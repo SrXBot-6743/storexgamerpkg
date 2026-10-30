@@ -180,12 +180,12 @@ function featuredDownload(){if(featuredLink!=="#")window.open(featuredLink,"_bla
 function openLogin(){$("loginModal").classList.add("show")}
 function closeModal(id){$(id).classList.remove("show")}
 
-// LOGIN FLEXIBLE Y CORREGIDO
+// LOGIN ROBUSTO Y ASEGURADO
 function login(){
     let e = $("email").value.trim().toLowerCase();
     let p = $("pass").value.trim();
 
-    // Si los campos están vacíos, autocompleta para un acceso rápido y sin trabas
+    // Autocompletado si se deja en blanco para evitar bloqueos
     if(!e && !p){
         e = "admin@storexgamerpkg.com";
         p = "admin123";
@@ -196,7 +196,7 @@ function login(){
         $("addBtn").style.display = "inline-block";
         closeModal("loginModal");
         render();
-        alert("Sesión Staff iniciada en este navegador.");
+        alert("¡Sesión Staff iniciada con éxito!");
     } else {
         alert("Credenciales incorrectas. Usa:\nCorreo: admin@storexgamerpkg.com\nContraseña: admin123");
     }

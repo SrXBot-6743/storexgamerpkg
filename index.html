@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vista Previa - StoreXGamerPKG</title>
+    <style>
+        :root {
+            --bg-dark: #060913;
+            --card-bg: rgba(13, 18, 36, 0.95);
+            --accent-blue: #00d2ff;
+            --text-main: #e6f1ff;
+            --text-muted: #7e8c9d;
+            --border-glow: rgba(0, 210, 255, 0.3);
+        }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            padding: 10px;
+        }
+        /* Contenedor simulador móvil */
+        .preview-phone {
+            max-width: 380px;
+            margin: 0 auto;
+            border: 2px solid var(--border-glow);
+            border-radius: 20px;
+            background: #060913;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.25);
+        }
+        .header-p {
+            padding: 12px 16px;
+            background: rgba(6, 9, 19, 0.9);
+            border-bottom: 1px solid var(--border-glow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .banner-p {
+            margin: 12px;
+            padding: 16px;
+            background: linear-gradient(135deg, #0d1224, #060913);
+            border: 1px solid var(--border-glow);
+            border-radius: 12px;
+        }
+        .filters-p {
+            display: flex;
+            gap: 6px;
+            padding: 0 12px 10px 12px;
+            overflow-x: auto;
+        }
+        .chip-p {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            color: var(--accent-blue);
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .card-p {
+            margin: 0 12px 10px 12px;
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 210, 255, 0.15);
+            border-radius: 10px;
+            display: flex;
+            overflow: hidden;
+        }
+        .social-p {
+            margin: 15px 12px;
+            padding: 14px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--border-glow);
+        }
+        .s-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+            margin-top: 10px;
+        }
+        .s-btn {
+            background: #060913;
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            color: #fff;
+            padding: 8px;
+            font-size: 11px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="preview-phone">
+        <!-- Cabecera -->
+        <div class="header-p">
+            <span style="font-weight: 900; color: var(--accent-blue); font-size: 14px;">🎮 STOREXGAMER</span>
+            <span style="background: linear-gradient(135deg, #0072ff, #00d2ff); padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: bold;">Staff</span>
+        </div>
+
+        <!-- Banner Principal sin cobros -->
+        <div class="banner-p">
+            <span style="font-size: 9px; color: var(--accent-blue); font-weight: 800;">CATÁLOGO OFICIAL</span>
+            <div style="font-size: 16px; font-weight: 900; margin: 4px 0;">JUEGOS 100% GRATIS</div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">Descargas directas para PS4, PS3 y móviles sin acortadores.</div>
+            <div style="background: linear-gradient(135deg, #0072ff, #00d2ff); text-align: center; padding: 6px; border-radius: 6px; font-size: 11px; font-weight: bold;">💬 WhatsApp Directo</div>
+        </div>
+
+        <!-- Filtros táctiles -->
+        <div class="filters-p">
+            <div class="chip-p" style="background: rgba(0,210,255,0.15);">Todos</div>
+            <div class="chip-p">PS4 PKG</div>
+            <div class="chip-p">PS3 PKG</div>
+            <div class="chip-p">Móvil</div>
+            <div class="chip-p">Ports PC</div>
+        </div>
+
+        <!-- Tarjetas de Juegos -->
+        <div class="card-p">
+            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=150&q=80" style="width: 80px; height: 80px; object-fit: cover;">
+            <div style="padding: 8px; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <span style="font-size: 9px; color: var(--accent-blue); font-weight: bold;">PS4 PKG</span>
+                    <div style="font-size: 13px; font-weight: bold;">God of War Ragnarök</div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 10px; color: var(--text-muted);">84 GB</span>
+                    <span style="background: var(--accent-blue); color: #060913; font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: bold;">Descargar</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Redes Sociales Editables -->
+        <div class="social-p">
+            <span style="font-size: 12px; font-weight: bold; color: var(--accent-blue);">COMUNIDAD Y REDES</span>
+            <div class="s-grid">
+                <div class="s-btn">📢 Telegram</div>
+                <div class="s-btn">🎵 TikTok</div>
+                <div class="s-btn">💬 WhatsApp</div>
+                <div class="s-btn">🎮 Discord</div>
+                <div class="s-btn" style="grid-column: span 2;">▶️ YouTube</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

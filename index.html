@@ -48,15 +48,24 @@ nav a:hover,nav a.active{color:var(--green);border-color:var(--green)}
 .toolbar{display:flex;gap:10px;align-items:center;margin:15px 0 12px;background:#061511;padding:8px;border-radius:10px}.toolbar input{flex:1;min-width:120px}.field{background:#03100d;border:1px solid #176653;color:white;padding:10px 12px;border-radius:8px;font-size:11px}.toolbar select{max-width:150px}
 .games{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}.game{background:linear-gradient(#082019,#03100e);border:1px solid #087e6a;border-radius:9px;overflow:hidden;min-width:0;transition:.2s}.game:hover{transform:translateY(-3px);box-shadow:0 0 14px #00ff6a33}.cover{height:115px;position:relative;background:#071a14}.cover img{width:100%;height:100%;object-fit:cover}.platform{position:absolute;right:5px;top:5px;background:var(--green);color:#00170b;padding:3px 5px;border-radius:4px;font-size:9px;font-weight:bold}.game-info{padding:8px}.game h3{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:7px}.meta{font-size:9px;color:#b5d7ca;display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px}.game .details{width:100%;padding:6px;border:1px solid var(--green);border-radius:15px;background:transparent;color:var(--green);font-size:10px;cursor:pointer}
 
-/* VISTA DE COMUNIDAD APARTE */
-#communityView{display:none;padding:25px;min-height:500px}
-#communityView.active{display:block}
+/* VISTAS SEPARADAS (TIENDA, COMUNIDAD Y CHAT XAT) */
+#shopView, #communityView, #chatView{display:none;padding:25px;min-height:500px}
+#shopView.active, #communityView.active, #chatView.active{display:block}
+
 .community-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:16px;margin-top:20px}
 .community-card{background:linear-gradient(135deg, #061a15, #030f0d);border:1px solid var(--green);border-radius:12px;padding:20px;box-shadow:0 0 15px rgba(0,255,106,0.1);display:flex;flex-direction:column;gap:12px;position:relative}
 .community-card h3{color:var(--lime);font-size:18px;display:flex;align-items:center;gap:8px}
 .community-card p{font-size:12px;color:#c4e5d9;line-height:1.5}
 .community-btn{margin-top:auto;background:rgba(0,255,106,0.1);border:1px solid var(--green);color:var(--green);padding:10px;border-radius:8px;font-weight:bold;text-align:center;cursor:pointer;display:block;transition:0.2s}
 .community-btn:hover{background:var(--green);color:#00140a;box-shadow:0 0 12px var(--green)}
+
+.community-social-bar{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0 25px 0}
+.community-social-btn{padding:10px 18px;border:1px solid var(--cyan);border-radius:20px;background:rgba(0,223,255,0.1);color:var(--cyan);font-weight:bold;font-size:12px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;transition:0.2s}
+.community-social-btn:hover{background:var(--cyan);color:#020907;box-shadow:0 0 12px var(--cyan)}
+
+/* CONTENEDOR DEL CHAT XAT */
+.xat-container{width:100%;height:600px;border:1px solid var(--green);border-radius:12px;overflow:hidden;background:#03100d;box-shadow:0 0 25px rgba(0,255,106,0.15);margin-top:15px}
+.xat-container iframe{width:100%;height:100%;border:none}
 
 footer{border-top:1px solid #135748;padding:14px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px;color:#b4d3c8;font-size:11px;position:relative;flex-wrap:wrap;}.social{display:flex;gap:10px}.social a{padding:6px 10px;border:1px solid var(--green);border-radius:15px;display:inline-flex;align-items:center;gap:5px;color:var(--green);font-size:10px;font-weight:bold;background:rgba(0,255,106,0.05);cursor:pointer;}
 
@@ -104,6 +113,7 @@ footer{border-top:1px solid #135748;padding:14px 22px;display:flex;justify-conte
     <a onclick="navAction('juegos')">🎮 Juegos</a>
     <a onclick="navAction('apps')">▣ Apps</a>
     <a onclick="navAction('herramientas')">⚒ Herramientas</a>
+    <a onclick="navAction('chat')">💬 Chat</a>
     <a onclick="navAction('comunidad')">♟ Comunidad</a>
     <a onclick="navAction('faq')">ⓘ FAQ</a>
 </nav>
@@ -112,7 +122,7 @@ footer{border-top:1px solid #135748;padding:14px 22px;display:flex;justify-conte
 </header>
 
 <!-- CONTENEDOR PRINCIPAL DE LA TIENDA -->
-<div id="shopView">
+<div id="shopView" class="active">
     <section class="hero" id="inicio"><div class="hero-copy"><div class="eyebrow">BIENVENIDO A</div><h1>STORE<span>X</span>GAMER<br><span>PKG</span></h1><p>TU MUNDO GAMER EN UN <b>SOLO LUGAR</b></p><div class="perks"><div class="perk"><strong>ϟ Juegos</strong>100% seguros*</div><div class="perk"><strong>♢ Descargas</strong>Rápidas y confiables</div><div class="perk"><strong>☁ Apps</strong>Premium y gratis*</div><div class="perk"><strong>♟ Comunidad</strong>Gamers como tú</div></div></div></section>
 
     <!-- BANNER ÚNICO -->
@@ -138,14 +148,26 @@ footer{border-top:1px solid #135748;padding:14px 22px;display:flex;justify-conte
     </section>
 </div>
 
-<!-- VISTA DE COMUNIDAD APARTE (TOTALMENTE EDITABLE) -->
+<!-- VISTA DE CHAT XAT INTERACTIVO -->
+<div id="chatView">
+    <div class="section-head" style="display:flex;justify-content:space-between;align-items:center">
+        <h2 style="color:var(--green);font-size:22px">💬 CHAT INTERACTIVO XAT.COM</h2>
+        <button id="editChatBtn" style="display:none;background:var(--cyan);color:#020907;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;font-weight:bold;font-size:11px;" onclick="openChatModal()">✏ Cambiar Código de Xat</button>
+    </div>
+    <p style="font-size:13px;color:#b5d7ca;margin-bottom:10px">Conéctate y chatea en tiempo real con la comunidad de StoreXGamerPKG.</p>
+    
+    <div class="xat-container" id="xatWrapper"></div>
+</div>
+
+<!-- VISTA DE COMUNIDAD APARTE -->
 <div id="communityView">
     <div class="section-head" style="display:flex;justify-content:space-between;align-items:center">
-        <h2 style="color:var(--green);font-size:22px">♟ CENTRO DE COMUNIDAD & SOPORTE</h2>
+        <h2 style="color:var(--green);font-size:22px">♟ CENTRO DE COMUNIDAD & REDES</h2>
         <button id="editCommunityBtn" style="display:none;background:var(--cyan);color:#020907;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;font-weight:bold;font-size:11px;" onclick="openCommunityModal()">✏ Editar Comunidad</button>
     </div>
-    <p style="font-size:13px;color:#b5d7ca;margin-bottom:15px">Únete a nuestros grupos oficiales, interactúa con la comunidad gamer, descubre nuestras redes o reporta cualquier enlace caído.</p>
+    <p style="font-size:13px;color:#b5d7ca;margin-bottom:15px">Únete a nuestros grupos oficiales, canales directos y redes sociales o reporta cualquier problema con el staff.</p>
     
+    <div class="community-social-bar" id="communitySocialBar"></div>
     <div class="community-grid" id="communityGridContainer"></div>
 </div>
 
@@ -154,7 +176,7 @@ footer{border-top:1px solid #135748;padding:14px 22px;display:flex;justify-conte
     <div class="brand"><div class="brand-mark">✦</div><div class="brand-name">STORE<span style="color:var(--lime)">X</span>GAMER<small>PKG</small></div></div>
     <span>¡Juega · Descarga · Disfruta!</span>
     <div class="social" id="socialList"></div>
-    <button id="editSocialBtn" style="display:none;background:var(--cyan);color:#020907;border:none;padding:4px 8px;border-radius:6px;cursor:pointer;font-size:10px;font-weight:bold;" onclick="openSocialModal()">✏ Editar Redes</button>
+    <button id="editSocialBtn" style="display:none;background:var(--cyan);color:#020907;border:none;padding:4px 8px;border-radius:6px;cursor:pointer;font-size:10px;font-weight:bold;" onclick="openSocialModal()">✏ Editar Redes Footer</button>
     <span>Términos de uso · Privacidad · Contacto<br>StoreXGamerPKG © 2026</span>
 </footer>
 </main>
@@ -194,14 +216,25 @@ footer{border-top:1px solid #135748;padding:14px 22px;display:flex;justify-conte
 <div class="formrow"><label>Enlace de Descarga</label><input id="fLink"></div>
 <div class="actions"><button class="secondary" onclick="closeModal('featuredModal')">Cancelar</button><button class="primary" onclick="saveFeatured()">Guardar Cambios</button></div></div></div>
 
+<!-- MODAL EDITAR CHAT XAT -->
+<div class="modal" id="chatModal"><div class="modal-box"><h2>Configurar Xat.com</h2>
+<p style="font-size:11px;color:var(--muted);margin-bottom:10px">Pega aquí tu código completo de iframe de xat.com (ej: &lt;iframe src="https://xat.com/embed/room.php?id=..." width="100%" height="500"&gt;&lt;/iframe&gt;) o simplemente el enlace de tu sala.</p>
+<div class="formrow"><textarea id="fChatCode" rows="4" style="width:100%" placeholder="<iframe src='https://xat.com/...'></iframe>"></textarea></div>
+<div class="actions"><button class="secondary" onclick="closeModal('chatModal')">Cancelar</button><button class="primary" onclick="saveChat()">Guardar Chat</button></div></div></div>
+
 <!-- MODAL EDITAR NOVEDADES -->
 <div class="modal" id="sidebarModal"><div class="modal-box"><h2>Editar Panel de Novedades</h2><p style="font-size:11px;color:var(--muted);margin-bottom:10px">Formato: Ícono|Título|Texto (Uno por línea)</p><div class="formrow"><textarea id="fSidebarText" rows="6" style="width:100%"></textarea></div><div class="actions"><button class="secondary" onclick="closeModal('sidebarModal')">Cancelar</button><button class="primary" onclick="saveSidebar()">Guardar Novedades</button></div></div></div>
 
-<!-- MODAL EDITAR REDES -->
+<!-- MODAL EDITAR REDES FOOTER -->
 <div class="modal" id="socialModal"><div class="modal-box"><h2>Editar Redes de Footer</h2><p style="font-size:11px;color:var(--muted);margin-bottom:10px">Formato: Nombre|URL (Una red por línea)</p><div class="formrow"><textarea id="fSocialText" rows="5" style="width:100%"></textarea></div><div class="actions"><button class="secondary" onclick="closeModal('socialModal')">Cancelar</button><button class="primary" onclick="saveSocial()">Guardar Redes</button></div></div></div>
 
-<!-- MODAL EDITAR SECCIONES DE COMUNIDAD -->
-<div class="modal" id="communityModal"><div class="modal-box"><h2>Editar Página de Comunidad</h2><p style="font-size:11px;color:var(--muted);margin-bottom:10px">Formato por línea: Título | Descripción | Texto del Botón | URL de Enlace</p><div class="formrow"><textarea id="fCommunityText" rows="8" style="width:100%"></textarea></div><div class="actions"><button class="secondary" onclick="closeModal('communityModal')">Cancelar</button><button class="primary" onclick="saveCommunitySections()">Guardar Comunidad</button></div></div></div>
+<!-- MODAL EDITAR SECCIONES Y REDES DE COMUNIDAD -->
+<div class="modal" id="communityModal"><div class="modal-box"><h2>Editar Página de Comunidad</h2>
+<p style="font-size:11px;color:var(--green);margin-bottom:5px"><b>1. Botones Rápidos de Redes:</b></p>
+<div class="formrow"><textarea id="fCommunitySocialText" rows="4" style="width:100%"></textarea></div>
+<p style="font-size:11px;color:var(--green);margin:12px 0 5px 0"><b>2. Tarjetas y Grupos:</b></p>
+<div class="formrow"><textarea id="fCommunityCardsText" rows="5" style="width:100%"></textarea></div>
+<div class="actions"><button class="secondary" onclick="closeModal('communityModal')">Cancelar</button><button class="primary" onclick="saveCommunitySections()">Guardar Comunidad</button></div></div></div>
 
 <!-- MODAL FAQ -->
 <div class="modal" id="faqModal"><div class="modal-box"><h2>ⓘ PREGUNTAS FRECUENTES (FAQ)</h2>
@@ -213,9 +246,9 @@ footer{border-top:1px solid #135748;padding:14px 22px;display:flex;justify-conte
 
 <script>
 const defaults=[
-{id:1,type:"juego",title:"Elden Ring",platform:"PS4/PS5",genre:"RPG",size:"60.2 GB",desc:"Aventura de rol y fantasía en un vasto mundo abierto.",img:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&q=80",link:"#"},
-{id:2,type:"juego",title:"Red Dead Redemption 2",platform:"PS4/PS5",genre:"Aventura",size:"120 GB",desc:"Una aventura de mundo abierto en el viejo oeste.",img:"https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&q=80",link:"#"},
-{id:3,type:"juego",title:"Forza Horizon 5",platform:"Xbox",genre:"Deportes",size:"105 GB",desc:"Conduce y explora un enorme festival automovilístico.",img:"https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=80",link:"#"}
+{id:1,type:"juego",title:"Elden Ring",platform:"PS4/PS5",genre:"RPG",size:"60.2 GB",desc:"Aventura de rol y fantasía en un vasto mundo abierto.",img:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&q=80",link:"https://example.com"},
+{id:2,type:"juego",title:"Red Dead Redemption 2",platform:"PS4/PS5",genre:"Aventura",size:"120 GB",desc:"Una aventura de mundo abierto en el viejo oeste.",img:"https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&q=80",link:"https://example.com"},
+{id:3,type:"juego",title:"Forza Horizon 5",platform:"Xbox",genre:"Deportes",size:"105 GB",desc:"Conduce y explora un enorme festival automovilístico.",img:"https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=80",link:"https://example.com"}
 ];
 
 let games = JSON.parse(localStorage.getItem("sxg_games")||"null")||defaults;
@@ -227,7 +260,7 @@ let featuredData = JSON.parse(localStorage.getItem("sxg_featured")||"null") || {
     desc: "Explora Los Santos en su versión PKG definitiva, optimizada y completa para descargar.",
     tags: ["Mundo Abierto", "PC / PS4 / Xbox", "65 GB"],
     img: "https://images.unsplash.com/photo-1603481546238-487240415921?w=1200&q=85",
-    link: "#"
+    link: "https://example.com"
 };
 
 let sidebarData = JSON.parse(localStorage.getItem("sxg_sidebar")||"null") || [
@@ -237,15 +270,24 @@ let sidebarData = JSON.parse(localStorage.getItem("sxg_sidebar")||"null") || [
 ];
 
 let socialData = JSON.parse(localStorage.getItem("sxg_social")||"null") || [
-    {name:"Discord", url:"#"}, {name:"WhatsApp", url:"#"}, {name:"Telegram", url:"#"}, {name:"YouTube", url:"#"}, {name:"TikTok", url:"#"}
+    {name:"Discord", url:"https://discord.com"}, {name:"WhatsApp", url:"https://whatsapp.com"}, {name:"Telegram", url:"https://telegram.org"}, {name:"YouTube", url:"https://youtube.com"}, {name:"TikTok", url:"https://tiktok.com"}
+];
+
+let communitySocialData = JSON.parse(localStorage.getItem("sxg_community_social")||"null") || [
+    {name:"💬 Telegram", url:"https://telegram.org"},
+    {name:"📸 Instagram", url:"https://instagram.com"},
+    {name:"🎮 Discord", url:"https://discord.com"},
+    {name:"🎥 YouTube", url:"https://youtube.com"},
+    {name:"🎵 TikTok", url:"https://tiktok.com"}
 ];
 
 let communitySectionsData = JSON.parse(localStorage.getItem("sxg_community_sections")||"null") || [
-    {title:"💬 Grupo de Discord", desc:"Conéctate con miles de gamers, chatea y encuentra compañeros de partida.", btn:"Unirme a Discord", url:"#"},
-    {title:"📢 Canal de WhatsApp", desc:"Entérate al instante de los nuevos aportes y estrenos subidos a la tienda.", btn:"Seguir Canal", url:"#"},
-    {title:"🛠 Soporte y Reportes", desc:"¿Encontraste un enlace caído o necesitas ayuda? Repórtalo aquí con el staff.", btn:"Reportar Problema", url:"#"},
-    {title:"🌐 Redes Sociales", desc:"Síguenos en TikTok y YouTube para ver gameplays y game trailers exclusivos.", btn:"Ver Redes", url:"#"}
+    {title:"💬 Grupo Principal de Discord", desc:"Conéctate con miles de gamers, chatea y encuentra compañeros de partida.", btn:"Unirme a Discord", url:"https://discord.com"},
+    {title:"📢 Canal Oficial de WhatsApp", desc:"Entérate al instante de los nuevos aportes y estrenos subidos a la tienda.", btn:"Seguir Canal", url:"https://whatsapp.com"},
+    {title:"🛠 Soporte y Reportes", desc:"¿Encontraste un enlace caído o necesitas ayuda? Repórtalo aquí con el staff.", btn:"Reportar Problema", url:"https://example.com"}
 ];
+
+let xatCustomCode = localStorage.getItem("sxg_xat_code") || '<iframe src="https://xat.com/embed/room.php?id=StoreXGamerPKG" scrolling="no"></iframe>';
 
 const $=id=>document.getElementById(id);
 function safe(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
@@ -254,41 +296,45 @@ function navAction(target){
     const links = document.querySelectorAll("#topNav a");
     links.forEach(l => l.classList.remove("active"));
     
+    $("shopView").classList.remove("active");
+    $("chatView").classList.remove("active");
+    $("communityView").classList.remove("active");
+
     if(target === 'inicio'){
         links[0].classList.add("active");
         activeFilter = "all";
         $("search").value = "";
-        $("shopView").style.display = "block";
-        $("communityView").classList.remove("active");
+        $("shopView").classList.add("active");
         window.scrollTo({top:0, behavior:'smooth'});
     } else if(target === 'juegos'){
         links[1].classList.add("active");
         activeFilter = "juego";
         $("search").value = "";
-        $("shopView").style.display = "block";
-        $("communityView").classList.remove("active");
+        $("shopView").classList.add("active");
         document.getElementById("juegos").scrollIntoView({behavior:'smooth'});
     } else if(target === 'apps'){
         links[2].classList.add("active");
         activeFilter = "app";
         $("search").value = "";
-        $("shopView").style.display = "block";
-        $("communityView").classList.remove("active");
+        $("shopView").classList.add("active");
         document.getElementById("juegos").scrollIntoView({behavior:'smooth'});
     } else if(target === 'herramientas'){
         links[3].classList.add("active");
         activeFilter = "herramienta";
         $("search").value = "";
-        $("shopView").style.display = "block";
-        $("communityView").classList.remove("active");
+        $("shopView").classList.add("active");
         document.getElementById("juegos").scrollIntoView({behavior:'smooth'});
-    } else if(target === 'comunidad'){
+    } else if(target === 'chat'){
         links[4].classList.add("active");
-        $("shopView").style.display = "none";
+        $("chatView").classList.add("active");
+        renderChat();
+        window.scrollTo({top:0, behavior:'smooth'});
+    } else if(target === 'comunidad'){
+        links[5].classList.add("active");
         $("communityView").classList.add("active");
         window.scrollTo({top:0, behavior:'smooth'});
     } else if(target === 'faq'){
-        links[5].classList.add("active");
+        links[6].classList.add("active");
         $("faqModal").classList.add("show");
     }
     render();
@@ -304,6 +350,7 @@ function checkAdminState(){
         $("editSidebarBtn").style.display = "block";
         $("editSocialBtn").style.display = "block";
         $("editCommunityBtn").style.display = "inline-block";
+        $("editChatBtn").style.display = "inline-block";
     } else if(userRole === "colab"){
         $("adminBanner").classList.add("active");
         $("adminBannerText").textContent = "✍ MODO COLABORADOR ACTIVO — Puedes subir aportes al catálogo.";
@@ -313,6 +360,7 @@ function checkAdminState(){
         $("editSidebarBtn").style.display = "none";
         $("editSocialBtn").style.display = "none";
         $("editCommunityBtn").style.display = "none";
+        $("editChatBtn").style.display = "none";
     } else {
         $("adminBanner").classList.remove("active");
         $("addBtn").style.display = "none";
@@ -321,6 +369,7 @@ function checkAdminState(){
         $("editSidebarBtn").style.display = "none";
         $("editSocialBtn").style.display = "none";
         $("editCommunityBtn").style.display = "none";
+        $("editChatBtn").style.display = "none";
     }
 }
 
@@ -332,7 +381,7 @@ function renderFeatured(){
 }
 
 function featuredDownload(){
-    if(featuredData.link && featuredData.link !== "#") window.open(featuredData.link, "_blank", "noopener");
+    if(featuredData.link && featuredData.link !== "https://example.com" && featuredData.link !== "#") window.open(featuredData.link, "_blank", "noopener");
     else navAction('juegos');
 }
 
@@ -351,7 +400,11 @@ function renderSocial(){
     `).join("");
 }
 
-function renderCommunitySections(){
+function renderCommunity(){
+    $("communitySocialBar").innerHTML = communitySocialData.map(cs => `
+        <a href="${safe(cs.url)}" target="_blank" rel="noopener" class="community-social-btn">${safe(cs.name)}</a>
+    `).join("");
+
     $("communityGridContainer").innerHTML = communitySectionsData.map(sec => `
         <div class="community-card">
             <h3>${safe(sec.title)}</h3>
@@ -361,12 +414,16 @@ function renderCommunitySections(){
     `).join("");
 }
 
+function renderChat(){
+    $("xatWrapper").innerHTML = xatCustomCode;
+}
+
 function render(){
     checkAdminState();
     renderFeatured();
     renderSidebar();
     renderSocial();
-    renderCommunitySections();
+    renderCommunity();
 
     let q=$("search").value.toLowerCase(),p=$("platform").value,sort=$("sort").value;
     
@@ -403,7 +460,7 @@ function render(){
     `).join("")||'<p style="color:#9ab9ae;grid-column:1/-1;">No hay ítems en esta categoría.</p>';
 }
 
-function details(id){let g=games.find(x=>x.id===id);if(!g)return;alert(`${g.title}\n${g.platform} · ${g.genre}\n${g.desc}\nTamaño: ${g.size}`);if(g.link&&g.link!=="#")window.open(g.link,"_blank","noopener")}
+function details(id){let g=games.find(x=>x.id===id);if(!g)return;alert(`${g.title}\n${g.platform} · ${g.genre}\n${g.desc}\nTamaño: ${g.size}`);if(g.link&&g.link!=="https://example.com"&&g.link!=="#")window.open(g.link,"_blank","noopener")}
 function openLogin(){$("loginModal").classList.add("show")}
 function closeModal(id){$(id).classList.remove("show")}
 
@@ -439,7 +496,7 @@ function logout(){
 
 function openGame(id=null){$("gameModalTitle").textContent=id?"Editar ítem":"Agregar Aporte";let g=games.find(x=>x.id===id)||{};$("editId").value=g.id||"";$("gTitle").value=g.title||"";$("gType").value=g.type||"juego";$("gPlatform").value=g.platform||"PC";$("gGenre").value=g.genre||"";$("gDesc").value=g.desc||"";$("gSize").value=g.size||"";$("gImg").value=g.img||"";$("gLink").value=g.link||"";$("gameModal").classList.add("show")}
 function editGame(id){if(userRole==='admin') openGame(id)}
-function saveGame(){let title=$("gTitle").value.trim();if(!title){alert("Escribe el nombre del ítem.");return}let id=Number($("editId").value),obj={id:id||Date.now(),title,type:$("gType").value,platform:$("gPlatform").value,genre:$("gGenre").value.trim(),desc:$("gDesc").value.trim(),size:$("gSize").value.trim(),img:$("gImg").value.trim(),link:$("gLink").value.trim()||"#"};if(id && userRole==='admin')games=games.map(g=>g.id===id?obj:g);else games.unshift(obj);localStorage.setItem("sxg_games",JSON.stringify(games));closeModal("gameModal");render()}
+function saveGame(){let title=$("gTitle").value.trim();if(!title){alert("Escribe el nombre del ítem.");return}let id=Number($("editId").value),obj={id:id||Date.now(),title,type:$("gType").value,platform:$("gPlatform").value,genre:$("gGenre").value.trim(),desc:$("gDesc").value.trim(),size:$("gSize").value.trim(),img:$("gImg").value.trim(),link:$("gLink").value.trim()||"https://example.com"};if(id && userRole==='admin')games=games.map(g=>g.id===id?obj:g);else games.unshift(obj);localStorage.setItem("sxg_games",JSON.stringify(games));closeModal("gameModal");render()}
 function deleteGame(id){if(userRole==='admin' && confirm("¿Eliminar este ítem del catálogo?")){games=games.filter(g=>g.id!==id);localStorage.setItem("sxg_games",JSON.stringify(games));render()}}
 
 function openFeaturedModal(){
@@ -456,7 +513,7 @@ function saveFeatured(){
     featuredData.title = $("fTitle").value.trim() || featuredData.title;
     featuredData.desc = $("fDesc").value.trim() || featuredData.desc;
     featuredData.tags = $("fTags").value.split(",").map(t=>t.trim()).filter(Boolean);
-    featuredData.link = $("fLink").value.trim() || "#";
+    featuredData.link = $("fLink").value.trim() || "https://example.com";
 
     let fileInput = $("fImgFile");
     if(fileInput.files && fileInput.files[0]){
@@ -508,7 +565,7 @@ function saveSocial(){
     let lines = $("fSocialText").value.split("\n").filter(Boolean);
     socialData = lines.map(line => {
         let parts = line.split("|");
-        return { name: parts[0].trim(), url: parts[1] ? parts[1].trim() : "#" };
+        return { name: parts[0].trim(), url: parts[1] ? parts[1].trim() : "https://example.com" };
     });
     localStorage.setItem("sxg_social", JSON.stringify(socialData));
     closeModal("socialModal");
@@ -518,28 +575,56 @@ function saveSocial(){
 
 function openCommunityModal(){
     if(userRole!=='admin')return;
-    $("fCommunityText").value = communitySectionsData.map(c => `${c.title}|${c.desc}|${c.btn}|${c.url}`).join("\n");
+    $("fCommunitySocialText").value = communitySocialData.map(cs => `${cs.name}|${cs.url}`).join("\n");
+    $("fCommunityCardsText").value = communitySectionsData.map(c => `${c.title}|${c.desc}|${c.btn}|${c.url}`).join("\n");
     $("communityModal").classList.add("show");
 }
 
 function saveCommunitySections(){
-    let lines = $("fCommunityText").value.split("\n").filter(Boolean);
-    communitySectionsData = lines.map(line => {
+    let socialLines = $("fCommunitySocialText").value.split("\n").filter(Boolean);
+    communitySocialData = socialLines.map(line => {
+        let parts = line.split("|");
+        return { name: parts[0] ? parts[0].trim() : "Red", url: parts[1] ? parts[1].trim() : "https://example.com" };
+    });
+
+    let cardLines = $("fCommunityCardsText").value.split("\n").filter(Boolean);
+    communitySectionsData = cardLines.map(line => {
         let parts = line.split("|");
         return {
             title: parts[0] ? parts[0].trim() : "Grupo",
             desc: parts[1] ? parts[1].trim() : "Descripción...",
             btn: parts[2] ? parts[2].trim() : "Acceder",
-            url: parts[3] ? parts[3].trim() : "#"
+            url: parts[3] ? parts[3].trim() : "https://example.com"
         };
     });
+
+    localStorage.setItem("sxg_community_social", JSON.stringify(communitySocialData));
     localStorage.setItem("sxg_community_sections", JSON.stringify(communitySectionsData));
     closeModal("communityModal");
-    renderCommunitySections();
+    renderCommunity();
     alert("¡Página de comunidad actualizada con éxito!");
 }
 
-$("search").addEventListener("input",render);$("platform").addEventListener("change",render);$("sort").addEventListener("sort",render);$("topSearch").addEventListener("input",e=>{$("search").value=e.target.value;render();location.hash="#juegos"});document.querySelectorAll(".category").forEach(c=>c.addEventListener("click",()=>{$("search").value=c.dataset.filter;render();location.hash="#juegos"}));render();
+function openChatModal(){
+    if(userRole!=='admin')return;
+    $("fChatCode").value = xatCustomCode;
+    $("chatModal").classList.add("show");
+}
+
+function saveChat(){
+    let code = $("fChatCode").value.trim();
+    if(code){
+        xatCustomCode = code;
+        localStorage.setItem("sxg_xat_code", xatCustomCode);
+        closeModal("chatModal");
+        renderChat();
+        alert("¡Chat actualizado con éxito!");
+    } else {
+        alert("Ingresa un código de xat válido.");
+    }
+}
+
+$("search").addEventListener("input",render);$("platform").addEventListener("change",render);$("sort").addEventListener("change",render);$("topSearch").addEventListener("input",e=>{$("search").value=e.target.value;render();location.hash="#juegos"});document.querySelectorAll(".category").forEach(c=>c.addEventListener("click",()=>{$("search").value=c.dataset.filter;render();location.hash="#juegos"}));render();
 </script>
 </body>
 </html>

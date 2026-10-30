@@ -111,11 +111,11 @@
             border: 1px solid var(--neon-purple);
             box-shadow: 0 0 25px var(--neon-purple-glow);
             border-radius: 16px;
-            padding: 2rem 1.5rem;
+            padding: 2rem 2.5rem;
             margin-bottom: 2rem;
             text-align: center;
             overflow: hidden;
-            min-height: 240px;
+            min-height: 220px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -127,7 +127,7 @@
             flex-direction: column;
             align-items: center;
             width: 100%;
-            animation: fadeIn 0.5s ease-in-out;
+            animation: fadeIn 0.4s ease-in-out;
         }
 
         @keyframes fadeIn {
@@ -148,7 +148,7 @@
         }
 
         .featured-title {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             color: #fff;
             text-shadow: 0 0 12px var(--neon-cyan);
             margin-bottom: 6px;
@@ -156,8 +156,8 @@
 
         .featured-desc {
             color: var(--text-dim);
-            font-size: 0.9rem;
-            max-width: 600px;
+            font-size: 0.85rem;
+            max-width: 550px;
             margin: 0 auto 1rem auto;
             line-height: 1.4;
         }
@@ -208,8 +208,8 @@
             box-shadow: 0 0 15px var(--neon-cyan);
         }
 
-        .arrow-left { left: 12px; }
-        .arrow-right { right: 12px; }
+        .arrow-left { left: 10px; }
+        .arrow-right { right: 10px; }
 
         /* Cuadrícula de Géneros Rápidos Táctiles */
         .quick-genres-grid {
@@ -601,14 +601,12 @@
     </header>
 
     <div class="container" id="mainContainer">
-        <!-- Banner Rotativo / Destacados Dinámicos Automáticos -->
+        <!-- Banner Destacado Dinámico -->
         <div class="slider-container" id="bannerSliderBox">
             <button class="slider-arrow arrow-left" onclick="changeFeatured(-1)">&#10094;</button>
             <button class="slider-arrow arrow-right" onclick="changeFeatured(1)">&#10095;</button>
             
-            <div id="featuredSlideContainer" style="width: 100%;">
-                <!-- Se inyecta dinámicamente con los juegos subidos -->
-            </div>
+            <div id="featuredSlideContainer" style="width: 100%;"></div>
         </div>
 
         <!-- Botones Táctiles Rápidos de Géneros -->
@@ -639,7 +637,7 @@
             </div>
         </div>
 
-        <!-- Sección de Comunidad Oculta por Defecto -->
+        <!-- Sección de Comunidad -->
         <div id="communitySection">
             <div class="community-header">
                 <h2>CANALES OFICIALES DE COMUNIDAD</h2>
@@ -729,4 +727,102 @@
     <div id="collabModal" class="modal">
         <div class="modal-content">
             <h2>Colaboradores</h2>
-            <div class="form-group"><label>Correo</label><input type
+            <div class="form-group"><label>Correo</label><input type="email" id="newCollabEmail"></div>
+            <div class="form-group"><label>Contraseña</label><input type="password" id="newCollabPass"></div>
+            <button class="btn-neon" style="width:100%; margin-bottom: 12px; padding: 8px;" onclick="addCollaborator()">+ Registrar</button>
+            <div style="max-height: 120px; overflow-y: auto; margin-bottom: 12px;" id="collabListContainer"></div>
+            <div class="modal-actions"><button class="btn-close" onclick="closeCollabManager()">Cerrar</button></div>
+        </div>
+    </div>
+
+    <!-- Modal Redes y Comunidad -->
+    <div id="socialModal" class="modal">
+        <div class="modal-content">
+            <h2>Configurar Redes y Comunidad</h2>
+            <div class="form-group"><label>Telegram URL</label><input type="text" id="sTelegram"></div>
+            <div class="form-group"><label>TikTok URL</label><input type="text" id="sTikTok"></div>
+            <div class="form-group"><label>WhatsApp URL</label><input type="text" id="sWhatsapp"></div>
+            <div class="form-group"><label>Discord URL</label><input type="text" id="sDiscord"></div>
+            <div class="form-group"><label>YouTube URL</label><input type="text" id="sYoutube"></div>
+            <div class="form-group"><label>Instagram URL</label><input type="text" id="sInstagram"></div>
+            <div class="modal-actions">
+                <button class="btn-close" onclick="closeSocialConfig()">Cancelar</button>
+                <button class="btn-neon" onclick="saveSocials()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const defaultGames = [
+            { id: 1, title: "Grand Theft Auto V", category: "PS4 PKG", genre: "Mundo Abierto", img: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=500&q=80", desc: "Versión optimizada PKG lista para instalar en consola.", size: "48 GB", link: "#" },
+            { id: 2, title: "Devil May Cry 3 Port", category: "PORT ANDROID", genre: "Acción", img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=500&q=80", desc: "Port nativo optimizado para Android ARM64.", size: "3.5 GB", link: "#" }
+        ];
+
+        let games = JSON.parse(localStorage.getItem('xgamer_games')) || defaultGames;
+        let socials = JSON.parse(localStorage.getItem('xgamer_socials')) || {
+            telegram: "#", tiktok: "#", whatsapp: "#", discord: "#", youtube: "#", instagram: "#"
+        };
+        
+        // Blindaje y verificación estricta de colaboradores y sesión
+        let collaborators = JSON.parse(localStorage.getItem('xgamer_collabs'));
+        if (!collaborators || !Array.isArray(collaborators) || collaborators.length === 0) {
+            collaborators = [{ email: "admin@storexgamerpkg.com", pass: "admin123" }];
+            localStorage.setItem('xgamer_collabs', JSON.stringify(collaborators));
+        }
+
+        let currentUser = localStorage.getItem('xgamer_logged_user') || null;
+        let currentFilter = 'ALL';
+        let featuredIndex = 0;
+
+        function renderFeaturedBanner() {
+            const container = document.getElementById('featuredSlideContainer');
+            if(!container) return;
+            
+            if(games.length === 0) {
+                container.innerHTML = `<div class="featured-slide"><h3 class="featured-title">STOREXGAMER</h3><p class="featured-desc">Agrega juegos desde el panel para verlos destacados aquí.</p></div>`;
+                return;
+            }
+
+            const game = games[featuredIndex % games.length];
+            container.innerHTML = `
+                <div class="featured-slide">
+                    <span class="featured-badge">🔥 DESTACADO: ${game.category}</span>
+                    <h3 class="featured-title">${game.title}</h3>
+                    <p class="featured-desc">${game.desc || 'Juego optimizado disponible para descarga.'}</p>
+                    <a href="${game.link}" target="_blank" class="slide-btn">Descargar (${game.size || 'Nuevo'})</a>
+                </div>
+            `;
+        }
+
+        function changeFeatured(n) {
+            if(games.length === 0) return;
+            featuredIndex += n;
+            if(featuredIndex < 0) featuredIndex = games.length - 1;
+            renderFeaturedBanner();
+        }
+
+        setInterval(() => {
+            if(games.length > 0) {
+                featuredIndex = (featuredIndex + 1) % games.length;
+                renderFeaturedBanner();
+            }
+        }, 6000);
+
+        function scrollToCatalog() {
+            document.getElementById('communitySection').style.display = 'none';
+            document.getElementById('bannerSliderBox').style.display = 'flex';
+            document.getElementById('quickGenresBox').style.display = 'grid';
+            document.getElementById('catalogSection').style.display = 'block';
+            document.getElementById('gamesGrid').style.display = 'grid';
+            document.getElementById('catalogSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function renderGames() {
+            const grid = document.getElementById('gamesGrid');
+            if(!grid) return;
+            grid.innerHTML = '';
+            
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = games.filter(g => {
+                const matchQuery = g.title.toLowerCase().includes(query) || g.desc.toLowerCase().includes(query) || (g.genre && g.genre.toLowerCase().includes(query)) || (g.category && g.category.toLowerCase().includes(query));
+                

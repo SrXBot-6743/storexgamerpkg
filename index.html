@@ -3,149 +3,681 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vista Previa - StoreXGamerPKG</title>
+    <title>StoreXGamerPKG - Portal de Juegos</title>
     <style>
         :root {
-            --bg-dark: #060913;
-            --card-bg: rgba(13, 18, 36, 0.95);
-            --accent-blue: #00d2ff;
-            --text-main: #e6f1ff;
-            --text-muted: #7e8c9d;
-            --border-glow: rgba(0, 210, 255, 0.3);
+            --bg-color: #02060d;
+            --panel-bg: #07101e;
+            --neon-blue: #00f0ff;
+            --neon-purple: #b026ff;
+            --neon-pink: #ff007f;
+            --neon-blue-glow: rgba(0, 240, 255, 0.6);
+            --neon-purple-glow: rgba(176, 38, 255, 0.5);
+            --text-color: #f1f5f9;
+            --text-dim: #94a3b8;
+            --border-color: #1e293b;
         }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            padding: 10px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(176, 38, 255, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 240, 255, 0.08) 0%, transparent 40%);
         }
-        /* Contenedor simulador móvil */
-        .preview-phone {
-            max-width: 380px;
-            margin: 0 auto;
-            border: 2px solid var(--border-glow);
-            border-radius: 20px;
-            background: #060913;
-            overflow: hidden;
-            box-shadow: 0 0 25px rgba(0, 210, 255, 0.25);
-        }
-        .header-p {
-            padding: 12px 16px;
-            background: rgba(6, 9, 19, 0.9);
-            border-bottom: 1px solid var(--border-glow);
+
+        header {
+            background: var(--panel-bg);
+            border-bottom: 2px solid var(--neon-blue);
+            box-shadow: 0 0 20px var(--neon-blue-glow), inset 0 0 15px rgba(0, 240, 255, 0.1);
+            padding: 1.2rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .banner-p {
-            margin: 12px;
-            padding: 16px;
-            background: linear-gradient(135deg, #0d1224, #060913);
-            border: 1px solid var(--border-glow);
-            border-radius: 12px;
-        }
-        .filters-p {
+
+        .logo-area {
             display: flex;
-            gap: 6px;
-            padding: 0 12px 10px 12px;
-            overflow-x: auto;
+            align-items: center;
+            gap: 12px;
         }
-        .chip-p {
-            background: var(--card-bg);
-            border: 1px solid rgba(0, 210, 255, 0.2);
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 11px;
-            color: var(--accent-blue);
-            font-weight: bold;
-            white-space: nowrap;
-        }
-        .card-p {
-            margin: 0 12px 10px 12px;
-            background: var(--card-bg);
-            border: 1px solid rgba(0, 210, 255, 0.15);
-            border-radius: 10px;
-            display: flex;
-            overflow: hidden;
-        }
-        .social-p {
-            margin: 15px 12px;
-            padding: 14px;
-            background: var(--card-bg);
-            border-radius: 12px;
-            text-align: center;
-            border: 1px solid var(--border-glow);
-        }
-        .s-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 6px;
-            margin-top: 10px;
-        }
-        .s-btn {
-            background: #060913;
-            border: 1px solid rgba(0, 210, 255, 0.2);
+
+        .logo-area h1 {
+            font-size: 1.5rem;
             color: #fff;
-            padding: 8px;
-            font-size: 11px;
+            text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-purple);
+            letter-spacing: 1.5px;
+            font-weight: 800;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-neon {
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(176, 38, 255, 0.1));
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 8px 18px;
             border-radius: 6px;
-            font-weight: bold;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--neon-blue-glow);
+            transition: all 0.3s ease;
+        }
+
+        .btn-neon:active, .btn-neon:hover {
+            background: var(--neon-blue);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px var(--neon-blue), 0 0 35px var(--neon-purple);
+            border-color: #fff;
+        }
+
+        .container {
+            flex: 1;
+            padding: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .search-filter {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .search-filter input, .search-filter select {
+            flex: 1;
+            min-width: 250px;
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 12px 18px;
+            border-radius: 8px;
+            outline: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-filter input:focus, .search-filter select:focus {
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 12px var(--neon-purple-glow);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .game-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .game-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            border: 1px solid transparent;
+            transition: 0.3s;
+            pointer-events: none;
+        }
+
+        .game-card:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px var(--neon-blue-glow), 0 0 10px var(--neon-purple-glow);
+            transform: translateY(-5px);
+        }
+
+        .game-img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            background: #111;
+        }
+
+        .game-info {
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .game-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--neon-pink);
+            font-weight: 800;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 8px rgba(255, 0, 127, 0.4);
+        }
+
+        .game-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--text-color);
+        }
+
+        .game-desc {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            margin-bottom: 15px;
+            flex: 1;
+            line-height: 1.4;
+        }
+
+        .game-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .game-size {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            font-weight: 600;
+        }
+
+        .btn-download {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            color: #fff;
+            border: none;
+            padding: 9px 18px;
+            border-radius: 6px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 0 12px var(--neon-blue-glow);
+            transition: all 0.3s ease;
+        }
+
+        .btn-download:hover {
+            box-shadow: 0 0 20px var(--neon-blue), 0 0 20px var(--neon-purple);
+            transform: scale(1.05);
+        }
+
+        /* Barra Social & Footer */
+        .social-section {
+            background: var(--panel-bg);
+            border-top: 2px solid var(--neon-purple);
+            box-shadow: 0 -5px 20px var(--neon-purple-glow);
+            padding: 1.8rem;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-size: 0.95rem;
+            border: 1px solid var(--border-color);
+            padding: 6px 16px;
+            border-radius: 6px;
+            background: rgba(0,240,255,0.03);
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .social-link:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 12px var(--neon-blue-glow);
+            background: rgba(0,240,255,0.1);
+            color: #fff;
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(2, 6, 13, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background: var(--panel-bg);
+            border: 2px solid var(--neon-purple);
+            box-shadow: 0 0 35px var(--neon-purple-glow), inset 0 0 20px rgba(176, 38, 255, 0.1);
+            padding: 2.2rem;
+            border-radius: 14px;
+            width: 100%;
+            max-width: 520px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-content h2 {
+            color: var(--neon-blue);
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            text-shadow: 0 0 10px var(--neon-blue-glow);
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            border-color: var(--neon-blue);
+            outline: none;
+            box-shadow: 0 0 12px var(--neon-blue-glow);
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 1.5rem;
+        }
+
+        .btn-close {
+            background: transparent;
+            border: 1px solid var(--text-dim);
+            color: var(--text-dim);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .btn-close:hover {
+            border-color: #fff;
+            color: #fff;
+        }
+
+        .admin-actions {
+            margin-top: 14px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-edit { background: #d97706; color: #fff; border:none; padding:6px 12px; border-radius:6px; font-size:0.8rem; cursor:pointer; font-weight:700; }
+        .btn-delete { background: #dc2626; color: #fff; border:none; padding:6px 12px; border-radius:6px; font-size:0.8rem; cursor:pointer; font-weight:700; }
+
+        @media (max-width: 768px) {
+            header { padding: 1rem; }
+            .logo-area h1 { font-size: 1.2rem; }
+            .container { padding: 1rem; }
+            .search-filter { gap: 10px; margin-bottom: 1.5rem; }
+            .search-filter input, .search-filter select { min-width: 100%; }
+            .games-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .modal-content { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="preview-phone">
-        <!-- Cabecera -->
-        <div class="header-p">
-            <span style="font-weight: 900; color: var(--accent-blue); font-size: 14px;">🎮 STOREXGAMER</span>
-            <span style="background: linear-gradient(135deg, #0072ff, #00d2ff); padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: bold;">Staff</span>
+    <header>
+        <div class="logo-area">
+            <h1>StoreXGamerPKG</h1>
+        </div>
+        <div class="nav-buttons">
+            <button class="btn-neon" onclick="openAdminModal()">Staff</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="search-filter">
+            <input type="text" id="searchInput" placeholder="Buscar juegos (PS3, PS4, Móvil, PC)..." oninput="filterGames()">
+            <select id="categoryFilter" onchange="filterGames()">
+                <option value="ALL">Todas las Categorías</option>
+                <option value="PS3 PKG">PS3 PKG</option>
+                <option value="PS4 PKG">PS4 PKG</option>
+                <option value="MOBILE">Móvil (APK)</option>
+                <option value="PC PORT">PC Port</option>
+            </select>
         </div>
 
-        <!-- Banner Principal sin cobros -->
-        <div class="banner-p">
-            <span style="font-size: 9px; color: var(--accent-blue); font-weight: 800;">CATÁLOGO OFICIAL</span>
-            <div style="font-size: 16px; font-weight: 900; margin: 4px 0;">JUEGOS 100% GRATIS</div>
-            <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">Descargas directas para PS4, PS3 y móviles sin acortadores.</div>
-            <div style="background: linear-gradient(135deg, #0072ff, #00d2ff); text-align: center; padding: 6px; border-radius: 6px; font-size: 11px; font-weight: bold;">💬 WhatsApp Directo</div>
+        <div id="gamesGrid" class="games-grid">
+            <!-- Los juegos se cargan dinámicamente -->
         </div>
+    </div>
 
-        <!-- Filtros táctiles -->
-        <div class="filters-p">
-            <div class="chip-p" style="background: rgba(0,210,255,0.15);">Todos</div>
-            <div class="chip-p">PS4 PKG</div>
-            <div class="chip-p">PS3 PKG</div>
-            <div class="chip-p">Móvil</div>
-            <div class="chip-p">Ports PC</div>
+    <!-- Barra Social -->
+    <footer class="social-section">
+        <p style="font-size: 0.9rem; color: var(--text-dim); font-weight: 600;">Redes Oficiales</p>
+        <div class="social-icons" id="socialLinksContainer">
+            <a href="#" class="social-link" target="_blank" id="socTelegram">Telegram</a>
+            <a href="#" class="social-link" target="_blank" id="socTikTok">TikTok</a>
+            <a href="#" class="social-link" target="_blank" id="socWhatsapp">WhatsApp</a>
+            <a href="#" class="social-link" target="_blank" id="socDiscord">Discord</a>
+            <a href="#" class="social-link" target="_blank" id="socYoutube">YouTube</a>
         </div>
+    </footer>
 
-        <!-- Tarjetas de Juegos -->
-        <div class="card-p">
-            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=150&q=80" style="width: 80px; height: 80px; object-fit: cover;">
-            <div style="padding: 8px; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
-                <div>
-                    <span style="font-size: 9px; color: var(--accent-blue); font-weight: bold;">PS4 PKG</span>
-                    <div style="font-size: 13px; font-weight: bold;">God of War Ragnarök</div>
+    <!-- Modal Login / Panel Admin -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content">
+            <div id="loginSection">
+                <h2>Acceso Staff</h2>
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="adminEmail" placeholder="admin@storexgamerpkg.com">
                 </div>
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-size: 10px; color: var(--text-muted);">84 GB</span>
-                    <span style="background: var(--accent-blue); color: #060913; font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: bold;">Descargar</span>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="adminPass" placeholder="••••••••">
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-close" onclick="closeAdminModal()">Cancelar</button>
+                    <button class="btn-neon" onclick="handleLogin()">Entrar</button>
                 </div>
             </div>
-        </div>
 
-        <!-- Redes Sociales Editables -->
-        <div class="social-p">
-            <span style="font-size: 12px; font-weight: bold; color: var(--accent-blue);">COMUNIDAD Y REDES</span>
-            <div class="s-grid">
-                <div class="s-btn">📢 Telegram</div>
-                <div class="s-btn">🎵 TikTok</div>
-                <div class="s-btn">💬 WhatsApp</div>
-                <div class="s-btn">🎮 Discord</div>
-                <div class="s-btn" style="grid-column: span 2;">▶️ YouTube</div>
+            <div id="dashboardSection" style="display: none;">
+                <h2>Panel de Administración</h2>
+                <button class="btn-neon" style="width:100%; margin-bottom: 12px; padding: 12px;" onclick="openGameForm()">+ Agregar Nuevo Juego</button>
+                <button class="btn-close" style="width:100%; margin-bottom: 15px; padding: 12px; color: var(--neon-blue); border-color: var(--neon-blue);" onclick="openSocialConfig()">⚙️ Configurar Redes Sociales</button>
+                <button class="btn-close" style="width:100%; background: #dc2626; color:white; border:none; padding: 12px;" onclick="handleLogout()">Cerrar Sesión</button>
+                <div class="modal-actions" style="margin-top: 15px;">
+                    <button class="btn-close" onclick="closeAdminModal()">Cerrar Ventana</button>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- Modal CRUD Juego -->
+    <div id="gameModal" class="modal">
+        <div class="modal-content">
+            <h2 id="gameModalTitle">Agregar Juego</h2>
+            <input type="hidden" id="gameId">
+            <div class="form-group">
+                <label>Título del Juego</label>
+                <input type="text" id="gTitle" placeholder="Ej: God of War III">
+            </div>
+            <div class="form-group">
+                <label>Categoría</label>
+                <select id="gCategory">
+                    <option value="PS3 PKG">PS3 PKG</option>
+                    <option value="PS4 PKG">PS4 PKG</option>
+                    <option value="MOBILE">Móvil (APK)</option>
+                    <option value="PC PORT">PC Port</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>URL de Imagen / Portada</label>
+                <input type="text" id="gImg" placeholder="https://...">
+            </div>
+            <div class="form-group">
+                <label>Descripción Corta</label>
+                <textarea id="gDesc" rows="2" placeholder="Detalles de la versión..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Tamaño (Ej: 15 GB / 450 MB)</label>
+                <input type="text" id="gSize" placeholder="15 GB">
+            </div>
+            <div class="form-group">
+                <label>Enlace de Descarga</label>
+                <input type="text" id="gLink" placeholder="https://...">
+            </div>
+            <div class="modal-actions">
+                <button class="btn-close" onclick="closeGameForm()">Cancelar</button>
+                <button class="btn-neon" onclick="saveGame()">Guardar Juego</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Redes Sociales -->
+    <div id="socialModal" class="modal">
+        <div class="modal-content">
+            <h2>Gestionar Redes Sociales</h2>
+            <div class="form-group"><label>Telegram URL</label><input type="text" id="sTelegram"></div>
+            <div class="form-group"><label>TikTok URL</label><input type="text" id="sTikTok"></div>
+            <div class="form-group"><label>WhatsApp URL</label><input type="text" id="sWhatsapp"></div>
+            <div class="form-group"><label>Discord URL</label><input type="text" id="sDiscord"></div>
+            <div class="form-group"><label>YouTube URL</label><input type="text" id="sYoutube"></div>
+            <div class="modal-actions">
+                <button class="btn-close" onclick="closeSocialConfig()">Cancelar</button>
+                <button class="btn-neon" onclick="saveSocials()">Guardar Redes</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const defaultGames = [
+            { id: 1, title: "Grand Theft Auto V", category: "PS4 PKG", img: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=500&q=80", desc: "Versión optimizada PKG lista para instalar.", size: "48 GB", link: "#" },
+            { id: 2, title: "Minecraft PS3 Edition", category: "PS3 PKG", img: "https://images.unsplash.com/photo-1627856013091-feddeec4b466?w=500&q=80", desc: "Incluye actualizaciones y parches estables.", size: "1.8 GB", link: "#" }
+        ];
+
+        let games = JSON.parse(localStorage.getItem('xgamer_games')) || defaultGames;
+        let socials = JSON.parse(localStorage.getItem('xgamer_socials')) || {
+            telegram: "#", tiktok: "#", whatsapp: "#", discord: "#", youtube: "#"
+        };
+        let isAdmin = localStorage.getItem('xgamer_is_admin') === 'true';
+
+        function renderGames(data = games) {
+            const grid = document.getElementById('gamesGrid');
+            grid.innerHTML = '';
+            if(data.length === 0) {
+                grid.innerHTML = '<p style="color:var(--text-dim); grid-column:1/-1; text-align:center; padding:2rem;">No hay juegos disponibles.</p>';
+                return;
+            }
+            data.forEach(game => {
+                const card = document.createElement('div');
+                card.className = 'game-card';
+                card.innerHTML = `
+                    <img src="${game.img || 'https://via.placeholder.com/300x170?text=StoreXGamerPKG'}" class="game-img" alt="${game.title}">
+                    <div class="game-info">
+                        <span class="game-category">${game.category}</span>
+                        <h3 class="game-title">${game.title}</h3>
+                        <p class="game-desc">${game.desc}</p>
+                        <div class="game-footer">
+                            <span class="game-size">${game.size}</span>
+                            <a href="${game.link}" target="_blank" class="btn-download">Descargar</a>
+                        </div>
+                        ${isAdmin ? `
+                        <div class="admin-actions">
+                            <button class="btn-edit" onclick="editGame(${game.id})">Editar</button>
+                            <button class="btn-delete" onclick="deleteGame(${game.id})">Eliminar</button>
+                        </div>` : ''}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function renderSocials() {
+            document.getElementById('socTelegram').href = socials.telegram;
+            document.getElementById('socTikTok').href = socials.tiktok;
+            document.getElementById('socWhatsapp').href = socials.whatsapp;
+            document.getElementById('socDiscord').href = socials.discord;
+            document.getElementById('socYoutube').href = socials.youtube;
+        }
+
+        function filterGames() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const cat = document.getElementById('categoryFilter').value;
+            const filtered = games.filter(g => {
+                const matchQuery = g.title.toLowerCase().includes(query) || g.desc.toLowerCase().includes(query);
+                const matchCat = cat === 'ALL' || g.category === cat;
+                return matchQuery && matchCat;
+            });
+            renderGames(filtered);
+        }
+
+        function openAdminModal() {
+            document.getElementById('adminModal').style.display = 'flex';
+            if(isAdmin) {
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('dashboardSection').style.display = 'block';
+            } else {
+                document.getElementById('loginSection').style.display = 'block';
+                document.getElementById('dashboardSection').style.display = 'none';
+            }
+        }
+        function closeAdminModal() { document.getElementById('adminModal').style.display = 'none'; }
+
+        function handleLogin() {
+            const email = document.getElementById('adminEmail').value.trim();
+            const pass = document.getElementById('adminPass').value.trim();
+            if(email === 'admin@storexgamerpkg.com' && pass === 'admin123') {
+                isAdmin = true;
+                localStorage.setItem('xgamer_is_admin', 'true');
+                openAdminModal();
+                renderGames();
+            } else {
+                alert('Credenciales incorrectas (admin@storexgamerpkg.com / admin123)');
+            }
+        }
+
+        function handleLogout() {
+            isAdmin = false;
+            localStorage.setItem('xgamer_is_admin', 'false');
+            closeAdminModal();
+            renderGames();
+        }
+
+        function openGameForm(id = null) {
+            document.getElementById('gameModal').style.display = 'flex';
+            if(id) {
+                document.getElementById('gameModalTitle').innerText = 'Editar Juego';
+                const g = games.find(item => item.id === id);
+                document.getElementById('gameId').value = g.id;
+                document.getElementById('gTitle').value = g.title;
+                document.getElementById('gCategory').value = g.category;
+                document.getElementById('gImg').value = g.img;
+                document.getElementById('gDesc').value = g.desc;
+                document.getElementById('gSize').value = g.size;
+                document.getElementById('gLink').value = g.link;
+            } else {
+                document.getElementById('gameModalTitle').innerText = 'Agregar Juego';
+                document.getElementById('gameId').value = '';
+                document.getElementById('gTitle').value = '';
+                document.getElementById('gImg').value = '';
+                document.getElementById('gDesc').value = '';
+                document.getElementById('gSize').value = '';
+                document.getElementById('gLink').value = '';
+            }
+        }
+        function closeGameForm() { document.getElementById('gameModal').style.display = 'none'; }
+
+        function saveGame() {
+            const id = document.getElementById('gameId').value;
+            const title = document.getElementById('gTitle').value;
+            const category = document.getElementById('gCategory').value;
+            const img = document.getElementById('gImg').value;
+            const desc = document.getElementById('gDesc').value;
+            const size = document.getElementById('gSize').value;
+            const link = document.getElementById('gLink').value;
+
+            if(!title) { alert('El título es obligatorio'); return; }
+
+            if(id) {
+                const idx = games.findIndex(g => g.id == id);
+                games[idx] = { id: Number(id), title, category, img, desc, size, link };
+            } else {
+                const newId = games.length > 0 ? Math.max(...games.map(g => g.id)) + 1 : 1;
+                games.push({ id: newId, title, category, img, desc, size, link });
+            }
+
+            localStorage.setItem('xgamer_games', JSON.stringify(games));
+            closeGameForm();
+            renderGames();
+        }
+
+        function editGame(id) { openGameForm(id); closeAdminModal(); }
+        function deleteGame(id) {
+            if(confirm('¿Eliminar este juego?')) {
+                games = games.filter(g => g.id !== id);
+                localStorage.setItem('xgamer_games', JSON.stringify(games));
+                renderGames();
+            }
+        }
+
+        function openSocialConfig() {
+            document.getElementById('socialModal').style.display = 'flex';
+            document.getElementById('sTelegram').value = socials.telegram;
+            document.getElementById('sTikTok').value = socials.tiktok;
+            document.getElementById('sWhatsapp').value = socials.whatsapp;
+            document.getElementById('sDiscord').value = socials.discord;
+            document.getElementById('sYoutube').value = socials.youtube;
+        }
+        function closeSocialConfig() { document.getElementById('socialModal').style.display = 'none'; }
+
+        function saveSocials() {
+            socials = {
+                telegram: document.getElementById('sTelegram').value,
+                tiktok: document.getElementById('sTikTok').value,
+                whatsapp: document.getElementById('sWhatsapp').value,
+                discord: document.getElementById('sDiscord').value,
+                youtube: document.getElementById('sYoutube').value
+            };
+            localStorage.setItem('xgamer_sql', JSON.stringify(socials)); // opcional
+            localStorage.setItem('xgamer_socials', JSON.stringify(socials));
+            closeSocialConfig();
+            renderSocials();
+        }
+
+        renderGames();
+        renderSocials();
+    </script>
 </body>
 </html>

@@ -92,7 +92,7 @@ footer{border-top:1px solid #135748;padding:14px 22px;display:flex;justify-conte
 </header>
 <section class="hero" id="inicio"><div class="hero-copy"><div class="eyebrow">BIENVENIDO A</div><h1>STORE<span>X</span>GAMER<br><span>PKG</span></h1><p>TU MUNDO GAMER EN UN <b>SOLO LUGAR</b></p><div class="perks"><div class="perk"><strong>ϟ Juegos</strong>100% seguros*</div><div class="perk"><strong>♢ Descargas</strong>Rápidas y confiables</div><div class="perk"><strong>☁ Apps</strong>Premium y gratis*</div><div class="perk"><strong>♟ Comunidad</strong>Gamers como tú</div></div></div></section>
 
-<!-- DESTACADO EDITABLE -->
+<!-- DESTACADO EDITABLE COMPLETO -->
 <section class="featured" id="featuredSection">
     <img id="featImg" src="https://images.unsplash.com/photo-1603481546238-487240415921?w=600&q=85" alt="Juego destacado">
     <div>
@@ -102,11 +102,8 @@ footer{border-top:1px solid #135748;padding:14px 22px;display:flex;justify-conte
         <div class="pills" id="featPills"><span class="pill">Mundo Abierto</span><span class="pill">PC / PS4 / Xbox</span><span class="pill">65 GB</span></div>
         <button class="primary" onclick="featuredDownload()">¡Explora nuestro catálogo de Juegos!</button>
     </div>
-    <div class="featured-thumbs">
-        <img class="thumb" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300&q=80" alt="">
-        <img class="thumb" src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=300&q=80" alt="">
-        <img class="thumb" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=300&q=80" alt="">
-        <img class="thumb" src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=300&q=80" alt="">
+    <div class="featured-thumbs" id="featuredThumbsContainer">
+        <!-- Se generan dinámicamente las 4 miniaturas -->
     </div>
     <button id="editFeatBtn" style="display:none;position:absolute;top:10px;right:10px;background:var(--cyan);color:#020907;border:none;padding:5px 10px;border-radius:6px;cursor:pointer;font-weight:bold;" onclick="openFeaturedModal()">✏ Editar Destacado</button>
 </section>
@@ -159,8 +156,20 @@ footer{border-top:1px solid #135748;padding:14px 22px;display:flex;justify-conte
 <!-- MODAL AGREGAR/EDITAR JUEGO O APORTE -->
 <div class="modal" id="gameModal"><div class="modal-box"><h2 id="gameModalTitle">Agregar Aporte</h2><input type="hidden" id="editId"><div class="formrow"><label>Nombre</label><input id="gTitle"></div><div class="formrow"><label>Tipo de Contenido</label><select id="gType"><option value="juego">Juego</option><option value="app">App</option><option value="herramienta">Herramienta</option></select></div><div class="formrow"><label>Plataforma</label><select id="gPlatform"><option>PC</option><option>PS4/PS5</option><option>Xbox</option><option>Android</option><option>iOS</option></select></div><div class="formrow"><label>Género / Categoría</label><input id="gGenre" placeholder="Acción, RPG, Utilidad..."></div><div class="formrow"><label>Descripción</label><textarea id="gDesc" rows="2"></textarea></div><div class="formrow"><label>Tamaño</label><input id="gSize" placeholder="Ej. 2.5 GB"></div><div class="formrow"><label>Portada (URL)</label><input id="gImg" placeholder="https://..."></div><div class="formrow"><label>Enlace de descarga autorizado</label><input id="gLink" placeholder="https://..."></div><div class="actions"><button class="secondary" onclick="closeModal('gameModal')">Cancelar</button><button class="primary" onclick="saveGame()">Publicar Aporte</button></div></div></div>
 
-<!-- MODAL EDITAR DESTACADO (CON SUBIDA DE IMAGEN DESDE DISPOSITIVO) -->
-<div class="modal" id="featuredModal"><div class="modal-box"><h2>Editar Banner Destacado</h2><div class="formrow"><label>Título</label><input id="fTitle"></div><div class="formrow"><label>Descripción</label><textarea id="fDesc" rows="2"></textarea></div><div class="formrow"><label>Etiquetas (Separadas por coma)</label><input id="fTags" placeholder="Mundo Abierto, PC, 65 GB"></div><div class="formrow"><label>Subir Imagen Destacada</label><input type="file" id="fImgFile" accept="image/*" class="field" style="padding:6px"></div><div class="formrow"><label>Enlace de Descarga</label><input id="fLink"></div><div class="actions"><button class="secondary" onclick="closeModal('featuredModal')">Cancelar</button><button class="primary" onclick="saveFeatured()">Guardar Cambios</button></div></div></div>
+<!-- MODAL EDITAR DESTACADO COMPLETO (BANNER + 4 MINIATURAS) -->
+<div class="modal" id="featuredModal"><div class="modal-box"><h2>Editar Banner Destacado</h2>
+<div class="formrow"><label>Título</label><input id="fTitle"></div>
+<div class="formrow"><label>Descripción</label><textarea id="fDesc" rows="2"></textarea></div>
+<div class="formrow"><label>Etiquetas (Separadas por coma)</label><input id="fTags" placeholder="Mundo Abierto, PC, 65 GB"></div>
+<div class="formrow"><label>Imagen Principal del Banner</label><input type="file" id="fImgFile" accept="image/*" class="field" style="padding:6px"></div>
+<hr style="border-color:#176653;margin:12px 0">
+<p style="font-size:11px;color:var(--green);margin-bottom:8px"><b>Imágenes de las 4 Miniaturas Derechas:</b></p>
+<div class="formrow"><label>Miniatura 1</label><input type="file" id="fThumb0" accept="image/*" class="field" style="padding:6px"></div>
+<div class="formrow"><label>Miniatura 2</label><input type="file" id="fThumb1" accept="image/*" class="field" style="padding:6px"></div>
+<div class="formrow"><label>Miniatura 3</label><input type="file" id="fThumb2" accept="image/*" class="field" style="padding:6px"></div>
+<div class="formrow"><label>Miniatura 4</label><input type="file" id="fThumb3" accept="image/*" class="field" style="padding:6px"></div>
+<div class="formrow"><label>Enlace de Descarga</label><input id="fLink"></div>
+<div class="actions"><button class="secondary" onclick="closeModal('featuredModal')">Cancelar</button><button class="primary" onclick="saveFeatured()">Guardar Cambios</button></div></div></div>
 
 <!-- MODAL EDITAR NOVEDADES -->
 <div class="modal" id="sidebarModal"><div class="modal-box"><h2>Editar Panel de Novedades</h2><p style="font-size:11px;color:var(--muted);margin-bottom:10px">Formato: Ícono|Título|Texto (Uno por línea)</p><div class="formrow"><textarea id="fSidebarText" rows="6" style="width:100%"></textarea></div><div class="actions"><button class="secondary" onclick="closeModal('sidebarModal')">Cancelar</button><button class="primary" onclick="saveSidebar()">Guardar Novedades</button></div></div></div>
@@ -192,6 +201,12 @@ let featuredData = JSON.parse(localStorage.getItem("sxg_featured")||"null") || {
     desc: "Explora Los Santos en su versión PKG definitiva, optimizada y completa para descargar.",
     tags: ["Mundo Abierto", "PC / PS4 / Xbox", "65 GB"],
     img: "https://images.unsplash.com/photo-1603481546238-487240415921?w=600&q=85",
+    thumbs: [
+        "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300&q=80",
+        "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=300&q=80",
+        "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=300&q=80",
+        "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=300&q=80"
+    ],
     link: "#"
 };
 
@@ -274,6 +289,14 @@ function renderFeatured(){
     $("featDesc").textContent = featuredData.desc;
     $("featImg").src = featuredData.img;
     $("featPills").innerHTML = featuredData.tags.map(t=>`<span class="pill">${safe(t)}</span>`).join("");
+    
+    let thumbs = featuredData.thumbs || [
+        "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300&q=80",
+        "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=300&q=80",
+        "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=300&q=80",
+        "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=300&q=80"
+    ];
+    $("featuredThumbsContainer").innerHTML = thumbs.map(img => `<img class="thumb" src="${safe(img)}" alt="">`).join("");
 }
 
 function featuredDownload(){
@@ -382,6 +405,10 @@ function openFeaturedModal(){
     $("fDesc").value = featuredData.desc;
     $("fTags").value = featuredData.tags.join(", ");
     $("fImgFile").value = "";
+    $("fThumb0").value = "";
+    $("fThumb1").value = "";
+    $("fThumb2").value = "";
+    $("fThumb3").value = "";
     $("fLink").value = featuredData.link;
     $("featuredModal").classList.add("show");
 }
@@ -392,23 +419,53 @@ function saveFeatured(){
     featuredData.tags = $("fTags").value.split(",").map(t=>t.trim()).filter(Boolean);
     featuredData.link = $("fLink").value.trim() || "#";
 
-    let fileInput = $("fImgFile");
-    if(fileInput.files && fileInput.files[0]){
-        let reader = new FileReader();
-        reader.onload = function(e){
-            featuredData.img = e.target.result;
+    if(!featuredData.thumbs) featuredData.thumbs = [
+        "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300&q=80",
+        "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=300&q=80",
+        "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=300&q=80",
+        "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=300&q=80"
+    ];
+
+    let filesProcessed = 0;
+    let totalFiles = 5; // Banner principal + 4 miniaturas
+
+    function checkFinish(){
+        filesProcessed++;
+        if(filesProcessed >= totalFiles){
             localStorage.setItem("sxg_featured", JSON.stringify(featuredData));
             closeModal("featuredModal");
             renderFeatured();
             alert("¡Destacado actualizado con éxito!");
-        };
-        reader.readAsDataURL(fileInput.files[0]);
-    } else {
-        localStorage.setItem("sxg_featured", JSON.stringify(featuredData));
-        closeModal("featuredModal");
-        renderFeatured();
-        alert("¡Destacado actualizado con éxito!");
+        }
     }
+
+    // Procesar banner principal
+    let mainFile = $("fImgFile").files[0];
+    if(mainFile){
+        let reader = new FileReader();
+        reader.onload = function(e){
+            featuredData.img = e.target.result;
+            checkFinish();
+        };
+        reader.readAsDataURL(mainFile);
+    } else {
+        checkFinish();
+    }
+
+    // Procesar las 4 miniaturas
+    [0, 1, 2, 3].forEach(idx => {
+        let thumbFile = $(`fThumb${idx}`).files[0];
+        if(thumbFile){
+            let reader = new FileReader();
+            reader.onload = function(e){
+                featuredData.thumbs[idx] = e.target.result;
+                checkFinish();
+            };
+            reader.readAsDataURL(thumbFile);
+        } else {
+            checkFinish();
+        }
+    });
 }
 
 function openSidebarModal(){

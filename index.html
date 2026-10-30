@@ -65,7 +65,7 @@ footer{border-top:1px solid #135748;padding:14px 22px;display:flex;justify-conte
 
 .modal-box{width:min(500px,100%);max-height:90vh;overflow:auto;background:#061711;border:1px solid var(--green);border-radius:12px;padding:20px;box-shadow:0 0 25px #00ff6a33}.modal-box h2{color:var(--green);margin-bottom:14px}.formrow{margin:10px 0}.formrow label{display:block;font-size:11px;color:#b5d7ca;margin-bottom:5px}.formrow input,.formrow textarea,.formrow select{width:100%;background:#020b08;border:1px solid #236653;color:white;padding:10px;border-radius:7px}.actions{display:flex;justify-content:flex-end;gap:8px;margin-top:15px}.secondary{border:1px solid #6a8980;background:transparent;color:white;border-radius:8px;padding:9px 13px;cursor:pointer}
 @media(max-width:1050px){.layout{grid-template-columns:1fr}.sidebar{display:none}.games{grid-template-columns:repeat(4,minmax(0,1fr))}}
-@media(max-width:760px){.site{padding:0}.main{border-radius:0}header{height:auto;min-height:65px;padding:9px 12px;flex-wrap:wrap}.brand{min-width:0}.brand-name{font-size:15px}.brand-mark{width:39px;height:39px}nav{order:3;width:100%;overflow:auto;gap:17px}nav a{white-space:nowrap;padding:7px 0}.header-actions{margin-left:auto}.top-search{display:none}.hero{height:230px;padding:22px 18px;background-position:60% center}.hero h1{font-size:40px}.hero p{font-size:11px;letter-spacing:1px}.perks{gap:9px}.perk{padding-right:9px;font-size:9px}.perk strong{font-size:10px}.categories{grid-template-columns:repeat(3,1fr);gap:7px}.category{height:85px}.toolbar{flex-wrap:wrap}.toolbar input{flex-basis:100%}.toolbar select{flex:1;max-width:none}.games{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.cover{height:130px}.game h3{font-size:11px}footer{flex-wrap:wrap;justify-content:center;text-align:center}.social{order:3;width:100%;justify-content:center}}
+@media(max-width:760px){.site{padding:0}.main{border-radius:0}header{height:auto;min-height:65px;padding:9px 12px;flex-wrap:wrap}.brand{min-width:0}.brand-name{font-size:15px}.brand-mark{width:39px;height:39px}nav{order:3;width:100%;overflow:auto;gap:17px}nav a{white-space:nowrap;padding:7px 0}.header-actions{margin-left:auto}.top-search{display:none}.hero{height:230px;padding:22px 18px;background-position:60% center}.hero h1{font-size:40px}.hero p{font-size:11px;letter-spacing:1px}.perks{gap:9px}.perk{padding-right:9px;font-size:9px}.perk strong{font-size:10px}.featured{grid-template-columns:110px 1fr;margin:10px;padding:9px;gap:10px}.featured img{height:125px}.featured h2{font-size:16px}.featured p{font-size:10px}.featured-thumbs{grid-column:1/-1}.thumb{height:65px}.categories{grid-template-columns:repeat(3,1fr);gap:7px}.category{height:85px}.toolbar{flex-wrap:wrap}.toolbar input{flex-basis:100%}.toolbar select{flex:1;max-width:none}.games{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.cover{height:130px}.game h3{font-size:11px}footer{flex-wrap:wrap;justify-content:center;text-align:center}.social{order:3;width:100%;justify-content:center}}
 </style>
 </head>
 <body>
@@ -92,7 +92,7 @@ footer{border-top:1px solid #135748;padding:14px 22px;display:flex;justify-conte
 </header>
 <section class="hero" id="inicio"><div class="hero-copy"><div class="eyebrow">BIENVENIDO A</div><h1>STORE<span>X</span>GAMER<br><span>PKG</span></h1><p>TU MUNDO GAMER EN UN <b>SOLO LUGAR</b></p><div class="perks"><div class="perk"><strong>ϟ Juegos</strong>100% seguros*</div><div class="perk"><strong>♢ Descargas</strong>Rápidas y confiables</div><div class="perk"><strong>☁ Apps</strong>Premium y gratis*</div><div class="perk"><strong>♟ Comunidad</strong>Gamers como tú</div></div></div></section>
 
-<!-- DESTACADO EDITABLE CON ESTÉTICA CYBER -->
+<!-- DESTACADO EDITABLE -->
 <section class="featured" id="featuredSection">
     <img id="featImg" src="https://images.unsplash.com/photo-1603481546238-487240415921?w=600&q=85" alt="Juego destacado">
     <div>
@@ -159,8 +159,8 @@ footer{border-top:1px solid #135748;padding:14px 22px;display:flex;justify-conte
 <!-- MODAL AGREGAR/EDITAR JUEGO O APORTE -->
 <div class="modal" id="gameModal"><div class="modal-box"><h2 id="gameModalTitle">Agregar Aporte</h2><input type="hidden" id="editId"><div class="formrow"><label>Nombre</label><input id="gTitle"></div><div class="formrow"><label>Tipo de Contenido</label><select id="gType"><option value="juego">Juego</option><option value="app">App</option><option value="herramienta">Herramienta</option></select></div><div class="formrow"><label>Plataforma</label><select id="gPlatform"><option>PC</option><option>PS4/PS5</option><option>Xbox</option><option>Android</option><option>iOS</option></select></div><div class="formrow"><label>Género / Categoría</label><input id="gGenre" placeholder="Acción, RPG, Utilidad..."></div><div class="formrow"><label>Descripción</label><textarea id="gDesc" rows="2"></textarea></div><div class="formrow"><label>Tamaño</label><input id="gSize" placeholder="Ej. 2.5 GB"></div><div class="formrow"><label>Portada (URL)</label><input id="gImg" placeholder="https://..."></div><div class="formrow"><label>Enlace de descarga autorizado</label><input id="gLink" placeholder="https://..."></div><div class="actions"><button class="secondary" onclick="closeModal('gameModal')">Cancelar</button><button class="primary" onclick="saveGame()">Publicar Aporte</button></div></div></div>
 
-<!-- MODAL EDITAR DESTACADO -->
-<div class="modal" id="featuredModal"><div class="modal-box"><h2>Editar Banner Destacado</h2><div class="formrow"><label>Título</label><input id="fTitle"></div><div class="formrow"><label>Descripción</label><textarea id="fDesc" rows="2"></textarea></div><div class="formrow"><label>Etiquetas (Separadas por coma)</label><input id="fTags" placeholder="Shooter, Android, 2.5 GB"></div><div class="formrow"><label>Imagen Principal (URL)</label><input id="fImg"></div><div class="formrow"><label>Enlace de Descarga</label><input id="fLink"></div><div class="actions"><button class="secondary" onclick="closeModal('featuredModal')">Cancelar</button><button class="primary" onclick="saveFeatured()">Guardar Cambios</button></div></div></div>
+<!-- MODAL EDITAR DESTACADO (CON SUBIDA DE IMAGEN DESDE DISPOSITIVO) -->
+<div class="modal" id="featuredModal"><div class="modal-box"><h2>Editar Banner Destacado</h2><div class="formrow"><label>Título</label><input id="fTitle"></div><div class="formrow"><label>Descripción</label><textarea id="fDesc" rows="2"></textarea></div><div class="formrow"><label>Etiquetas (Separadas por coma)</label><input id="fTags" placeholder="Mundo Abierto, PC, 65 GB"></div><div class="formrow"><label>Subir Imagen Destacada</label><input type="file" id="fImgFile" accept="image/*" class="field" style="padding:6px"></div><div class="formrow"><label>Enlace de Descarga</label><input id="fLink"></div><div class="actions"><button class="secondary" onclick="closeModal('featuredModal')">Cancelar</button><button class="primary" onclick="saveFeatured()">Guardar Cambios</button></div></div></div>
 
 <!-- MODAL EDITAR NOVEDADES -->
 <div class="modal" id="sidebarModal"><div class="modal-box"><h2>Editar Panel de Novedades</h2><p style="font-size:11px;color:var(--muted);margin-bottom:10px">Formato: Ícono|Título|Texto (Uno por línea)</p><div class="formrow"><textarea id="fSidebarText" rows="6" style="width:100%"></textarea></div><div class="actions"><button class="secondary" onclick="closeModal('sidebarModal')">Cancelar</button><button class="primary" onclick="saveSidebar()">Guardar Novedades</button></div></div></div>
@@ -381,7 +381,7 @@ function openFeaturedModal(){
     $("fTitle").value = featuredData.title;
     $("fDesc").value = featuredData.desc;
     $("fTags").value = featuredData.tags.join(", ");
-    $("fImg").value = featuredData.img;
+    $("fImgFile").value = "";
     $("fLink").value = featuredData.link;
     $("featuredModal").classList.add("show");
 }
@@ -390,12 +390,25 @@ function saveFeatured(){
     featuredData.title = $("fTitle").value.trim() || featuredData.title;
     featuredData.desc = $("fDesc").value.trim() || featuredData.desc;
     featuredData.tags = $("fTags").value.split(",").map(t=>t.trim()).filter(Boolean);
-    featuredData.img = $("fImg").value.trim() || featuredData.img;
     featuredData.link = $("fLink").value.trim() || "#";
-    localStorage.setItem("sxg_featured", JSON.stringify(featuredData));
-    closeModal("featuredModal");
-    renderFeatured();
-    alert("¡Destacado actualizado con éxito!");
+
+    let fileInput = $("fImgFile");
+    if(fileInput.files && fileInput.files[0]){
+        let reader = new FileReader();
+        reader.onload = function(e){
+            featuredData.img = e.target.result;
+            localStorage.setItem("sxg_featured", JSON.stringify(featuredData));
+            closeModal("featuredModal");
+            renderFeatured();
+            alert("¡Destacado actualizado con éxito!");
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+    } else {
+        localStorage.setItem("sxg_featured", JSON.stringify(featuredData));
+        closeModal("featuredModal");
+        renderFeatured();
+        alert("¡Destacado actualizado con éxito!");
+    }
 }
 
 function openSidebarModal(){

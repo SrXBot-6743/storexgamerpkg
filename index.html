@@ -306,4 +306,547 @@
         .social-section {
             background: var(--panel-glass);
             backdrop-filter: blur(10px);
-            border-top:
+            border-top: 2px solid var(--neon-purple);
+            box-shadow: 0 -5px 25px var(--neon-purple-glow);
+            padding: 2rem;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            color: var(--neon-cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            border: 1px solid var(--border-color);
+            padding: 8px 18px;
+            border-radius: 8px;
+            background: rgba(0,240,255,0.03);
+            transition: all 0.3s ease;
+            font-weight: 700;
+        }
+
+        .social-link:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 15px var(--neon-cyan-glow);
+            background: rgba(0,240,255,0.1);
+            color: #fff;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 7, 18, 0.9);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background: var(--panel-bg);
+            border: 2px solid var(--neon-purple);
+            box-shadow: 0 0 40px var(--neon-purple-glow), inset 0 0 20px rgba(176, 38, 255, 0.1);
+            padding: 2.5rem;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 580px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-content h2 {
+            color: var(--neon-cyan);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px var(--neon-cyan-glow);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            border-color: var(--neon-cyan);
+            outline: none;
+            box-shadow: 0 0 12px var(--neon-cyan-glow);
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 1.8rem;
+        }
+
+        .btn-close {
+            background: transparent;
+            border: 1px solid var(--text-dim);
+            color: var(--text-dim);
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .btn-close:hover {
+            border-color: #fff;
+            color: #fff;
+        }
+
+        .collaborator-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255,255,255,0.03);
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 1rem; }
+            .logo-area h1 { font-size: 1.2rem; }
+            .container { padding: 1rem; }
+            .hero-banner { padding: 1.5rem; }
+            .hero-banner h2 { font-size: 1.6rem; }
+            .games-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+            .modal-content { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <h1>StoreXGamerPKG</h1>
+        </div>
+        <div class="nav-buttons">
+            <span id="userBadge" class="user-badge">Staff Mode</span>
+            <button class="btn-neon" onclick="openAdminModal()">Staff / Login</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="hero-banner">
+            <h2>CENTRAL DE JUEGOS Y PKG</h2>
+            <p>Descarga las mejores versiones optimizadas para PS3, PS4, Móviles y PC Ports con máxima velocidad y estilo neón gamer.</p>
+        </div>
+
+        <div class="search-bar-container">
+            <input type="text" id="searchInput" placeholder="Buscar juego por título o descripción..." oninput="filterGames()">
+        </div>
+
+        <div class="categories-tabs">
+            <button class="tab-btn active" onclick="setCategory('ALL', this)">Todos</button>
+            <button class="tab-btn" onclick="setCategory('PS3 PKG', this)">PS3 PKG</button>
+            <button class="tab-btn" onclick="setCategory('PS4 PKG', this)">PS4 PKG</button>
+            <button class="tab-btn" onclick="setCategory('MOBILE', this)">Móvil (APK)</button>
+            <button class="tab-btn" onclick="setCategory('PC PORT', this)">PC Port</button>
+        </div>
+
+        <div id="gamesGrid" class="games-grid"></div>
+    </div>
+
+    <footer class="social-section">
+        <p style="font-size: 0.95rem; color: var(--text-dim); font-weight: 700;">ÚNETE A NUESTRA COMUNIDAD</p>
+        <div class="social-icons" id="socialLinksContainer">
+            <a href="#" class="social-link" target="_blank" id="socTelegram">Telegram</a>
+            <a href="#" class="social-link" target="_blank" id="socTikTok">TikTok</a>
+            <a href="#" class="social-link" target="_blank" id="socWhatsapp">WhatsApp</a>
+            <a href="#" class="social-link" target="_blank" id="socDiscord">Discord</a>
+            <a href="#" class="social-link" target="_blank" id="socYoutube">YouTube</a>
+        </div>
+    </footer>
+
+    <div id="adminModal" class="modal">
+        <div class="modal-content">
+            <div id="loginSection">
+                <h2>Acceso Staff / Colaborador</h2>
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="adminEmail" placeholder="admin@storexgamerpkg.com">
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="adminPass" placeholder="••••••••">
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-close" onclick="closeAdminModal()">Cancelar</button>
+                    <button class="btn-neon" onclick="handleLogin()">Entrar</button>
+                </div>
+            </div>
+
+            <div id="dashboardSection" style="display: none;">
+                <h2>Panel de Administración Pro</h2>
+                <button class="btn-neon" style="width:100%; margin-bottom: 12px; padding: 12px;" onclick="openGameForm()">+ Agregar Nuevo Juego</button>
+                <button class="btn-close" style="width:100%; margin-bottom: 12px; padding: 12px; color: var(--neon-cyan); border-color: var(--neon-cyan);" onclick="openCollabManager()">👥 Gestionar Colaboradores</button>
+                <button class="btn-close" style="width:100%; margin-bottom: 15px; padding: 12px; color: var(--neon-purple); border-color: var(--neon-purple);" onclick="openSocialConfig()">⚙️ Configurar Redes Sociales</button>
+                <button class="btn-close" style="width:100%; background: #dc2626; color:white; border:none; padding: 12px;" onclick="handleLogout()">Cerrar Sesión</button>
+                <div class="modal-actions" style="margin-top: 15px;">
+                    <button class="btn-close" onclick="closeAdminModal()">Cerrar Ventana</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="gameModal" class="modal">
+        <div class="modal-content">
+            <h2 id="gameModalTitle">Agregar Juego</h2>
+            <input type="hidden" id="gameId">
+            <div class="form-group">
+                <label>Título del Juego</label>
+                <input type="text" id="gTitle" placeholder="Ej: God of War III">
+            </div>
+            <div class="form-group">
+                <label>Categoría</label>
+                <select id="gCategory">
+                    <option value="PS3 PKG">PS3 PKG</option>
+                    <option value="PS4 PKG">PS4 PKG</option>
+                    <option value="MOBILE">Móvil (APK)</option>
+                    <option value="PC PORT">PC Port</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>URL de Imagen / Portada</label>
+                <input type="text" id="gImg" placeholder="https://...">
+            </div>
+            <div class="form-group">
+                <label>Descripción Corta</label>
+                <textarea id="gDesc" rows="2" placeholder="Detalles de la versión..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Tamaño (Ej: 15 GB / 450 MB)</label>
+                <input type="text" id="gSize" placeholder="15 GB">
+            </div>
+            <div class="form-group">
+                <label>Enlace de Descarga</label>
+                <input type="text" id="gLink" placeholder="https://...">
+            </div>
+            <div class="modal-actions">
+                <button class="btn-close" onclick="closeGameForm()">Cancelar</button>
+                <button class="btn-neon" onclick="saveGame()">Guardar Juego</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="collabModal" class="modal">
+        <div class="modal-content">
+            <h2>Colaboradores del Equipo</h2>
+            <div class="form-group">
+                <label>Nuevo Correo de Colaborador</label>
+                <input type="email" id="newCollabEmail" placeholder="colaborador@storexgamerpkg.com">
+            </div>
+            <div class="form-group">
+                <label>Contraseña Temporal</label>
+                <input type="password" id="newCollabPass" placeholder="••••••••">
+            </div>
+            <button class="btn-neon" style="width:100%; margin-bottom: 15px; padding: 10px;" onclick="addCollaborator()">+ Registrar Colaborador</button>
+            
+            <div style="max-height: 150px; overflow-y: auto; margin-bottom: 15px;" id="collabListContainer"></div>
+
+            <div class="modal-actions">
+                <button class="btn-close" onclick="closeCollabManager()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="socialModal" class="modal">
+        <div class="modal-content">
+            <h2>Gestionar Redes Sociales</h2>
+            <div class="form-group"><label>Telegram URL</label><input type="text" id="sTelegram"></div>
+            <div class="form-group"><label>TikTok URL</label><input type="text" id="sTikTok"></div>
+            <div class="form-group"><label>WhatsApp URL</label><input type="text" id="sWhatsapp"></div>
+            <div class="form-group"><label>Discord URL</label><input type="text" id="sDiscord"></div>
+            <div class="form-group"><label>YouTube URL</label><input type="text" id="sYoutube"></div>
+            <div class="modal-actions">
+                <button class="btn-close" onclick="closeSocialConfig()">Cancelar</button>
+                <button class="btn-neon" onclick="saveSocials()">Guardar Redes</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const defaultGames = [
+            { id: 1, title: "Grand Theft Auto V", category: "PS4 PKG", img: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=500&q=80", desc: "Versión optimizada PKG lista para instalar en consola.", size: "48 GB", link: "#" },
+            { id: 2, title: "Minecraft PS3 Edition", category: "PS3 PKG", img: "https://images.unsplash.com/photo-1627856013091-feddeec4b466?w=500&q=80", desc: "Incluye actualizaciones y parches estables.", size: "1.8 GB", link: "#" }
+        ];
+
+        let games = JSON.parse(localStorage.getItem('xgamer_games')) || defaultGames;
+        let socials = JSON.parse(localStorage.getItem('xgamer_socials')) || {
+            telegram: "#", tiktok: "#", whatsapp: "#", discord: "#", youtube: "#"
+        };
+        let collaborators = JSON.parse(localStorage.getItem('xgamer_collabs')) || [
+            { email: "admin@storexgamerpkg.com", pass: "admin123" }
+        ];
+
+        let currentUser = localStorage.getItem('xgamer_logged_user') || null;
+        let selectedCategory = 'ALL';
+
+        function renderGames() {
+            const grid = document.getElementById('gamesGrid');
+            grid.innerHTML = '';
+            
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = games.filter(g => {
+                const matchQuery = g.title.toLowerCase().includes(query) || g.desc.toLowerCase().includes(query);
+                const matchCat = selectedCategory === 'ALL' || g.category === selectedCategory;
+                return matchQuery && matchCat;
+            });
+
+            if(filtered.length === 0) {
+                grid.innerHTML = '<p style="color:var(--text-dim); grid-column:1/-1; text-align:center; padding:3rem;">No se encontraron juegos en esta categoría.</p>';
+                return;
+            }
+
+            filtered.forEach(game => {
+                const card = document.createElement('div');
+                card.className = 'game-card';
+                card.innerHTML = `
+                    <div class="game-img-container">
+                        <img src="${game.img || 'https://via.placeholder.com/300x180?text=StoreXGamerPKG'}" class="game-img" alt="${game.title}">
+                        <span class="game-badge">${game.category}</span>
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">${game.title}</h3>
+                        <p class="game-desc">${game.desc}</p>
+                        <div class="game-footer">
+                            <span class="game-size">${game.size}</span>
+                            <a href="${game.link}" target="_blank" class="btn-download">Descargar</a>
+                        </div>
+                        ${currentUser ? `
+                        <div class="admin-actions">
+                            <button class="btn-edit" onclick="editGame(${game.id})">Editar</button>
+                            <button class="btn-delete" onclick="deleteGame(${game.id})">Eliminar</button>
+                        </div>` : ''}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function setCategory(cat, btn) {
+            selectedCategory = cat;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderGames();
+        }
+
+        function filterGames() {
+            renderGames();
+        }
+
+        function renderSocials() {
+            document.getElementById('socTelegram').href = socials.telegram;
+            document.getElementById('socTikTok').href = socials.tiktok;
+            document.getElementById('socWhatsapp').href = socials.whatsapp;
+            document.getElementById('socDiscord').href = socials.discord;
+            document.getElementById('socYoutube').href = socials.youtube;
+        }
+
+        function checkUserSession() {
+            const badge = document.getElementById('userBadge');
+            if(currentUser) {
+                badge.style.display = 'block';
+                badge.innerText = `Staff: ${currentUser}`;
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        function openAdminModal() {
+            document.getElementById('adminModal').style.display = 'flex';
+            if(currentUser) {
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('dashboardSection').style.display = 'block';
+            } else {
+                document.getElementById('loginSection').style.display = 'block';
+                document.getElementById('dashboardSection').style.display = 'none';
+            }
+        }
+        function closeAdminModal() { document.getElementById('adminModal').style.display = 'none'; }
+
+        function handleLogin() {
+            const email = document.getElementById('adminEmail').value.trim();
+            const pass = document.getElementById('adminPass').value.trim();
+            
+            const found = collaborators.find(c => c.email === email && c.pass === pass);
+            if(found) {
+                currentUser = email;
+                localStorage.setItem('xgamer_logged_user', currentUser);
+                checkUserSession();
+                openAdminModal();
+                renderGames();
+            } else {
+                alert('Credenciales incorrectas. Verifique correo o contraseña.');
+            }
+        }
+
+        function handleLogout() {
+            currentUser = null;
+            localStorage.removeItem('xgamer_logged_user');
+            checkUserSession();
+            closeAdminModal();
+            renderGames();
+        }
+
+        function openCollabManager() {
+            document.getElementById('collabModal').style.display = 'flex';
+            renderCollabList();
+        }
+        function closeCollabManager() { document.getElementById('collabModal').style.display = 'none'; }
+
+        function renderCollabList() {
+            const container = document.getElementById('collabListContainer');
+            container.innerHTML = '';
+            collaborators.forEach((c, index) => {
+                container.innerHTML += `
+                    <div class="collaborator-item">
+                        <span style="font-size:0.9rem; color:var(--text-color);">${c.email}</span>
+                        ${collaborators.length > 1 ? `<button class="btn-delete" onclick="removeCollab(${index})">Quitar</button>` : '<span style="font-size:0.8rem; color:var(--text-dim);">Principal</span>'}
+                    </div>
+                `;
+            });
+        }
+
+        function addCollaborator() {
+            const email = document.getElementById('newCollabEmail').value.trim();
+            const pass = document.getElementById('newCollabPass').value.trim();
+            if(!email || !pass) { alert('Complete ambos campos'); return; }
+            
+            collaborators.push({ email, pass });
+            localStorage.setItem('xgamer_collabs', JSON.stringify(collaborators));
+            document.getElementById('newCollabEmail').value = '';
+            document.getElementById('newCollabPass').value = '';
+            renderCollabList();
+            alert('¡Colaborador registrado con éxito!');
+        }
+
+        function removeCollab(index) {
+            if(confirm('¿Eliminar este colaborador?')) {
+                collaborators.splice(index, 1);
+                localStorage.setItem('xgamer_collabs', JSON.stringify(collaborators));
+                renderCollabList();
+            }
+        }
+
+        function openGameForm(id = null) {
+            document.getElementById('gameModal').style.display = 'flex';
+            if(id) {
+                document.getElementById('gameModalTitle').innerText = 'Editar Juego';
+                const g = games.find(item => item.id === id);
+                document.getElementById('gameId').value = g.id;
+                document.getElementById('gTitle').value = g.title;
+                document.getElementById('gCategory').value = g.category;
+                document.getElementById('gImg').value = g.img;
+                document.getElementById('gDesc').value = g.desc;
+                document.getElementById('gSize').value = g.size;
+                document.getElementById('gLink').value = g.link;
+            } else {
+                document.getElementById('gameModalTitle').innerText = 'Agregar Juego';
+                document.getElementById('gameId').value = '';
+                document.getElementById('gTitle').value = '';
+                document.getElementById('gImg').value = '';
+                document.getElementById('gDesc').value = '';
+                document.getElementById('gSize').value = '';
+                document.getElementById('gLink').value = '';
+            }
+        }
+        function closeGameForm() { document.getElementById('gameModal').style.display = 'none'; }
+
+        function saveGame() {
+            const id = document.getElementById('gameId').value;
+            const title = document.getElementById('gTitle').value;
+            const category = document.getElementById('gCategory').value;
+            const img = document.getElementById('gImg').value;
+            const desc = document.getElementById('gDesc').value;
+            const size = document.getElementById('gSize').value;
+            const link = document.getElementById('gLink').value;
+
+            if(!title) { alert('El título es obligatorio'); return; }
+
+            if(id) {
+                const idx = games.findIndex(g => g.id == id);
+                games[idx] = { id: Number(id), title, category, img, desc, size, link };
+            } else {
+                const newId = games.length > 0 ? Math.max(...games.map(g => g.id)) + 1 : 1;
+                games.push({ id: newId, title, category, img, desc, size, link });
+            }
+
+            localStorage.setItem('xgamer_games', JSON.stringify(games));
+            closeGameForm();
+            renderGames();
+        }
+
+        function editGame(id) { openGameForm(id); closeAdminModal(); }
+        function deleteGame(id) {
+            if(confirm('¿Seguro que deseas eliminar este juego?')) {
+                games = games.filter(g => g.id !== id);
+                localStorage.setItem('xgamer_games', JSON.stringify(games));
+                renderGames();
+            }
+        }
+
+        function openSocialConfig() {
+            document.getElementById('socialModal').style.display = 'flex';
+            document.getElementById('sTelegram').value = socials.telegram;
+            document.getElementById('sTikTok').value = socials.tiktok;
+            document.getElementById('sWhatsapp').value = socials.whatsapp;
+            document.getElementById('sDiscord').value = socials.discord;
+            document.getElementById('sYoutube').value = socials.youtube;
+        }
+        function closeSocialConfig() { document.getElementById('socialModal').style.display = 'none'; }
+
+        function saveSocials() {
+            socials = {
+                telegram: document.getElementById('sTelegram').value,
+                tiktok: document.getElementById('sTikTok').value,
+                whatsapp: document.getElementById('sWhatsapp').value,
+                discord: document.getElementById('sDiscord').value,
+                youtube: document.getElementById('sYoutube').value
+            };
+            localStorage.setItem('xgamer_socials', JSON.stringify(socials));
+            closeSocialConfig();
+            renderSocials();
+        }
+
+        checkUserSession();
+        renderGames();
+        renderSocials();
+    </script>
+</body>
+</html>

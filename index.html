@@ -53,12 +53,6 @@
             align-items: center;
         }
 
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
         .logo-area h1 {
             font-size: 1.5rem;
             color: #fff;
@@ -136,10 +130,22 @@
             margin: 0 auto;
         }
 
+        /* Sección de Filtros por Categoría y Género */
+        .filter-section {
+            margin-bottom: 2rem;
+        }
+
+        .filter-section h3 {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
         .categories-tabs {
             display: flex;
-            gap: 12px;
-            margin-bottom: 2rem;
+            gap: 10px;
             overflow-x: auto;
             padding-bottom: 5px;
         }
@@ -148,12 +154,13 @@
             background: var(--panel-bg);
             border: 1px solid var(--border-color);
             color: var(--text-dim);
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 8px;
             font-weight: 700;
             cursor: pointer;
             white-space: nowrap;
             transition: all 0.3s ease;
+            font-size: 0.9rem;
         }
 
         .tab-btn.active, .tab-btn:hover {
@@ -222,19 +229,35 @@
             object-fit: cover;
         }
 
-        .game-badge {
+        .badges-top {
             position: absolute;
             top: 10px;
             left: 10px;
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .game-badge {
             background: rgba(3, 7, 18, 0.85);
             border: 1px solid var(--neon-pink);
             color: var(--neon-pink);
-            padding: 4px 10px;
-            font-size: 0.75rem;
+            padding: 4px 8px;
+            font-size: 0.7rem;
             font-weight: 800;
             border-radius: 4px;
             text-transform: uppercase;
-            box-shadow: 0 0 8px rgba(255, 0, 127, 0.4);
+        }
+
+        .genre-badge {
+            background: rgba(3, 7, 18, 0.85);
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 4px 8px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            border-radius: 4px;
+            text-transform: uppercase;
         }
 
         .game-info {
@@ -247,14 +270,14 @@
         .game-title {
             font-size: 1.2rem;
             font-weight: 800;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: var(--text-color);
         }
 
         .game-desc {
             font-size: 0.9rem;
             color: var(--text-dim);
-            margin-bottom: 18px;
+            margin-bottom: 15px;
             flex: 1;
             line-height: 1.5;
         }
@@ -464,19 +487,34 @@
     <div class="container">
         <div class="hero-banner">
             <h2>CENTRAL DE JUEGOS Y PKG</h2>
-            <p>Descarga las mejores versiones optimizadas para PS3, PS4, Móviles y PC Ports con máxima velocidad y estilo neón gamer.</p>
+            <p>Descarga las mejores versiones optimizadas organizadas por consolas y géneros con estilo neón gamer.</p>
         </div>
 
         <div class="search-bar-container">
-            <input type="text" id="searchInput" placeholder="Buscar juego por título o descripción..." oninput="filterGames()">
+            <input type="text" id="searchInput" placeholder="Buscar por título, consola (ej: PS4) o género (ej: Acción)..." oninput="filterGames()">
         </div>
 
-        <div class="categories-tabs">
-            <button class="tab-btn active" onclick="setCategory('ALL', this)">Todos</button>
-            <button class="tab-btn" onclick="setCategory('PS3 PKG', this)">PS3 PKG</button>
-            <button class="tab-btn" onclick="setCategory('PS4 PKG', this)">PS4 PKG</button>
-            <button class="tab-btn" onclick="setCategory('MOBILE', this)">Móvil (APK)</button>
-            <button class="tab-btn" onclick="setCategory('PC PORT', this)">PC Port</button>
+        <!-- Filtros por Consola y Género -->
+        <div class="filter-section">
+            <h3>Filtrar por Consola / Plataforma</h3>
+            <div class="categories-tabs" style="margin-bottom: 1rem;">
+                <button class="tab-btn active" onclick="setFilter('ALL', this)">Todos</button>
+                <button class="tab-btn" onclick="setFilter('PS3 PKG', this)">PS3 PKG</button>
+                <button class="tab-btn" onclick="setFilter('PS4 PKG', this)">PS4 PKG</button>
+                <button class="tab-btn" onclick="setFilter('MOBILE', this)">Móvil (APK)</button>
+                <button class="tab-btn" onclick="setFilter('PORT ANDROID', this)">Port Android</button>
+                <button class="tab-btn" onclick="setFilter('PC PORT', this)">PC Port</button>
+            </div>
+
+            <h3>Filtrar por Género</h3>
+            <div class="categories-tabs">
+                <button class="tab-btn" onclick="setFilter('Acción', this)">Acción</button>
+                <button class="tab-btn" onclick="setFilter('RPG', this)">RPG</button>
+                <button class="tab-btn" onclick="setFilter('Deportes', this)">Deportes</button>
+                <button class="tab-btn" onclick="setFilter('Mundo Abierto', this)">Mundo Abierto</button>
+                <button class="tab-btn" onclick="setFilter('Shooter', this)">Shooter</button>
+                <button class="tab-btn" onclick="setFilter('Terror', this)">Terror</button>
+            </div>
         </div>
 
         <div id="gamesGrid" class="games-grid"></div>
@@ -533,13 +571,18 @@
                 <input type="text" id="gTitle" placeholder="Ej: God of War III">
             </div>
             <div class="form-group">
-                <label>Categoría</label>
+                <label>Plataforma / Consola</label>
                 <select id="gCategory">
                     <option value="PS3 PKG">PS3 PKG</option>
                     <option value="PS4 PKG">PS4 PKG</option>
                     <option value="MOBILE">Móvil (APK)</option>
+                    <option value="PORT ANDROID">Port Android</option>
                     <option value="PC PORT">PC Port</option>
                 </select>
+            </div>
+            <div class="form-group">
+                <label>Género (Acción, RPG, Deportes, etc.)</label>
+                <input type="text" id="gGenre" placeholder="Ej: Acción">
             </div>
             <div class="form-group">
                 <label>URL de Imagen / Portada</label>
@@ -554,7 +597,7 @@
                 <input type="text" id="gSize" placeholder="15 GB">
             </div>
             <div class="form-group">
-                <label>Enlace de Descarga</label>
+                <label>Enlace de Descarga (Repositorio / Servidor)</label>
                 <input type="text" id="gLink" placeholder="https://...">
             </div>
             <div class="modal-actions">
@@ -602,8 +645,8 @@
 
     <script>
         const defaultGames = [
-            { id: 1, title: "Grand Theft Auto V", category: "PS4 PKG", img: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=500&q=80", desc: "Versión optimizada PKG lista para instalar en consola.", size: "48 GB", link: "#" },
-            { id: 2, title: "Minecraft PS3 Edition", category: "PS3 PKG", img: "https://images.unsplash.com/photo-1627856013091-feddeec4b466?w=500&q=80", desc: "Incluye actualizaciones y parches estables.", size: "1.8 GB", link: "#" }
+            { id: 1, title: "Grand Theft Auto V", category: "PS4 PKG", genre: "Mundo Abierto", img: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=500&q=80", desc: "Versión optimizada PKG lista para instalar en consola.", size: "48 GB", link: "#" },
+            { id: 2, title: "Minecraft PS3 Edition", category: "PS3 PKG", genre: "Supervivencia", img: "https://images.unsplash.com/photo-1627856013091-feddeec4b466?w=500&q=80", desc: "Incluye actualizaciones y parches estables.", size: "1.8 GB", link: "#" }
         ];
 
         let games = JSON.parse(localStorage.getItem('xgamer_games')) || defaultGames;
@@ -615,7 +658,7 @@
         ];
 
         let currentUser = localStorage.getItem('xgamer_logged_user') || null;
-        let selectedCategory = 'ALL';
+        let currentFilter = 'ALL';
 
         function renderGames() {
             const grid = document.getElementById('gamesGrid');
@@ -623,13 +666,18 @@
             
             const query = document.getElementById('searchInput').value.toLowerCase();
             const filtered = games.filter(g => {
-                const matchQuery = g.title.toLowerCase().includes(query) || g.desc.toLowerCase().includes(query);
-                const matchCat = selectedCategory === 'ALL' || g.category === selectedCategory;
-                return matchQuery && matchCat;
+                const matchQuery = g.title.toLowerCase().includes(query) || g.desc.toLowerCase().includes(query) || (g.genre && g.genre.toLowerCase().includes(query)) || (g.category && g.category.toLowerCase().includes(query));
+                
+                let matchFilter = true;
+                if (currentFilter !== 'ALL') {
+                    matchFilter = g.category === currentFilter || (g.genre && g.genre.toLowerCase() === currentFilter.toLowerCase());
+                }
+
+                return matchQuery && matchFilter;
             });
 
             if(filtered.length === 0) {
-                grid.innerHTML = '<p style="color:var(--text-dim); grid-column:1/-1; text-align:center; padding:3rem;">No se encontraron juegos en esta categoría.</p>';
+                grid.innerHTML = '<p style="color:var(--text-dim); grid-column:1/-1; text-align:center; padding:3rem;">No se encontraron juegos con este filtro.</p>';
                 return;
             }
 
@@ -639,7 +687,10 @@
                 card.innerHTML = `
                     <div class="game-img-container">
                         <img src="${game.img || 'https://via.placeholder.com/300x180?text=StoreXGamerPKG'}" class="game-img" alt="${game.title}">
-                        <span class="game-badge">${game.category}</span>
+                        <div class="badges-top">
+                            <span class="game-badge">${game.category}</span>
+                            ${game.genre ? `<span class="genre-badge">${game.genre}</span>` : ''}
+                        </div>
                     </div>
                     <div class="game-info">
                         <h3 class="game-title">${game.title}</h3>
@@ -659,8 +710,8 @@
             });
         }
 
-        function setCategory(cat, btn) {
-            selectedCategory = cat;
+        function setFilter(filterVal, btn) {
+            currentFilter = filterVal;
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             renderGames();
@@ -772,6 +823,7 @@
                 document.getElementById('gameId').value = g.id;
                 document.getElementById('gTitle').value = g.title;
                 document.getElementById('gCategory').value = g.category;
+                document.getElementById('gGenre').value = g.genre || '';
                 document.getElementById('gImg').value = g.img;
                 document.getElementById('gDesc').value = g.desc;
                 document.getElementById('gSize').value = g.size;
@@ -780,6 +832,7 @@
                 document.getElementById('gameModalTitle').innerText = 'Agregar Juego';
                 document.getElementById('gameId').value = '';
                 document.getElementById('gTitle').value = '';
+                document.getElementById('gGenre').value = '';
                 document.getElementById('gImg').value = '';
                 document.getElementById('gDesc').value = '';
                 document.getElementById('gSize').value = '';
@@ -792,6 +845,7 @@
             const id = document.getElementById('gameId').value;
             const title = document.getElementById('gTitle').value;
             const category = document.getElementById('gCategory').value;
+            const genre = document.getElementById('gGenre').value;
             const img = document.getElementById('gImg').value;
             const desc = document.getElementById('gDesc').value;
             const size = document.getElementById('gSize').value;
@@ -801,10 +855,10 @@
 
             if(id) {
                 const idx = games.findIndex(g => g.id == id);
-                games[idx] = { id: Number(id), title, category, img, desc, size, link };
+                games[idx] = { id: Number(id), title, category, genre, img, desc, size, link };
             } else {
                 const newId = games.length > 0 ? Math.max(...games.map(g => g.id)) + 1 : 1;
-                games.push({ id: newId, title, category, img, desc, size, link });
+                games.push({ id: newId, title, category, genre, img, desc, size, link });
             }
 
             localStorage.setItem('xgamer_games', JSON.stringify(games));

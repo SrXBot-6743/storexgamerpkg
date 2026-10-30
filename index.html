@@ -31,9 +31,18 @@ nav a:hover,nav a.active{color:var(--green);border-color:var(--green)}
 .hero{height:250px;position:relative;overflow:hidden;background:linear-gradient(90deg,#020907 0%,#020907aa 36%,#02090718 100%),url('https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1500&q=85') center/cover;border-bottom:1px solid var(--cyan);display:flex;align-items:center;padding:30px 5%}
 .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 55%,#00ff6a24);pointer-events:none}.hero-copy{position:relative;z-index:1;max-width:550px}.eyebrow{letter-spacing:5px;font-size:12px;color:#e9fff7}.hero h1{font-size:clamp(34px,5vw,65px);font-weight:1000;line-height:.95;font-style:italic;text-shadow:3px 4px #001b13,0 0 20px #00ff6a88}.hero h1 span{color:var(--lime)}.hero p{margin-top:16px;letter-spacing:3px;font-size:15px}.hero p b{color:var(--green)}
 .perks{display:flex;gap:20px;margin-top:22px;flex-wrap:wrap}.perk{font-size:11px;border-right:1px solid var(--green);padding-right:20px}.perk strong{display:block;color:var(--green);font-size:13px;margin-bottom:3px}
-.featured{margin:12px 3%;padding:12px;display:grid;grid-template-columns:210px minmax(170px,1fr) minmax(260px,1.2fr);gap:18px;align-items:center;background:linear-gradient(110deg,#071d18,#071021 60%,#190b25);border:1px solid var(--cyan);border-right:3px solid var(--purple);border-radius:12px;box-shadow:0 0 20px #00dfff22,0 0 15px #a800ff22;position:relative}
-.featured img{width:100%;height:150px;object-fit:cover;border-radius:8px;border:1px solid #0ba88c}.tag{display:inline-block;background:var(--green);color:#00140a;font-size:10px;font-weight:900;padding:4px 9px;border-radius:5px;margin-bottom:7px}.featured h2{font-size:22px;margin-bottom:7px}.featured p{font-size:12px;color:#b5d3c8;line-height:1.5}.pills{display:flex;gap:6px;margin:9px 0;flex-wrap:wrap}.pill{font-size:10px;border:1px solid #27685a;border-radius:12px;padding:4px 9px;color:#d9fff0}.primary{background:linear-gradient(90deg,var(--green),#8cff00);color:#00170b;border:0;border-radius:20px;padding:9px 18px;font-weight:900;font-size:12px;cursor:pointer;box-shadow:0 0 13px #00ff6a55}
-.featured-thumbs{display:flex;align-items:center;gap:9px;overflow:hidden}.thumb{width:24%;min-width:65px;height:92px;object-fit:cover;border:1px solid #197f6a;border-radius:7px;filter:saturate(1.1)}
+
+/* BANNER ÚNICO INTEGRADO QUE OCUPA TODO */
+.featured{margin:12px 3%;padding:25px 30px;display:flex;flex-direction:column;justify-content:center;gap:12px;min-height:220px;background-size:cover;background-position:center;border:1px solid var(--cyan);border-radius:12px;box-shadow:0 0 20px #00dfff22,0 0 15px #a800ff22;position:relative}
+.featured::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg, rgba(2,9,7,0.92) 0%, rgba(2,9,7,0.75) 60%, rgba(2,9,7,0.4) 100%);border-radius:11px;z-index:1}
+.featured > *{position:relative;z-index:2}
+.tag{display:inline-block;background:var(--green);color:#00140a;font-size:10px;font-weight:900;padding:4px 9px;border-radius:5px;margin-bottom:4px;width:max-content}
+.featured h2{font-size:26px;margin-bottom:4px;text-shadow:0 2px 4px rgba(0,0,0,0.8)}
+.featured p{font-size:13px;color:#d9fff0;line-height:1.4;max-width:700px;text-shadow:0 1px 3px rgba(0,0,0,0.8)}
+.pills{display:flex;gap:6px;margin:6px 0;flex-wrap:wrap}
+.pill{font-size:10px;border:1px solid #27685a;border-radius:12px;padding:4px 9px;color:#d9fff0;background:rgba(0,0,0,0.5)}
+.primary{background:linear-gradient(90deg,var(--green),#8cff00);color:#00170b;border:0;border-radius:20px;padding:9px 18px;font-weight:900;font-size:12px;cursor:pointer;box-shadow:0 0 13px #00ff6a55;width:max-content}
+
 .section{padding:5px 3% 15px}.section-head{display:flex;justify-content:space-between;align-items:center;margin:6px 0 12px}.section-head h2{font-size:15px;letter-spacing:.5px}.section-head a{font-size:10px;color:var(--cyan)}
 .categories{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.category{height:100px;border:1px solid var(--cyan);border-radius:10px;overflow:hidden;position:relative;display:flex;align-items:end;justify-content:center;padding:12px 4px;background-size:cover;background-position:center;cursor:pointer}.category:before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#020907 5%,#02090755 75%,#02090722)}.category span{z-index:1;text-align:center;font-weight:900;font-size:12px;text-shadow:0 2px 5px black}.category small{display:block;color:var(--cyan);font-size:9px;margin-top:5px}
 .toolbar{display:flex;gap:10px;align-items:center;margin:15px 0 12px;background:#061511;padding:8px;border-radius:10px}.toolbar input{flex:1;min-width:120px}.field{background:#03100d;border:1px solid #176653;color:white;padding:10px 12px;border-radius:8px;font-size:11px}.toolbar select{max-width:150px}
@@ -65,7 +74,7 @@ footer{border-top:1px solid #135748;padding:14px 22px;display:flex;justify-conte
 
 .modal-box{width:min(500px,100%);max-height:90vh;overflow:auto;background:#061711;border:1px solid var(--green);border-radius:12px;padding:20px;box-shadow:0 0 25px #00ff6a33}.modal-box h2{color:var(--green);margin-bottom:14px}.formrow{margin:10px 0}.formrow label{display:block;font-size:11px;color:#b5d7ca;margin-bottom:5px}.formrow input,.formrow textarea,.formrow select{width:100%;background:#020b08;border:1px solid #236653;color:white;padding:10px;border-radius:7px}.actions{display:flex;justify-content:flex-end;gap:8px;margin-top:15px}.secondary{border:1px solid #6a8980;background:transparent;color:white;border-radius:8px;padding:9px 13px;cursor:pointer}
 @media(max-width:1050px){.layout{grid-template-columns:1fr}.sidebar{display:none}.games{grid-template-columns:repeat(4,minmax(0,1fr))}}
-@media(max-width:760px){.site{padding:0}.main{border-radius:0}header{height:auto;min-height:65px;padding:9px 12px;flex-wrap:wrap}.brand{min-width:0}.brand-name{font-size:15px}.brand-mark{width:39px;height:39px}nav{order:3;width:100%;overflow:auto;gap:17px}nav a{white-space:nowrap;padding:7px 0}.header-actions{margin-left:auto}.top-search{display:none}.hero{height:230px;padding:22px 18px;background-position:60% center}.hero h1{font-size:40px}.hero p{font-size:11px;letter-spacing:1px}.perks{gap:9px}.perk{padding-right:9px;font-size:9px}.perk strong{font-size:10px}.featured{grid-template-columns:110px 1fr;margin:10px;padding:9px;gap:10px}.featured img{height:125px}.featured h2{font-size:16px}.featured p{font-size:10px}.featured-thumbs{grid-column:1/-1}.thumb{height:65px}.categories{grid-template-columns:repeat(3,1fr);gap:7px}.category{height:85px}.toolbar{flex-wrap:wrap}.toolbar input{flex-basis:100%}.toolbar select{flex:1;max-width:none}.games{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.cover{height:130px}.game h3{font-size:11px}footer{flex-wrap:wrap;justify-content:center;text-align:center}.social{order:3;width:100%;justify-content:center}}
+@media(max-width:760px){.site{padding:0}.main{border-radius:0}header{height:auto;min-height:65px;padding:9px 12px;flex-wrap:wrap}.brand{min-width:0}.brand-name{font-size:15px}.brand-mark{width:39px;height:39px}nav{order:3;width:100%;overflow:auto;gap:17px}nav a{white-space:nowrap;padding:7px 0}.header-actions{margin-left:auto}.top-search{display:none}.hero{height:230px;padding:22px 18px;background-position:60% center}.hero h1{font-size:40px}.hero p{font-size:11px;letter-spacing:1px}.perks{gap:9px}.perk{padding-right:9px;font-size:9px}.perk strong{font-size:10px}.featured{margin:10px;padding:15px}.categories{grid-template-columns:repeat(3,1fr);gap:7px}.category{height:85px}.toolbar{flex-wrap:wrap}.toolbar input{flex-basis:100%}.toolbar select{flex:1;max-width:none}.games{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.cover{height:130px}.game h3{font-size:11px}footer{flex-wrap:wrap;justify-content:center;text-align:center}.social{order:3;width:100%;justify-content:center}}
 </style>
 </head>
 <body>
@@ -92,20 +101,14 @@ footer{border-top:1px solid #135748;padding:14px 22px;display:flex;justify-conte
 </header>
 <section class="hero" id="inicio"><div class="hero-copy"><div class="eyebrow">BIENVENIDO A</div><h1>STORE<span>X</span>GAMER<br><span>PKG</span></h1><p>TU MUNDO GAMER EN UN <b>SOLO LUGAR</b></p><div class="perks"><div class="perk"><strong>ϟ Juegos</strong>100% seguros*</div><div class="perk"><strong>♢ Descargas</strong>Rápidas y confiables</div><div class="perk"><strong>☁ Apps</strong>Premium y gratis*</div><div class="perk"><strong>♟ Comunidad</strong>Gamers como tú</div></div></div></section>
 
-<!-- DESTACADO EDITABLE COMPLETO -->
-<section class="featured" id="featuredSection">
-    <img id="featImg" src="https://images.unsplash.com/photo-1603481546238-487240415921?w=600&q=85" alt="Juego destacado">
-    <div>
-        <span class="tag">DESTACADO</span>
-        <h2 id="featTitle">Grand Theft Auto V PKG (GTA V PKG Edition)</h2>
-        <p id="featDesc">Explora Los Santos en su versión PKG definitiva, optimizada y completa para descargar.</p>
-        <div class="pills" id="featPills"><span class="pill">Mundo Abierto</span><span class="pill">PC / PS4 / Xbox</span><span class="pill">65 GB</span></div>
-        <button class="primary" onclick="featuredDownload()">¡Explora nuestro catálogo de Juegos!</button>
-    </div>
-    <div class="featured-thumbs" id="featuredThumbsContainer">
-        <!-- Se generan dinámicamente las 4 miniaturas -->
-    </div>
-    <button id="editFeatBtn" style="display:none;position:absolute;top:10px;right:10px;background:var(--cyan);color:#020907;border:none;padding:5px 10px;border-radius:6px;cursor:pointer;font-weight:bold;" onclick="openFeaturedModal()">✏ Editar Destacado</button>
+<!-- BANNER ÚNICO EXPANDIDO Y EDITABLE -->
+<section class="featured" id="featuredSection" style="background-image:url('https://images.unsplash.com/photo-1603481546238-487240415921?w=1200&q=85')">
+    <span class="tag">DESTACADO</span>
+    <h2 id="featTitle">Grand Theft Auto V PKG (GTA V PKG Edition)</h2>
+    <p id="featDesc">Explora Los Santos en su versión PKG definitiva, optimizada y completa para descargar.</p>
+    <div class="pills" id="featPills"><span class="pill">Mundo Abierto</span><span class="pill">PC / PS4 / Xbox</span><span class="pill">65 GB</span></div>
+    <button class="primary" onclick="featuredDownload()">¡Explora nuestro catálogo de Juegos!</button>
+    <button id="editFeatBtn" style="display:none;position:absolute;top:10px;right:10px;background:var(--cyan);color:#020907;border:none;padding:5px 10px;border-radius:6px;cursor:pointer;font-weight:bold;z-index:3;" onclick="openFeaturedModal()">✏ Editar Banner</button>
 </section>
 
 <section class="section" id="categorias"><div class="section-head"><h2 id="catalogTitle">🎮 CATEGORÍAS DESTACADAS</h2><a onclick="navAction('juegos')" style="cursor:pointer">Ver todas →</a></div><div class="categories">
@@ -156,18 +159,12 @@ footer{border-top:1px solid #135748;padding:14px 22px;display:flex;justify-conte
 <!-- MODAL AGREGAR/EDITAR JUEGO O APORTE -->
 <div class="modal" id="gameModal"><div class="modal-box"><h2 id="gameModalTitle">Agregar Aporte</h2><input type="hidden" id="editId"><div class="formrow"><label>Nombre</label><input id="gTitle"></div><div class="formrow"><label>Tipo de Contenido</label><select id="gType"><option value="juego">Juego</option><option value="app">App</option><option value="herramienta">Herramienta</option></select></div><div class="formrow"><label>Plataforma</label><select id="gPlatform"><option>PC</option><option>PS4/PS5</option><option>Xbox</option><option>Android</option><option>iOS</option></select></div><div class="formrow"><label>Género / Categoría</label><input id="gGenre" placeholder="Acción, RPG, Utilidad..."></div><div class="formrow"><label>Descripción</label><textarea id="gDesc" rows="2"></textarea></div><div class="formrow"><label>Tamaño</label><input id="gSize" placeholder="Ej. 2.5 GB"></div><div class="formrow"><label>Portada (URL)</label><input id="gImg" placeholder="https://..."></div><div class="formrow"><label>Enlace de descarga autorizado</label><input id="gLink" placeholder="https://..."></div><div class="actions"><button class="secondary" onclick="closeModal('gameModal')">Cancelar</button><button class="primary" onclick="saveGame()">Publicar Aporte</button></div></div></div>
 
-<!-- MODAL EDITAR DESTACADO COMPLETO (BANNER + 4 MINIATURAS) -->
-<div class="modal" id="featuredModal"><div class="modal-box"><h2>Editar Banner Destacado</h2>
+<!-- MODAL EDITAR BANNER ÚNICO -->
+<div class="modal" id="featuredModal"><div class="modal-box"><h2>Editar Banner Único</h2>
 <div class="formrow"><label>Título</label><input id="fTitle"></div>
 <div class="formrow"><label>Descripción</label><textarea id="fDesc" rows="2"></textarea></div>
 <div class="formrow"><label>Etiquetas (Separadas por coma)</label><input id="fTags" placeholder="Mundo Abierto, PC, 65 GB"></div>
-<div class="formrow"><label>Imagen Principal del Banner</label><input type="file" id="fImgFile" accept="image/*" class="field" style="padding:6px"></div>
-<hr style="border-color:#176653;margin:12px 0">
-<p style="font-size:11px;color:var(--green);margin-bottom:8px"><b>Imágenes de las 4 Miniaturas Derechas:</b></p>
-<div class="formrow"><label>Miniatura 1</label><input type="file" id="fThumb0" accept="image/*" class="field" style="padding:6px"></div>
-<div class="formrow"><label>Miniatura 2</label><input type="file" id="fThumb1" accept="image/*" class="field" style="padding:6px"></div>
-<div class="formrow"><label>Miniatura 3</label><input type="file" id="fThumb2" accept="image/*" class="field" style="padding:6px"></div>
-<div class="formrow"><label>Miniatura 4</label><input type="file" id="fThumb3" accept="image/*" class="field" style="padding:6px"></div>
+<div class="formrow"><label>Imagen de Fondo del Banner</label><input type="file" id="fImgFile" accept="image/*" class="field" style="padding:6px"></div>
 <div class="formrow"><label>Enlace de Descarga</label><input id="fLink"></div>
 <div class="actions"><button class="secondary" onclick="closeModal('featuredModal')">Cancelar</button><button class="primary" onclick="saveFeatured()">Guardar Cambios</button></div></div></div>
 
@@ -200,13 +197,7 @@ let featuredData = JSON.parse(localStorage.getItem("sxg_featured")||"null") || {
     title: "Grand Theft Auto V PKG (GTA V PKG Edition)",
     desc: "Explora Los Santos en su versión PKG definitiva, optimizada y completa para descargar.",
     tags: ["Mundo Abierto", "PC / PS4 / Xbox", "65 GB"],
-    img: "https://images.unsplash.com/photo-1603481546238-487240415921?w=600&q=85",
-    thumbs: [
-        "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300&q=80",
-        "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=300&q=80",
-        "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=300&q=80",
-        "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=300&q=80"
-    ],
+    img: "https://images.unsplash.com/photo-1603481546238-487240415921?w=1200&q=85",
     link: "#"
 };
 
@@ -287,16 +278,8 @@ function checkAdminState(){
 function renderFeatured(){
     $("featTitle").textContent = featuredData.title;
     $("featDesc").textContent = featuredData.desc;
-    $("featImg").src = featuredData.img;
+    $("featuredSection").style.backgroundImage = `url('${featuredData.img}')`;
     $("featPills").innerHTML = featuredData.tags.map(t=>`<span class="pill">${safe(t)}</span>`).join("");
-    
-    let thumbs = featuredData.thumbs || [
-        "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300&q=80",
-        "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=300&q=80",
-        "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=300&q=80",
-        "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=300&q=80"
-    ];
-    $("featuredThumbsContainer").innerHTML = thumbs.map(img => `<img class="thumb" src="${safe(img)}" alt="">`).join("");
 }
 
 function featuredDownload(){
@@ -405,10 +388,6 @@ function openFeaturedModal(){
     $("fDesc").value = featuredData.desc;
     $("fTags").value = featuredData.tags.join(", ");
     $("fImgFile").value = "";
-    $("fThumb0").value = "";
-    $("fThumb1").value = "";
-    $("fThumb2").value = "";
-    $("fThumb3").value = "";
     $("fLink").value = featuredData.link;
     $("featuredModal").classList.add("show");
 }
@@ -419,53 +398,23 @@ function saveFeatured(){
     featuredData.tags = $("fTags").value.split(",").map(t=>t.trim()).filter(Boolean);
     featuredData.link = $("fLink").value.trim() || "#";
 
-    if(!featuredData.thumbs) featuredData.thumbs = [
-        "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300&q=80",
-        "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=300&q=80",
-        "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=300&q=80",
-        "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=300&q=80"
-    ];
-
-    let filesProcessed = 0;
-    let totalFiles = 5; // Banner principal + 4 miniaturas
-
-    function checkFinish(){
-        filesProcessed++;
-        if(filesProcessed >= totalFiles){
-            localStorage.setItem("sxg_featured", JSON.stringify(featuredData));
-            closeModal("featuredModal");
-            renderFeatured();
-            alert("¡Destacado actualizado con éxito!");
-        }
-    }
-
-    // Procesar banner principal
-    let mainFile = $("fImgFile").files[0];
-    if(mainFile){
+    let fileInput = $("fImgFile");
+    if(fileInput.files && fileInput.files[0]){
         let reader = new FileReader();
         reader.onload = function(e){
             featuredData.img = e.target.result;
-            checkFinish();
+            localStorage.setItem("sxg_featured", JSON.stringify(featuredData));
+            closeModal("featuredModal");
+            renderFeatured();
+            alert("¡Banner actualizado con éxito!");
         };
-        reader.readAsDataURL(mainFile);
+        reader.readAsDataURL(fileInput.files[0]);
     } else {
-        checkFinish();
+        localStorage.setItem("sxg_featured", JSON.stringify(featuredData));
+        closeModal("featuredModal");
+        renderFeatured();
+        alert("¡Banner actualizado con éxito!");
     }
-
-    // Procesar las 4 miniaturas
-    [0, 1, 2, 3].forEach(idx => {
-        let thumbFile = $(`fThumb${idx}`).files[0];
-        if(thumbFile){
-            let reader = new FileReader();
-            reader.onload = function(e){
-                featuredData.thumbs[idx] = e.target.result;
-                checkFinish();
-            };
-            reader.readAsDataURL(thumbFile);
-        } else {
-            checkFinish();
-        }
-    });
 }
 
 function openSidebarModal(){

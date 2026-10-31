@@ -43,13 +43,11 @@ a {
     text-decoration: none;
 }
 
-/* BARRA SUPERIOR INSTITUCIONAL */
 .topline {
     height: 3px;
     background: linear-gradient(90deg, #1e40af, #3b82f6, #60a5fa);
 }
 
-/* ENCABEZADO CORPORATIVO */
 header {
     position: sticky;
     top: 0;
@@ -136,7 +134,6 @@ header {
     border-color: var(--accent-blue);
 }
 
-/* PORTADA PRINCIPAL / HERO */
 .hero-section {
     max-width: 1200px;
     margin: 2rem auto;
@@ -203,7 +200,6 @@ header {
     background: var(--accent-blue-hover);
 }
 
-/* CONTENIDO Y FILTROS */
 .main-content {
     max-width: 1200px;
     margin: 0 auto;
@@ -255,7 +251,6 @@ header {
     border-color: var(--accent-blue);
 }
 
-/* TARJETAS DE CONTENIDO */
 .game-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -368,7 +363,6 @@ header {
     border-color: var(--accent-blue);
 }
 
-/* COMUNIDAD */
 .community-section {
     max-width: 1200px;
     margin: 0 auto 3rem auto;
@@ -423,7 +417,6 @@ header {
     border-color: #4b5563;
 }
 
-/* MODAL / PANEL ADMIN */
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -532,7 +525,6 @@ header {
     border-color: var(--accent-blue);
 }
 
-/* FOOTER */
 footer {
     background: var(--bg-surface);
     border-top: 1px solid var(--border-color);
@@ -574,7 +566,6 @@ footer {
 </header>
 
 <main>
-    <!-- HERO CORPORATIVO -->
     <section class="hero-section" id="inicio">
         <div class="hero-banner">
             <span class="hero-badge" id="heroBadge">Plataforma Verificada 2026</span>
@@ -586,7 +577,6 @@ footer {
         </div>
     </section>
 
-    <!-- CATÁLOGO Y FILTROS -->
     <section class="main-content" id="catalogo">
         <div class="section-header">
             <h3>Directorio de Contenidos</h3>
@@ -614,12 +604,9 @@ footer {
             </select>
         </div>
 
-        <div class="game-grid" id="gameGrid">
-            <!-- Contenido dinámico -->
-        </div>
+        <div class="game-grid" id="gameGrid"></div>
     </section>
 
-    <!-- COMUNIDAD -->
     <section class="community-section" id="comunidad">
         <div class="community-box">
             <h3>Canales de Comunicación</h3>
@@ -640,7 +627,6 @@ footer {
     <p>&copy; 2026 StoreXGamerPKG. Todos los derechos reservados. Sistema operativo independiente para GitHub Pages.</p>
 </footer>
 
-<!-- MODAL DE GESTIÓN Y CMS -->
 <div class="modal-overlay" id="authModal">
     <div class="modal-box">
         <div class="modal-header">
@@ -648,9 +634,8 @@ footer {
             <button class="close-modal" onclick="closeAuthModal()"><i class="fa-solid fa-xmark"></i></button>
         </div>
         
-        <!-- PANTALLA DE ACCESO -->
         <div id="authContent">
-            <p style="color: var(--text-muted); margin-bottom: 1.2rem; font-size: 0.85rem;">Ingrese sus credenciales corporativas para gestionar el contenido. (Predeterminado: <b>admin</b> / <b>1234</b>)</p>
+            <p style="color: var(--text-muted); margin-bottom: 1.2rem; font-size: 0.85rem;">Ingrese sus credenciales para gestionar el contenido. (Predeterminado: <b>admin</b> / <b>1234</b>)</p>
             <div class="form-group">
                 <label>Usuario</label>
                 <input type="text" id="loginUser" placeholder="admin o colaborador">
@@ -662,12 +647,11 @@ footer {
             <button class="btn-primary" style="width: 100%; margin-top: 5px; justify-content: center;" onclick="handleLogin()">Autenticar Sesión</button>
         </div>
 
-        <!-- PANEL DE CONTROL TOTAL -->
         <div id="adminPanelContent" style="display: none;">
             <div class="admin-tabs" id="adminTabsContainer">
-                <button class="tab-btn active" onclick="switchAdminTab('games')">Gestión de Archivos</button>
-                <button class="tab-btn" onclick="switchAdminTab('banner')">Editar Portada</button>
-                <button class="tab-btn" onclick="switchAdminTab('social')">Redes Oficiales</button>
+                <button class="tab-btn active" onclick="switchAdminTab('games', event)">Gestión de Archivos</button>
+                <button class="tab-btn" onclick="switchAdminTab('banner', event)">Editar Portada</button>
+                <button class="tab-btn" onclick="switchAdminTab('social', event)">Redes Oficiales</button>
             </div>
             <div id="adminTabBody"></div>
         </div>
@@ -675,7 +659,6 @@ footer {
 </div>
 
 <script>
-    // Configuración general del sitio
     let siteConfig = JSON.parse(localStorage.getItem('sx_config_formal')) || {
         heroBadge: "Plataforma Verificada 2026",
         heroTitle: "Centro de Recursos y Descargas Oficiales",
@@ -748,6 +731,8 @@ footer {
         document.getElementById('authModal').classList.remove('active');
         document.getElementById('authContent').style.display = 'block';
         document.getElementById('adminPanelContent').style.display = 'none';
+        document.getElementById('loginUser').value = '';
+        document.getElementById('loginPass').value = '';
     }
 
     function handleLogin() {
@@ -771,10 +756,15 @@ footer {
         }
     }
 
-    function switchAdminTab(tabName) {
-        if(currentUserRole === 'admin') {
+    function switchAdminTab(tabName, eventObj) {
+        if (currentUserRole === 'admin') {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event && event.target && event.target.classList.add('active');
+            if (eventObj && eventObj.target) {
+                eventObj.target.classList.add('active');
+            } else {
+                const firstBtn = document.querySelector('.tab-btn');
+                if (firstBtn) firstBtn.classList.add('active');
+            }
         }
 
         const body = document.getElementById('adminTabBody');

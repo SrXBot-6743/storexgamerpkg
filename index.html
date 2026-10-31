@@ -7,6 +7,8 @@
 <title>StoreXGamer PKG — Portal Oficial & Panel Pro</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- Favicon con Estética Gamer Oficial sin Cuentas -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><circle cx='32' cy='32' r='30' fill='%23090812' stroke='%238B35FF' stroke-width='3'/><text x='50% ' y='54%' dominant-baseline='middle' text-anchor='middle' fill='%2308D9D0' font-size='20' font-weight='900' font-family='Orbitron'>SX</text></svg>">
 
 <style>
 :root {
@@ -16,8 +18,8 @@
     --neon-cyan: #08D9D0;
     --text-light: #F5F2FF;
     --text-muted: #9691AA;
-    --glow-cyan: rgba(8, 217, 208, 0.3);
-    --glow-purple: rgba(139, 53, 255, 0.3);
+    --glow-cyan: rgba(8, 217, 208, 0.35);
+    --glow-purple: rgba(139, 53, 255, 0.35);
 }
 
 * {
@@ -39,16 +41,27 @@ body {
     overflow-x: hidden;
 }
 
-/* FONDO CYBERPUNK CSS */
+/* FONDO CINEMATOGRÁFICO Y AMBIENTAL CON PARALLAX / MOVIMIENTO SUAVE */
 .animated-bg {
     position: fixed;
     inset: 0;
     z-index: -1;
     pointer-events: none;
     background: 
-        radial-gradient(circle at 10% 20%, rgba(139, 53, 255, 0.15) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(8, 217, 208, 0.12) 0%, transparent 40%),
-        #090812;
+        radial-gradient(circle at 15% 20%, rgba(139, 53, 255, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 85% 75%, rgba(8, 217, 208, 0.18) 0%, transparent 45%),
+        linear-gradient(135deg, #090812 0%, #130f24 50%, #090812 100%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .animated-bg {
+        animation: ambientCinematicGlow 14s ease-in-out infinite alternate;
+    }
+}
+
+@keyframes ambientCinematicGlow {
+    0% { filter: brightness(1) saturate(1); transform: scale(1); }
+    100% { filter: brightness(1.12) saturate(1.1); transform: scale(1.02); }
 }
 
 /* LÍNEA SUPERIOR RGB */
@@ -71,9 +84,9 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(9, 8, 18, 0.9);
+    background: rgba(9, 8, 18, 0.88);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(8, 217, 208, 0.2);
+    border-bottom: 1px solid rgba(8, 217, 208, 0.25);
 }
 
 .nav-container {
@@ -85,31 +98,50 @@ header {
     justify-content: space-between;
 }
 
+/* INTEGRACIÓN OFICIAL DEL LOGO GAMER (SIN CUENTAS) */
 .brand {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     text-decoration: none;
 }
 
-.brand img {
-    width: 44px;
-    height: 44px;
-    object-fit: contain;
-    border-radius: 8px;
+.brand-logo-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: radial-gradient(circle, rgba(139, 53, 255, 0.4) 0%, rgba(9, 8, 18, 0.9) 80%);
     border: 2px solid var(--neon-cyan);
-    box-shadow: 0 0 10px var(--glow-cyan);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px var(--glow-cyan);
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.brand-logo-wrapper:hover {
+    box-shadow: 0 0 25px var(--glow-purple);
+    transform: scale(1.05);
+}
+
+.brand-logo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .brand-text h1 {
     font-family: 'Orbitron', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 800;
+    font-size: 1.15rem;
+    font-weight: 900;
     color: #fff;
+    letter-spacing: 0.5px;
 }
 
 .brand-text h1 span {
     color: var(--neon-cyan);
+    text-shadow: 0 0 10px var(--glow-cyan);
 }
 
 .brand-text small {
@@ -125,7 +157,7 @@ header {
     display: flex;
     gap: 1.5rem;
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-family: 'Rajdhani', sans-serif;
 }
 
@@ -159,7 +191,7 @@ header {
     box-shadow: 0 0 20px var(--glow-purple);
 }
 
-/* HERO SECTION */
+/* PORTADA PRINCIPAL (HERO) */
 .hero-epic {
     max-width: 1200px;
     margin: 2rem auto;
@@ -227,7 +259,7 @@ header {
     box-shadow: 0 0 20px var(--glow-cyan);
 }
 
-/* CONTENIDO PRINCIPAL Y SECCIONES */
+/* SECCIONES Y CATÁLOGO */
 .main-content {
     max-width: 1200px;
     margin: 0 auto;
@@ -391,7 +423,6 @@ header {
     color: var(--bg-dark);
 }
 
-/* SECCIONES ADICIONALES (Móviles, Herramientas, Comunidad, FAQ, Staff) */
 .info-section {
     background: var(--panel-dark);
     border: 1px solid rgba(139, 53, 255, 0.3);
@@ -426,7 +457,7 @@ header {
     margin-bottom: 4px;
 }
 
-/* MODAL / PANEL DE ADMINISTRADOR PRO (11 SECCIONES) */
+/* PANEL ADMINISTRADOR PRO (11 SECCIONES) */
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -694,11 +725,14 @@ footer {
 
 <header>
     <div class="nav-container">
-        <a href="#" class="brand">
-            <img src="Logo gamer neón STOREX GAMER.png" alt="Logo StoreXGamerPKG" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'44\' height=\'44\'><rect width=\'44\' height=\'44\' rx=\'8\' fill=\'%2308D9D0\'/><text x=\'50%\' y=\'55%\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23090812\' font-size=\'16\' font-weight=\'bold\'>SX</text></svg>'">
+        <a href="#inicio" class="brand">
+            <div class="brand-logo-wrapper">
+                <!-- Imagen oficial del logo integrado (Juegos y Aplicaciones) -->
+                <img src="Logo gamer neón STOREX GAMER.png" alt="STOREXGAMER PKG Logo" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'48\' height=\'48\'><rect width=\'48\' height=\'48\' fill=\'%238B35FF\'/><text x=\'50%\' y=\'55% \' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23fff\' font-size=\'16\' font-weight=\'bold\' font-family=\'Orbitron\'>SX</text></svg>'">
+            </div>
             <div class="brand-text">
                 <h1>STOREXGAMER<span>PKG</span></h1>
-                <small>NEON GAMER COMMUNITY</small>
+                <small>JUEGOS • APLICACIONES</small>
             </div>
         </a>
         <nav class="nav-links">
@@ -720,7 +754,7 @@ footer {
     <!-- INICIO (HERO) -->
     <section class="hero-epic" id="inicio">
         <div class="epic-banner">
-            <span class="epic-badge"><i class="fa-solid fa-bolt"></i> PLATAFORMA OFICIAL PKG & APPS</span>
+            <span class="epic-badge"><i class="fa-solid fa-bolt"></i> PORTAL OFICIAL PKG & JUEGOS</span>
             <h2 id="homeHeroTitle">UNIVERSO GAMER & DESCARGAS</h2>
             <p id="homeHeroDesc">Explora listas exclusivas, aplicaciones y juegos optimizados para PS5, PS4, PS3, PC y Android con estética neón avanzada.</p>
             <button class="epic-btn" onclick="document.getElementById('catalogo').scrollIntoView({behavior: 'smooth'})">
@@ -859,7 +893,7 @@ footer {
                 <div class="admin-nav-item" onclick="switchAdminTab('tab-cats', this)"><i class="fa-solid fa-tags"></i> 6. Categorías</div>
                 <div class="admin-nav-item" onclick="switchAdminTab('tab-social', this)"><i class="fa-solid fa-share-nodes"></i> 7. Comunidad</div>
                 <div class="admin-nav-item" onclick="switchAdminTab('tab-news', this)"><i class="fa-solid fa-bullhorn"></i> 8. Avisos</div>
-                <div class="admin-nav-item" onclick="switchAdminTab('tab-visual', this)"><i class="fa-solid fa-palette"></i> 9. Apariencia</div>
+                <div class="admin-nav-item" onclick="switchAdminTab('tab-visual', this)"><i class="fa-solid fa-palette"></i> 9. Identidad Visual</div>
                 <div class="admin-nav-item" onclick="switchAdminTab('tab-faq', this)"><i class="fa-solid fa-circle-question"></i> 10. Gestión FAQ</div>
                 <div class="admin-nav-item" onclick="switchAdminTab('tab-backup', this)"><i class="fa-solid fa-database"></i> 11. Sincronización</div>
             </div>
@@ -961,10 +995,12 @@ footer {
                 <button class="epic-btn" onclick="alert('Aviso guardado.')">Publicar Aviso</button>
             </div>
 
-            <!-- 9. APARIENCIA -->
+            <!-- 9. IDENTIDAD VISUAL -->
             <div class="admin-content-pane" id="tab-visual">
-                <h4 style="color:var(--neon-cyan); margin-bottom:1rem;">Apariencia y Estética</h4>
-                <p style="color:var(--text-muted);">Identidad visual basada en negro profundo (#090812), paneles oscuros (#11101C), morado neón (#8B35FF) y cian eléctrico (#08D9D0).</p>
+                <h4 style="color:var(--neon-cyan); margin-bottom:1rem;">Personalización de Identidad Visual</h4>
+                <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1rem;">Ajusta los parámetros visuales y estéticos de la plataforma.</p>
+                <div class="form-group"><label>Nombre de Marca en Logo</label><input type="text" id="brandTitleInput" value="STOREXGAMER PKG"></div>
+                <button class="epic-btn" onclick="alert('Configuración de identidad visual aplicada.')">Guardar Estética</button>
             </div>
 
             <!-- 10. GESTIÓN FAQ -->
@@ -976,7 +1012,7 @@ footer {
             <!-- 11. SINCRONIZACIÓN Y RESPALDOS -->
             <div class="admin-content-pane" id="tab-backup">
                 <h4 style="color:var(--neon-cyan); margin-bottom:1rem;">Respaldos JSON & GitHub Pages</h4>
-                <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1rem;">Debido a que GitHub Pages es un alojamiento estático seguro, exporta tu base de datos en formato JSON para respaldar tus cambios de manera confiable.</p>
+                <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1rem;">Exporta tu base de datos en formato JSON para respaldar tus cambios de manera confiable.</p>
                 <div style="display:flex; gap:10px; flex-wrap:wrap;">
                     <button class="epic-btn" onclick="exportJSONBackup()"><i class="fa-solid fa-download"></i> Exportar Respaldo JSON</button>
                     <label class="epic-btn" style="background:#8B35FF; display:inline-flex; align-items:center; cursor:pointer;">
@@ -1124,7 +1160,7 @@ footer {
         const genre = document.getElementById('gGenre').value;
         const size = document.getElementById('gSize').value;
         const fw = document.getElementById('gFw').value;
-        const link = document.getElementById('gLink').value;
+        const link = document.getElementById('gLink',).value;
         const desc = document.getElementById('gDesc').value;
         const featured = document.getElementById('gFeatured').checked;
         const recent = document.getElementById('gRecent').checked;

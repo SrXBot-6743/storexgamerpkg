@@ -303,6 +303,27 @@ function showToast(msg){
     setTimeout(() => t.remove(), 3000);
 }
 
+// FUNCIÓN DE NOTIFICACIÓN AUTOMÁTICA A TELEGRAM
+async function sendTelegramAlert(game) {
+    const token = "9140049196:AAEerOdk_bNE6ITjBTwCnp9FnclBdlvxkbI";
+    const chatId = "5426265611"; // Tu Chat ID configurado
+    
+    const mensaje = `🎮 ¡NUEVO APORTE EN STOREXGAMERPKG!\n\n` +
+                    `📌 Título: ${game.title}\n` +
+                    `💻 Plataforma: ${game.platform}\n` +
+                    `📂 Categoría: ${game.genre}\n` +
+                    `💾 Tamaño: ${game.size}\n\n` +
+                    `¡Ya disponible para descargar en la tienda!`;
+
+    const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=` + encodeURIComponent(mensaje);
+
+    try {
+        await fetch(url);
+    } catch (error) {
+        console.error("Error al enviar alerta a Telegram:", error);
+    }
+}
+
 function navAction(target){
     const links = document.querySelectorAll("#topNav a");
     links.forEach(l => l.classList.remove("active"));
@@ -532,7 +553,26 @@ function logout(){
 
 function openGame(id=null){$("gameModalTitle").textContent=id?"Editar ítem":"Agregar Aporte";let g=games.find(x=>x.id===id)||{};$("editId").value=g.id||"";$("gTitle").value=g.title||"";$("gType").value=g.type||"juego";$("gPlatform").value=g.platform||"PC";$("gGenre").value=g.genre||"";$("gDesc").value=g.desc||"";$("gSize").value=g.size||"";$("gImg").value=g.img||"";$("gLink").value=g.link||"";$("gameModal").classList.add("show")}
 function editGame(id){if(userRole==='admin') openGame(id)}
-function saveGame(){let title=$("gTitle").value.trim();if(!title){showToast("Escribe el nombre del ítem.");return}let id=Number($("editId").value),obj={id:id||Date.now(),title,type:$("gType").value,platform:$("gPlatform").value,genre:$("gGenre").value.trim(),desc:$("gDesc").value.trim(),size:$("gSize").value.trim(),img:$("gImg").value.trim(),link:$("gLink").value.trim()||"https://example.com"};if(id && userRole==='admin')games=games.map(g=>g.id===id?obj:g);else games.unshift(obj);localStorage.setItem("sxg_games",JSON.stringify(games));closeModal("gameModal");render();showToast("¡Aporte guardado con éxito!");}
+
+function saveGame(){
+    let title=$("gTitle").value.trim();
+    if(!title){showToast("Escribe el nombre del ítem.");return}
+    let id=Number($("editId").value),obj={id:id||Date.now(),title,type:$("gType").value,platform:$("gPlatform").value,genre:$("gGenre").value.trim(),desc:$("gDesc").value.trim(),size:$("gSize").value.trim(),img:$("gImg").value.trim(),link:$("gLink").value.trim()||"https://example.com"};
+    
+    if(id && userRole==='admin'){
+        games=games.map(g=>g.id===id?obj:g);
+    } else {
+        games.unshift(obj);
+        // Dispara la alerta automática a Telegram al agregar un nuevo aporte
+        sendTelegramAlert(obj);
+    }
+    
+    localStorage.setItem("sxg_games",JSON.stringify(games));
+    closeModal("gameModal");
+    render();
+    showToast("¡Aporte guardado y notificado con éxito!");
+}
+
 function deleteGame(id){if(userRole==='admin' && confirm("¿Eliminar este ítem del catálogo?")){games=games.filter(g=>g.id!==id);localStorage.setItem("sxg_games",JSON.stringify(games));render();showToast("Ítem eliminado.");}}
 
 function exportData(){

@@ -606,7 +606,7 @@ function openChatModal(){
 }
 
 function saveChat(){
-    let code = $("fChatCode").value.trim();
+    let code = $("fChatCode").value.txt ? $("fChatCode").value.trim() : $("fChatCode").value.trim();
     if(code){
         xatCustomCode = code;
         localStorage.setItem("sxg_xat_code", xatCustomCode);

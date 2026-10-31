@@ -3,25 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#08060d">
-<meta name="description" content="StoreXGamerPKG: descubre juegos, novedades y una comunidad gamer.">
-
-<title>StoreXGamerPKG — Comunidad gamer</title>
+<meta name="theme-color" content="#0b0f19">
+<title>StoreXGamerPKG — Next-Gen Gaming Community</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
 :root {
-    --bg: #08060d;
-    --panel: #100d18;
-    --line: #292035;
-    --text: #f5f1fb;
-    --muted: #a69bb5;
+    --bg: #070913;
+    --panel: #0d1224;
+    --panel-border: rgba(0, 255, 204, 0.2);
+    --accent: #00ffcc;
+    --accent-glow: rgba(0, 255, 204, 0.35);
     --purple: #9b35ff;
-    --pink: #d34dff;
-    --lime: #c8ff4d;
+    --purple-glow: rgba(155, 53, 255, 0.4);
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --danger: #ff3366;
 }
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
 }
 
 html {
@@ -29,12 +34,12 @@ html {
 }
 
 body {
-    margin: 0;
-    background:
-        radial-gradient(ellipse at 75% -15%, #321052 0, transparent 34%),
-        var(--bg);
+    background-color: var(--bg);
     color: var(--text);
-    font: 15px/1.5 Inter, system-ui, "Segoe UI", sans-serif;
+    background-image: 
+        radial-gradient(circle at 15% 15%, rgba(155, 53, 255, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(0, 255, 204, 0.06) 0%, transparent 40%);
+    min-height: 100vh;
 }
 
 a {
@@ -42,873 +47,599 @@ a {
     text-decoration: none;
 }
 
-button, input, select, textarea {
-    font: inherit;
-}
-
-button {
-    cursor: pointer;
-}
-
-.wrap {
-    width: min(1200px, calc(100% - 38px));
-    margin: auto;
-}
-
+/* TOP RGB LINE */
 .topline {
     height: 3px;
-    background: linear-gradient(90deg, #5b1ab4, #c13cff, #7625d9);
+    background: linear-gradient(90deg, var(--purple), var(--accent), var(--purple));
+    box-shadow: 0 0 10px var(--accent);
 }
 
+/* HEADER */
 header {
     position: sticky;
     top: 0;
-    z-index: 20;
-    background: #09070de8;
-    backdrop-filter: blur(18px);
-    border-bottom: 1px solid #ffffff12;
+    z-index: 100;
+    background: rgba(7, 9, 19, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.nav {
-    height: 76px;
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
     display: flex;
     align-items: center;
-    gap: 28px;
+    justify-content: space-between;
 }
 
 .brand {
     display: flex;
     align-items: center;
-    gap: 10px;
-    min-width: max-content;
-}
-
-.brand img {
-    width: 52px;
-    height: 52px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 12px #9b35ff55);
-}
-
-.brand strong {
-    font-size: 16px;
-    letter-spacing: .5px;
-}
-
-.brand small {
-    display: block;
-    color: var(--muted);
-    font-size: 9px;
-    letter-spacing: 2.4px;
-}
-
-.links {
-    display: flex;
-    gap: 24px;
-    margin-left: auto;
-    color: #c8bfd2;
-    font-weight: 650;
-    font-size: 13px;
-}
-
-.links a:hover {
-    color: #dca9ff;
-}
-
-.navright {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-}
-
-.searchbtn, .menuBtn {
-    border: 1px solid var(--line);
-    background: #15101e;
-    color: white;
-    border-radius: 11px;
-    padding: 10px 13px;
-}
-
-.pill {
-    border: 0;
-    border-radius: 11px;
-    padding: 11px 16px;
-    background: linear-gradient(115deg, #8b2be8, #bd42ef);
-    color: white;
-    font-weight: 800;
-    box-shadow: 0 8px 25px #8c28d744;
-}
-
-.menuBtn {
-    display: none;
-}
-
-/* BANNER PRINCIPAL */
-
-.hero {
-    padding: 30px 0 18px;
-}
-
-.heroBox {
-    position: relative;
-    min-height: 400px;
-    overflow: hidden;
-    border: 1px solid #ffffff1b;
-    border-radius: 25px;
-    background: linear-gradient(
-        100deg,
-        #0b0712 3%,
-        #170c27 48%,
-        #30104a 100%
-    );
-    box-shadow: 0 25px 80px #0008;
-}
-
-.heroBox:before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-        linear-gradient(
-            90deg,
-            #09060ff5 0%,
-            #10091bdc 45%,
-            #10091b30 100%
-        ),
-        radial-gradient(
-            circle at 78% 42%,
-            #a22dff77,
-            transparent 35%
-        );
-}
-
-.heroArt {
-    position: absolute;
-    right: 2%;
-    top: 0;
-    height: 100%;
-    width: 58%;
-    display: grid;
-    place-items: center;
-    font-size: clamp(110px, 22vw, 250px);
-    opacity: .8;
-    text-shadow: 0 0 45px #a72aff88;
-}
-
-.heroContent {
-    position: relative;
-    z-index: 1;
-    padding: 52px 5%;
-    max-width: 650px;
-}
-
-.eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: #d8a8ff;
-    font-size: 10px;
-    font-weight: 900;
-    letter-spacing: 2.5px;
-}
-
-.dot {
-    width: 7px;
-    height: 7px;
-    background: var(--lime);
-    border-radius: 50%;
-    box-shadow: 0 0 12px var(--lime);
-}
-
-h1 {
-    font-size: clamp(36px, 5vw, 61px);
-    line-height: 1.02;
-    letter-spacing: -2px;
-    margin: 17px 0;
-}
-
-.gradient {
-    background: linear-gradient(90deg, #fff, #d7a3ff 70%, #a83dff);
-    background-clip: text;
-    color: transparent;
-}
-
-.hero p {
-    color: #c2b6d0;
-    max-width: 490px;
-    margin: 0 0 24px;
-    font-size: 15px;
-}
-
-.actions {
-    display: flex;
-    gap: 11px;
-    flex-wrap: wrap;
-}
-
-.outline {
-    border: 1px solid #ffffff35;
-    background: #ffffff0b;
-    color: #fff;
-    border-radius: 11px;
-    padding: 11px 16px;
-    font-weight: 750;
-}
-
-.sliderDots {
-    display: flex;
-    gap: 7px;
-    margin-top: 27px;
-}
-
-.sliderDots button {
-    width: 23px;
-    height: 4px;
-    padding: 0;
-    border: 0;
-    border-radius: 5px;
-    background: #ffffff44;
-}
-
-.sliderDots button.on {
-    width: 42px;
-    background: #c05aff;
-}
-
-/* ESTADÍSTICAS */
-
-.stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin: 16px 0 35px;
-}
-
-.stat {
-    border: 1px solid var(--line);
-    background: #100c17;
-    border-radius: 14px;
-    padding: 14px 17px;
-}
-
-.stat b {
-    display: block;
-    font-size: 18px;
-}
-
-.stat span {
-    color: var(--muted);
-    font-size: 11px;
-}
-
-/* SECCIONES */
-
-.section {
-    padding: 24px 0 36px;
-}
-
-.sectionHead {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    gap: 20px;
-    margin-bottom: 18px;
-}
-
-.kicker {
-    color: #b77aff;
-    font-size: 10px;
-    font-weight: 900;
-    letter-spacing: 2.5px;
-}
-
-.section h2 {
-    font-size: 26px;
-    letter-spacing: -.8px;
-    margin: 3px 0 0;
-}
-
-.muted {
-    color: var(--muted);
-}
-
-.textlink {
-    color: #d5a1ff;
-    font-size: 12px;
-    font-weight: 800;
-}
-
-/* PLATAFORMAS */
-
-.platforms {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
     gap: 12px;
 }
 
-.platform {
-    min-height: 112px;
-    padding: 17px;
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    background: linear-gradient(145deg, #191225, #0e0b14);
-    transition: .2s;
+.brand i {
+    font-size: 1.8rem;
+    color: var(--accent);
+    filter: drop-shadow(0 0 8px var(--accent-glow));
 }
 
-.platform:hover {
-    transform: translateY(-4px);
-    border-color: #9c43df;
-    box-shadow: 0 12px 35px #8d2bca22;
-}
-
-.platform .ico {
-    font-size: 27px;
-}
-
-.platform strong {
-    display: block;
-    margin-top: 8px;
-}
-
-.platform small {
-    color: var(--muted);
-}
-
-/* CATÁLOGO */
-
-.toolbar {
-    display: flex;
-    gap: 9px;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 16px;
-}
-
-.field {
-    background: #100c17;
-    border: 1px solid var(--line);
-    color: white;
-    border-radius: 10px;
-    padding: 10px 12px;
-    outline: none;
-}
-
-.field:focus {
-    border-color: #a34be8;
-}
-
-.toolbar input {
-    flex: 1;
-    min-width: 180px;
-}
-
-.cards {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-}
-
-.card {
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    overflow: hidden;
-    background: #100d17;
-    transition: .2s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    border-color: #9141c9;
-    box-shadow: 0 16px 36px #0008;
-}
-
-.cover {
-    height: 165px;
-    position: relative;
-    display: grid;
-    place-items: center;
-    background: radial-gradient(
-        circle at 50% 40%,
-        #7533a6,
-        #21102f 55%,
-        #0c0911
-    );
-    font-size: 62px;
-}
-
-.cover:after {
-    content: "";
-    position: absolute;
-    inset: auto 0 0;
-    height: 50%;
-    background: linear-gradient(transparent, #100d17);
-}
-
-.tag {
-    position: absolute;
-    z-index: 1;
-    top: 11px;
-    left: 11px;
-    padding: 5px 8px;
-    border-radius: 7px;
-    background: #09060dcc;
-    border: 1px solid #ffffff22;
-    font-size: 9px;
-    font-weight: 900;
+.brand h1 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
     letter-spacing: 1px;
 }
 
-.cardBody {
-    padding: 13px;
+.brand span {
+    color: var(--accent);
 }
 
-.cardBody h3 {
-    font-size: 14px;
-    margin: 0 0 5px;
-}
-
-.cardBody p {
-    font-size: 11px;
-    color: var(--muted);
-    margin: 0 0 12px;
-    min-height: 34px;
-}
-
-.meta {
+.nav-links {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: #9e92ad;
-    font-size: 10px;
+    gap: 2rem;
+    font-weight: 600;
+    font-size: 0.95rem;
 }
 
-.miniBtn {
-    background: #21142f;
-    color: #dcbaff;
-    border: 1px solid #573477;
+.nav-links a {
+    color: var(--muted);
+    transition: 0.2s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--accent);
+    text-shadow: 0 0 10px var(--accent-glow);
+}
+
+.nav-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.btn-glow {
+    background: transparent;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 1.25rem;
     border-radius: 8px;
-    padding: 6px 9px;
-    font-size: 10px;
-    font-weight: 800;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    transition: 0.3s;
 }
 
-/* COMUNIDAD */
+.btn-glow:hover {
+    background: var(--accent);
+    color: var(--bg);
+    box-shadow: 0 0 20px var(--accent-glow);
+}
 
-.community {
-    display: grid;
-    grid-template-columns: 1.1fr .9fr;
+/* HERO BANNER */
+.hero {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.hero-banner {
+    background: linear-gradient(135deg, #131c38 0%, #0d1224 100%);
+    border: 1px solid var(--panel-border);
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.hero-banner::after {
+    content: "🎮";
+    position: absolute;
+    right: 5%;
+    bottom: -10%;
+    font-size: 14rem;
+    opacity: 0.1;
+}
+
+.hero-content {
+    max-width: 600px;
+    position: relative;
+    z-index: 2;
+}
+
+.badge-tag {
+    display: inline-block;
+    background: rgba(0, 255, 204, 0.1);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-bottom: 1rem;
+}
+
+.hero-banner h2 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 3rem;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+}
+
+.hero-banner p {
+    color: var(--muted);
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+}
+
+.hero-buttons {
+    display: flex;
     gap: 15px;
-}
-
-.communityBox {
-    border: 1px solid var(--line);
-    border-radius: 19px;
-    padding: 24px;
-    background: linear-gradient(130deg, #1b1028, #100c17);
-}
-
-.communityBox h2 {
-    font-size: 25px;
-    margin: 8px 0;
-}
-
-.communityBox p {
-    color: var(--muted);
-    max-width: 520px;
-}
-
-.featureList {
-    display: grid;
-    gap: 11px;
-}
-
-.feature {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    padding: 12px;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    background: #0d0a13;
-}
-
-.feature i {
-    font-style: normal;
-    font-size: 21px;
-}
-
-.feature b {
-    display: block;
-    font-size: 12px;
-}
-
-.feature small {
-    color: var(--muted);
-    font-size: 11px;
-}
-
-/* PIE DE PÁGINA */
-
-footer {
-    border-top: 1px solid var(--line);
-    padding: 28px 0;
-    color: var(--muted);
-    font-size: 11px;
-}
-
-.foot {
-    display: flex;
-    justify-content: space-between;
-    gap: 18px;
     flex-wrap: wrap;
 }
 
-/* MODAL */
-
-.modal {
-    position: fixed;
-    inset: 0;
-    z-index: 50;
-    display: none;
-    place-items: center;
-    padding: 18px;
-    background: #050309d9;
-    backdrop-filter: blur(8px);
+.btn-solid {
+    background: linear-gradient(135deg, var(--purple), #b45afc);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.75rem;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 20px var(--purple-glow);
+    transition: 0.3s;
 }
 
-.modal.open {
+.btn-solid:hover {
+    filter: brightness(1.15);
+    transform: translateY(-2px);
+}
+
+/* CATEGORÍAS RÁPIDAS */
+.categories {
+    max-width: 1200px;
+    margin: 0 auto 2.5rem auto;
+    padding: 0 1.5rem;
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
 }
 
-.modalBox {
-    width: min(540px, 100%);
-    max-height: 90vh;
-    overflow: auto;
-    background: #120d1b;
-    border: 1px solid #55316f;
-    border-radius: 19px;
-    padding: 21px;
-    box-shadow: 0 25px 90px #000;
+.cat-card {
+    background: var(--panel);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-.modalHead {
+.cat-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px var(--accent-glow);
+}
+
+.cat-card i {
+    font-size: 1.5rem;
+    color: var(--accent);
+    margin-bottom: 8px;
+    display: block;
+}
+
+.cat-card span {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* MAIN CONTENT / CATALOG */
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem 1.5rem;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 0.75rem;
+}
+
+.section-header h3 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.5px;
+}
+
+.filters-bar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.search-input, .select-input {
+    background: var(--panel);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    outline: none;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+.search-input {
+    flex: 1;
+    min-width: 240px;
+}
+
+.search-input:focus, .select-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* GAME CARDS GRID */
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.game-card {
+    background: var(--panel);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s;
+}
+
+.game-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+}
+
+.game-img-container {
+    height: 180px;
+    background: #04060b;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    overflow: hidden;
+}
+
+.game-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(7, 9, 19, 0.85);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.game-info {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.game-info h4 {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+.game-info p {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    flex: 1;
+}
+
+.game-meta {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 14px;
-}
-
-.modalHead h3 {
-    margin: 0;
-}
-
-.close {
-    background: #251a30;
-    border: 0;
-    color: white;
-    border-radius: 8px;
-    padding: 7px 10px;
-}
-
-.form {
-    display: grid;
-    gap: 10px;
-}
-
-.form label {
-    font-size: 11px;
-    color: #c9bdd4;
-}
-
-.form input,
-.form select,
-.form textarea {
-    display: block;
-    width: 100%;
-    margin-top: 5px;
-}
-
-.form textarea {
-    min-height: 85px;
-    resize: vertical;
-}
-
-.notice {
-    font-size: 10px;
-    color: #b6a8c3;
-    background: #1b1424;
-    border: 1px solid #38264a;
-    padding: 11px;
-    border-radius: 10px;
-}
-
-.empty {
-    grid-column: 1/-1;
-    text-align: center;
-    padding: 32px;
+    font-size: 0.8rem;
     color: var(--muted);
-    border: 1px dashed var(--line);
-    border-radius: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 10px;
 }
 
-/* RESPONSIVE */
-
-@media(max-width:900px) {
-    .links {
-        gap: 13px;
-    }
-
-    .cards {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .platforms {
-        grid-template-columns: repeat(3, 1fr);
-    }
+.btn-download {
+    background: rgba(0, 255, 204, 0.1);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
-@media(max-width:650px) {
-    .wrap {
-        width: calc(100% - 26px);
-    }
+.btn-download:hover {
+    background: var(--accent);
+    color: var(--bg);
+}
 
-    .nav {
-        height: 66px;
-    }
+/* FOOTER */
+footer {
+    background: #04060c;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 3rem 1.5rem 1.5rem 1.5rem;
+    margin-top: 4rem;
+}
 
-    .brand img {
-        width: 44px;
-        height: 44px;
-    }
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 2rem;
+}
 
-    .links {
-        display: none;
-        position: absolute;
-        top: 66px;
-        left: 0;
-        right: 0;
-        padding: 17px;
-        background: #0b0811;
-        border-bottom: 1px solid var(--line);
-        flex-direction: column;
-    }
+.footer-col h5 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--accent);
+}
 
-    .links.show {
-        display: flex;
-    }
+.footer-col p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
 
-    .menuBtn {
-        display: block;
-    }
+.social-links {
+    display: flex;
+    gap: 12px;
+    margin-top: 1rem;
+}
 
-    .searchbtn {
-        display: none;
-    }
+.social-links a {
+    background: var(--panel);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+    transition: 0.2s;
+}
 
-    .navright .pill {
-        padding: 9px 10px;
-        font-size: 11px;
-    }
+.social-links a:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
 
-    .hero {
-        padding-top: 16px;
-    }
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 1.5rem;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+}
 
-    .heroBox {
-        min-height: 430px;
-    }
-
-    .heroArt {
-        right: -15%;
-        top: 0;
-        width: 100%;
-        height: 55%;
-        font-size: 165px;
-        opacity: .35;
-    }
-
-    .heroContent {
-        padding: 33px 21px;
-    }
-
-    .hero p {
-        font-size: 13px;
-    }
-
-    .stats {
-        gap: 7px;
-    }
-
-    .stat {
-        padding: 11px;
-    }
-
-    .stat b {
-        font-size: 15px;
-    }
-
-    .stat span {
-        font-size: 9px;
-    }
-
-    .platforms {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .cards {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 9px;
-    }
-
-    .cover {
-        height: 130px;
-        font-size: 50px;
-    }
-
-    .cardBody {
-        padding: 10px;
-    }
-
-    .cardBody h3 {
-        font-size: 12px;
-    }
-
-    .community {
-        grid-template-columns: 1fr;
-    }
-
-    .section h2 {
-        font-size: 22px;
-    }
+@media(max-width: 768px) {
+    .nav-links { display: none; }
+    .hero-banner h2 { font-size: 2.2rem; }
 }
 </style>
 </head>
-
 <body>
 
 <div class="topline"></div>
 
 <header>
-    <div class="wrap nav">
-
-        <a class="brand" href="#inicio">
-            <img src="assets/storexgamer-logo.png" alt="Logo StoreXGamerPKG">
-
-            <span>
-                <strong>STOREXGAMER<span style="color:#bd54ff">PKG</span></strong>
-                <small>GAMING COMMUNITY</small>
-            </span>
+    <div class="nav-container">
+        <a href="#" class="brand">
+            <i class="fa-solid fa-cube"></i>
+            <h1>STOREXGAMER<span>PKG</span></h1>
         </a>
-
-        <nav class="links" id="navLinks">
-            <a href="#inicio">Inicio</a>
-            <a href="#plataformas">Plataformas</a>
-            <a href="#juegos">Juegos</a>
+        <nav class="nav-links">
+            <a href="#" class="active">Inicio</a>
+            <a href="#catalogo">Catálogo</a>
             <a href="#comunidad">Comunidad</a>
+            <a href="https://t.me/" target="_blank">Telegram</a>
         </nav>
-
-        <div class="navright">
-            <button class="searchbtn"
-                onclick="document.querySelector('#search').focus()">
-                ⌕ Buscar
-            </button>
-
-            <button class="pill" onclick="openModal()">
-                Colaborar ↗
-            </button>
-
-            <button class="menuBtn"
-                onclick="document.querySelector('#navLinks').classList.toggle('show')">
-                ☰
-            </button>
+        <div class="nav-actions">
+            <button class="btn-glow" onclick="window.open('https://paypal.me/', '_blank')"><i class="fa-solid fa-heart"></i> Donar</button>
         </div>
-
     </div>
 </header>
 
-<main class="wrap">
-
-    <!-- BANNER PRINCIPAL -->
-
-    <section class="hero" id="inicio">
-
-        <div class="heroBox">
-
-            <div class="heroArt" id="heroArt">🎮</div>
-
-            <div class="heroContent">
-
-                <span class="eyebrow">
-                    <i class="dot"></i>
-                    TU PUNTO DE ENCUENTRO GAMER
-                </span>
-
-                <h1 id="heroTitle">
-                    JUEGA.<br>
-                    <span class="gradient">DESCUBRE.</span><br>
-                    COMPARTE.
-                </h1>
-
-                <p id="heroText">
-                    Explora novedades, descubre proyectos para tus
-                    plataformas favoritas y conecta con otros jugadores.
-                </p>
-
-                <div class="actions">
-                    <a class="pill" href="#juegos">
-                        Explorar biblioteca →
-                    </a>
-
-                    <a class="outline" href="#comunidad">
-                        Conocer comunidad
-                    </a>
+<main>
+    <!-- HERO BANNER -->
+    <section class="hero">
+        <div class="hero-banner">
+            <div class="hero-content">
+                <span class="badge-tag">PLATAFORMA MULTISISTEMA 2026</span>
+                <h2>JUEGA SIN LÍMITES, DESCARGA CON ESTILO</h2>
+                <p>Todo el contenido es gratuito. Descubre juegos, herramientas y ports optimizados para PS5, PS4, PS3, PC y Android en un solo lugar.</p>
+                <div class="hero-buttons">
+                    <button class="btn-solid" onclick="document.getElementById('catalogo').scrollIntoView({behavior: 'smooth'})">Explorar Biblioteca</button>
+                    <button class="btn-glow" onclick="window.open('https://t.me/', '_blank')"><i class="fa-brands fa-telegram"></i> Grupo Telegram</button>
                 </div>
-
-                <div class="sliderDots">
-                    <button class="on" aria-label="Banner 1"></button>
-                    <button aria-label="Banner 2"></button>
-                    <button aria-label="Banner 3"></button>
-                </div>
-
             </div>
         </div>
     </section>
 
-    <!-- ESTADÍSTICAS -->
-
-    <div class="stats">
-
-        <div class="stat">
-            <b>5 plataformas</b>
-            <span>Un solo lugar para descubrir</span>
+    <!-- CATEGORÍAS RÁPIDAS -->
+    <div class="categories">
+        <div class="cat-card" onclick="filterPlatform('PS5')">
+            <i class="fa-solid fa-gamepad"></i>
+            <span>PS5 Games</span>
         </div>
-
-        <div class="stat">
-            <b>Comunidad abierta</b>
-            <span>Comparte tus recomendaciones</span>
+        <div class="cat-card" onclick="filterPlatform('PS4')">
+            <i class="fa-solid fa-compact-disc"></i>
+            <span>PS4 PKG</span>
         </div>
-
-        <div class="stat">
-            <b>Contenido curado</b>
-            <span>Información organizada</span>
+        <div class="cat-card" onclick="filterPlatform('PS3')">
+            <i class="fa-solid fa-vr-cardboard"></i>
+            <span>PS3 ISO & HEN</span>
         </div>
-
+        <div class="cat-card" onclick="filterPlatform('PC')">
+            <i class="fa-solid fa-computer"></i>
+            <span>PC Ports</span>
+        </div>
+        <div class="cat-card" onclick="filterPlatform('Android')">
+            <i class="fa-solid fa-mobile-screen"></i>
+            <span>Android APK</span>
+        </div>
     </div>
 
-    <!-- PLATAFORMAS -->
-
-    <section class="section" id="plataformas">
-
-        <div class="sectionHead">
-            <div>
-                <div class="kicker">ENCUENTRA TU SISTEMA</div>
-                <h2>Explora por plataforma</h2>
-            </div>
-
-            <span class="muted">Tu biblioteca, a tu manera</span>
+    <!-- SECCIÓN DE CATÁLOGO -->
+    <section class="main-content" id="catalogo">
+        <div class="section-header">
+            <h3>Catálogo de Descargas</h3>
+            <span id="results-count" style="color: var(--muted); font-size: 0.9rem;">Mostrando juegos destacados</span>
         </div>
 
-        <div class="platforms">
+        <div class="filters-bar">
+            <input type="text" id="searchInput" class="search-input" placeholder="Buscar juego, herramienta o versión..." oninput="renderGames()">
+            <select id="platformSelect" class="select-input" onchange="renderGames()">
+                <option value="ALL">Todas las Plataformas</option>
+                <option value="PS5">PlayStation 5</option>
+                <option value="PS4">PlayStation 4</option>
+                <option value="PS3">PlayStation 3</option>
+                <option value="PC">PC Gaming</option>
+                <option value="Android">Android</option>
+            </select>
+        </div>
 
-            <a class="platform" href="#juegos" data-platform="PS5">
-                <span class="
+        <div class="game-grid" id="gameGrid">
+            <!-- Se inyecta dinámicamente mediante JS -->
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-col">
+            <h5>StoreXGamerPKG</h5>
+            <p>La comunidad gamer definitiva de distribución de software y respaldos de alta calidad. Verifica siempre el firmware requerido antes de instalar.</p>
+            <div class="social-links">
+                <a href="#" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="#" target="_blank"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h5>Apoya el Proyecto</h5>
+            <p>Mantener servidores rápidos y contenido constante requiere esfuerzo. Si te sirvió el sitio, apóyanos mediante PayPal.</p>
+            <button class="btn-solid" style="margin-top: 10px;" onclick="window.open('https://paypal.me/', '_blank')">Donar con PayPal</button>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 StoreXGamerPKG. Todos los derechos reservados. No afiliado con Sony Interactive Entertainment.</p>
+    </div>
+</footer>
+
+<script>
+    // Base de datos de juegos y herramientas
+    const gamesData = [
+        { title: "Dragon Ball Budokai Tenkaichi 4", platform: "PS4", fw: "FW 9.00+", size: "2.73 GB", icon: "🐉", desc: "Versión personalizada y adaptada con novedades de personajes." },
+        { title: "EA Sports FC 27 Remaster", platform: "PS4", fw: "FW 5.05+", size: "63.3 GB", icon: "⚽", desc: "Plantillas actualizadas, gráficos de nueva generación y mods." },
+        { title: "Resident Evil 4 Remake Gold", platform: "PS4", fw: "FW 9.00+", size: "37.9 GB", icon: "🧟", desc: "Incluye todos los DLCs y expansiones de historia." },
+        { title: "Cyber-Action Next-Gen Port", platform: "PC", fw: "N/A", size: "18.4 GB", icon: "💻", desc: "Versión de PC optimizada con ajustes visuales extremos." },
+        { title: "Kit de Utilidades GoldHEN", platform: "PS4", fw: "FW 5.05 / 9.00", size: "45 MB", icon: "🛠️", desc: "Herramientas esenciales para gestión de sistema." },
+        { title: "Survival Open World Port", platform: "Android", fw: "Android 10+", size: "2.1 GB", icon: "📱", desc: "Adaptación móvil fluida con alta tasa de refresco." },
+        { title: "God of War Ragnarok Test", platform: "PS5", fw: "FW 2.00+", size: "84.5 GB", icon: "⚡", desc: "Versión completa con mejoras de rendimiento." },
+        { title: "Classic Retro Collection ISO", platform: "PS3", fw: "HEN / CFW", size: "12.2 GB", icon: "🕹️", desc: "Compilación de clásicos listos para montar." }
+    ];
+
+    function renderGames() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const selectedPlatform = document.getElementById('platformSelect').value;
+        const grid = document.getElementById('gameGrid');
+
+        const filtered = gamesData.filter(game => {
+            const matchesQuery = game.title.toLowerCase().includes(query) || game.desc.toLowerCase().includes(query);
+            const matchesPlatform = selectedPlatform === 'ALL' || game.platform === selectedPlatform;
+            return matchesQuery && matchesPlatform;
+        });
+
+        document.getElementById('results-count').innerText = `Mostrando ${filtered.length} resultados`;
+
+        if (filtered.length === 0) {
+            grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--muted);">No se encontraron juegos con esos criterios.</div>`;
+            return;
+        }
+
+        grid.innerHTML = filtered.map(game => `
+            <div class="game-card">
+                <div class="game-img-container">
+                    <span class="game-badge">${game.platform}</span>
+                    <span>${game.icon}</span>
+                </div>
+                <div class="game-info">
+                    <h4>${game.title}</h4>
+                    <p>${game.desc}</p>
+                    <div class="game-meta">
+                        <span>${game.fw} • ${game.size}</span>
+                        <button class="btn-download" onclick="alert('Iniciando enlace de descarga para: ${game.title}')">Descargar</button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function filterPlatform(plat) {
+        document.getElementById('platformSelect').value = plat;
+        renderGames();
+        document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Inicializar catálogo al cargar
+    window.onload = renderGames;
+</script>
+
+</body>
+</html>

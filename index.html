@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#08060d">
-<meta name="description" content="StoreXGamerPKG: comunidad gamer, juegos, aplicaciones y herramientas para todas las plataformas.">
+<meta name="description" content="StoreXGamerPKG: descubre juegos, novedades y una comunidad gamer.">
 
-<title>StoreXGamerPKG — Next-Gen Gaming Community</title>
+<title>StoreXGamerPKG — Comunidad gamer</title>
 
 <style>
 :root {
@@ -18,7 +18,6 @@
     --purple: #9b35ff;
     --pink: #d34dff;
     --lime: #c8ff4d;
-    --cyan: #00ffcc;
 }
 
 * {
@@ -58,7 +57,7 @@ button {
 
 .topline {
     height: 3px;
-    background: linear-gradient(90deg, #5b1ab4, #c13cff, #00ffcc);
+    background: linear-gradient(90deg, #5b1ab4, #c13cff, #7625d9);
 }
 
 header {
@@ -113,8 +112,7 @@ header {
 }
 
 .links a:hover {
-    color: var(--cyan);
-    text-shadow: 0 0 8px rgba(0,255,204,0.4);
+    color: #dca9ff;
 }
 
 .navright {
@@ -135,15 +133,10 @@ header {
     border: 0;
     border-radius: 11px;
     padding: 11px 16px;
-    background: linear-gradient(115deg, #8b2be8, #00ffcc);
-    color: #0b0712;
+    background: linear-gradient(115deg, #8b2be8, #bd42ef);
+    color: white;
     font-weight: 800;
-    box-shadow: 0 8px 25px rgba(0,255,204,0.3);
-    transition: 0.2s;
-}
-.pill:hover {
-    filter: brightness(1.1);
-    box-shadow: 0 8px 30px rgba(0,255,204,0.5);
+    box-shadow: 0 8px 25px #8c28d744;
 }
 
 .menuBtn {
@@ -151,6 +144,7 @@ header {
 }
 
 /* BANNER PRINCIPAL */
+
 .hero {
     padding: 30px 0 18px;
 }
@@ -161,7 +155,12 @@ header {
     overflow: hidden;
     border: 1px solid #ffffff1b;
     border-radius: 25px;
-    background: linear-gradient(100deg, #0b0712 3%, #170c27 48%, #30104a 100%);
+    background: linear-gradient(
+        100deg,
+        #0b0712 3%,
+        #170c27 48%,
+        #30104a 100%
+    );
     box-shadow: 0 25px 80px #0008;
 }
 
@@ -170,8 +169,17 @@ header {
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(90deg, #09060ff5 0%, #10091bdc 45%, #10091b30 100%),
-        radial-gradient(circle at 78% 42%, #00ffcc33, transparent 35%);
+        linear-gradient(
+            90deg,
+            #09060ff5 0%,
+            #10091bdc 45%,
+            #10091b30 100%
+        ),
+        radial-gradient(
+            circle at 78% 42%,
+            #a22dff77,
+            transparent 35%
+        );
 }
 
 .heroArt {
@@ -184,7 +192,7 @@ header {
     place-items: center;
     font-size: clamp(110px, 22vw, 250px);
     opacity: .8;
-    text-shadow: 0 0 45px rgba(0,255,204,0.4);
+    text-shadow: 0 0 45px #a72aff88;
 }
 
 .heroContent {
@@ -198,7 +206,7 @@ header {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: var(--cyan);
+    color: #d8a8ff;
     font-size: 10px;
     font-weight: 900;
     letter-spacing: 2.5px;
@@ -220,9 +228,9 @@ h1 {
 }
 
 .gradient {
-    background: linear-gradient(90deg, #fff, #00ffcc 70%, #9b35ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background: linear-gradient(90deg, #fff, #d7a3ff 70%, #a83dff);
+    background-clip: text;
+    color: transparent;
 }
 
 .hero p {
@@ -245,14 +253,30 @@ h1 {
     border-radius: 11px;
     padding: 11px 16px;
     font-weight: 750;
-    transition: 0.2s;
 }
-.outline:hover {
-    border-color: var(--cyan);
-    color: var(--cyan);
+
+.sliderDots {
+    display: flex;
+    gap: 7px;
+    margin-top: 27px;
+}
+
+.sliderDots button {
+    width: 23px;
+    height: 4px;
+    padding: 0;
+    border: 0;
+    border-radius: 5px;
+    background: #ffffff44;
+}
+
+.sliderDots button.on {
+    width: 42px;
+    background: #c05aff;
 }
 
 /* ESTADÍSTICAS */
+
 .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -270,7 +294,6 @@ h1 {
 .stat b {
     display: block;
     font-size: 18px;
-    color: var(--cyan);
 }
 
 .stat span {
@@ -279,6 +302,7 @@ h1 {
 }
 
 /* SECCIONES */
+
 .section {
     padding: 24px 0 36px;
 }
@@ -292,7 +316,7 @@ h1 {
 }
 
 .kicker {
-    color: var(--cyan);
+    color: #b77aff;
     font-size: 10px;
     font-weight: 900;
     letter-spacing: 2.5px;
@@ -308,7 +332,14 @@ h1 {
     color: var(--muted);
 }
 
+.textlink {
+    color: #d5a1ff;
+    font-size: 12px;
+    font-weight: 800;
+}
+
 /* PLATAFORMAS */
+
 .platforms {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -322,14 +353,12 @@ h1 {
     border-radius: 16px;
     background: linear-gradient(145deg, #191225, #0e0b14);
     transition: .2s;
-    cursor: pointer;
-    display: block;
 }
 
 .platform:hover {
     transform: translateY(-4px);
-    border-color: var(--cyan);
-    box-shadow: 0 12px 35px rgba(0,255,204,0.15);
+    border-color: #9c43df;
+    box-shadow: 0 12px 35px #8d2bca22;
 }
 
 .platform .ico {
@@ -346,6 +375,7 @@ h1 {
 }
 
 /* CATÁLOGO */
+
 .toolbar {
     display: flex;
     gap: 9px;
@@ -364,7 +394,7 @@ h1 {
 }
 
 .field:focus {
-    border-color: var(--cyan);
+    border-color: #a34be8;
 }
 
 .toolbar input {
@@ -384,23 +414,34 @@ h1 {
     overflow: hidden;
     background: #100d17;
     transition: .2s;
-    display: flex;
-    flex-direction: column;
 }
 
 .card:hover {
     transform: translateY(-5px);
-    border-color: var(--cyan);
-    box-shadow: 0 16px 36px rgba(0,0,0,0.8);
+    border-color: #9141c9;
+    box-shadow: 0 16px 36px #0008;
 }
 
 .cover {
-    height: 150px;
+    height: 165px;
     position: relative;
     display: grid;
     place-items: center;
-    background: radial-gradient(circle at 50% 40%, #4a1975, #170a24 55%, #0c0911);
-    font-size: 50px;
+    background: radial-gradient(
+        circle at 50% 40%,
+        #7533a6,
+        #21102f 55%,
+        #0c0911
+    );
+    font-size: 62px;
+}
+
+.cover:after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 50%;
+    background: linear-gradient(transparent, #100d17);
 }
 
 .tag {
@@ -411,18 +452,14 @@ h1 {
     padding: 5px 8px;
     border-radius: 7px;
     background: #09060dcc;
-    border: 1px solid rgba(0,255,204,0.3);
+    border: 1px solid #ffffff22;
     font-size: 9px;
     font-weight: 900;
     letter-spacing: 1px;
-    color: var(--cyan);
 }
 
 .cardBody {
     padding: 13px;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
 }
 
 .cardBody h3 {
@@ -434,7 +471,7 @@ h1 {
     font-size: 11px;
     color: var(--muted);
     margin: 0 0 12px;
-    flex: 1;
+    min-height: 34px;
 }
 
 .meta {
@@ -443,24 +480,435 @@ h1 {
     justify-content: space-between;
     color: #9e92ad;
     font-size: 10px;
-    margin-top: auto;
 }
 
 .miniBtn {
-    background: #152226;
-    color: var(--cyan);
-    border: 1px solid rgba(0,255,204,0.4);
+    background: #21142f;
+    color: #dcbaff;
+    border: 1px solid #573477;
     border-radius: 8px;
-    padding: 6px 10px;
+    padding: 6px 9px;
     font-size: 10px;
     font-weight: 800;
-    transition: 0.2s;
-}
-.miniBtn:hover {
-    background: var(--cyan);
-    color: #0b0712;
 }
 
 /* COMUNIDAD */
+
 .community {
     display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 15px;
+}
+
+.communityBox {
+    border: 1px solid var(--line);
+    border-radius: 19px;
+    padding: 24px;
+    background: linear-gradient(130deg, #1b1028, #100c17);
+}
+
+.communityBox h2 {
+    font-size: 25px;
+    margin: 8px 0;
+}
+
+.communityBox p {
+    color: var(--muted);
+    max-width: 520px;
+}
+
+.featureList {
+    display: grid;
+    gap: 11px;
+}
+
+.feature {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #0d0a13;
+}
+
+.feature i {
+    font-style: normal;
+    font-size: 21px;
+}
+
+.feature b {
+    display: block;
+    font-size: 12px;
+}
+
+.feature small {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+/* PIE DE PÁGINA */
+
+footer {
+    border-top: 1px solid var(--line);
+    padding: 28px 0;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+/* MODAL */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    place-items: center;
+    padding: 18px;
+    background: #050309d9;
+    backdrop-filter: blur(8px);
+}
+
+.modal.open {
+    display: grid;
+}
+
+.modalBox {
+    width: min(540px, 100%);
+    max-height: 90vh;
+    overflow: auto;
+    background: #120d1b;
+    border: 1px solid #55316f;
+    border-radius: 19px;
+    padding: 21px;
+    box-shadow: 0 25px 90px #000;
+}
+
+.modalHead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.modalHead h3 {
+    margin: 0;
+}
+
+.close {
+    background: #251a30;
+    border: 0;
+    color: white;
+    border-radius: 8px;
+    padding: 7px 10px;
+}
+
+.form {
+    display: grid;
+    gap: 10px;
+}
+
+.form label {
+    font-size: 11px;
+    color: #c9bdd4;
+}
+
+.form input,
+.form select,
+.form textarea {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.form textarea {
+    min-height: 85px;
+    resize: vertical;
+}
+
+.notice {
+    font-size: 10px;
+    color: #b6a8c3;
+    background: #1b1424;
+    border: 1px solid #38264a;
+    padding: 11px;
+    border-radius: 10px;
+}
+
+.empty {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 32px;
+    color: var(--muted);
+    border: 1px dashed var(--line);
+    border-radius: 14px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px) {
+    .links {
+        gap: 13px;
+    }
+
+    .cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .platforms {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media(max-width:650px) {
+    .wrap {
+        width: calc(100% - 26px);
+    }
+
+    .nav {
+        height: 66px;
+    }
+
+    .brand img {
+        width: 44px;
+        height: 44px;
+    }
+
+    .links {
+        display: none;
+        position: absolute;
+        top: 66px;
+        left: 0;
+        right: 0;
+        padding: 17px;
+        background: #0b0811;
+        border-bottom: 1px solid var(--line);
+        flex-direction: column;
+    }
+
+    .links.show {
+        display: flex;
+    }
+
+    .menuBtn {
+        display: block;
+    }
+
+    .searchbtn {
+        display: none;
+    }
+
+    .navright .pill {
+        padding: 9px 10px;
+        font-size: 11px;
+    }
+
+    .hero {
+        padding-top: 16px;
+    }
+
+    .heroBox {
+        min-height: 430px;
+    }
+
+    .heroArt {
+        right: -15%;
+        top: 0;
+        width: 100%;
+        height: 55%;
+        font-size: 165px;
+        opacity: .35;
+    }
+
+    .heroContent {
+        padding: 33px 21px;
+    }
+
+    .hero p {
+        font-size: 13px;
+    }
+
+    .stats {
+        gap: 7px;
+    }
+
+    .stat {
+        padding: 11px;
+    }
+
+    .stat b {
+        font-size: 15px;
+    }
+
+    .stat span {
+        font-size: 9px;
+    }
+
+    .platforms {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 9px;
+    }
+
+    .cover {
+        height: 130px;
+        font-size: 50px;
+    }
+
+    .cardBody {
+        padding: 10px;
+    }
+
+    .cardBody h3 {
+        font-size: 12px;
+    }
+
+    .community {
+        grid-template-columns: 1fr;
+    }
+
+    .section h2 {
+        font-size: 22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="topline"></div>
+
+<header>
+    <div class="wrap nav">
+
+        <a class="brand" href="#inicio">
+            <img src="assets/storexgamer-logo.png" alt="Logo StoreXGamerPKG">
+
+            <span>
+                <strong>STOREXGAMER<span style="color:#bd54ff">PKG</span></strong>
+                <small>GAMING COMMUNITY</small>
+            </span>
+        </a>
+
+        <nav class="links" id="navLinks">
+            <a href="#inicio">Inicio</a>
+            <a href="#plataformas">Plataformas</a>
+            <a href="#juegos">Juegos</a>
+            <a href="#comunidad">Comunidad</a>
+        </nav>
+
+        <div class="navright">
+            <button class="searchbtn"
+                onclick="document.querySelector('#search').focus()">
+                ⌕ Buscar
+            </button>
+
+            <button class="pill" onclick="openModal()">
+                Colaborar ↗
+            </button>
+
+            <button class="menuBtn"
+                onclick="document.querySelector('#navLinks').classList.toggle('show')">
+                ☰
+            </button>
+        </div>
+
+    </div>
+</header>
+
+<main class="wrap">
+
+    <!-- BANNER PRINCIPAL -->
+
+    <section class="hero" id="inicio">
+
+        <div class="heroBox">
+
+            <div class="heroArt" id="heroArt">🎮</div>
+
+            <div class="heroContent">
+
+                <span class="eyebrow">
+                    <i class="dot"></i>
+                    TU PUNTO DE ENCUENTRO GAMER
+                </span>
+
+                <h1 id="heroTitle">
+                    JUEGA.<br>
+                    <span class="gradient">DESCUBRE.</span><br>
+                    COMPARTE.
+                </h1>
+
+                <p id="heroText">
+                    Explora novedades, descubre proyectos para tus
+                    plataformas favoritas y conecta con otros jugadores.
+                </p>
+
+                <div class="actions">
+                    <a class="pill" href="#juegos">
+                        Explorar biblioteca →
+                    </a>
+
+                    <a class="outline" href="#comunidad">
+                        Conocer comunidad
+                    </a>
+                </div>
+
+                <div class="sliderDots">
+                    <button class="on" aria-label="Banner 1"></button>
+                    <button aria-label="Banner 2"></button>
+                    <button aria-label="Banner 3"></button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ESTADÍSTICAS -->
+
+    <div class="stats">
+
+        <div class="stat">
+            <b>5 plataformas</b>
+            <span>Un solo lugar para descubrir</span>
+        </div>
+
+        <div class="stat">
+            <b>Comunidad abierta</b>
+            <span>Comparte tus recomendaciones</span>
+        </div>
+
+        <div class="stat">
+            <b>Contenido curado</b>
+            <span>Información organizada</span>
+        </div>
+
+    </div>
+
+    <!-- PLATAFORMAS -->
+
+    <section class="section" id="plataformas">
+
+        <div class="sectionHead">
+            <div>
+                <div class="kicker">ENCUENTRA TU SISTEMA</div>
+                <h2>Explora por plataforma</h2>
+            </div>
+
+            <span class="muted">Tu biblioteca, a tu manera</span>
+        </div>
+
+        <div class="platforms">
+
+            <a class="platform" href="#juegos" data-platform="PS5">
+                <span class="

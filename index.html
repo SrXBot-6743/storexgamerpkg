@@ -143,9 +143,9 @@ footer{border-top:1px solid #135748;padding:14px 22px;display:flex;justify-conte
     </div>
     <div class="toolbar" id="juegos"><input id="search" class="field" placeholder="⌕  Buscar por nombre, género o consola..."><select id="platform" class="field"><option value="">Todas las plataformas</option><option>PC</option><option>PS4/PS5</option><option>Xbox</option><option>Android</option><option>iOS</option></select><select id="sort" class="field"><option value="new">Más recientes</option><option value="az">Nombre A-Z</option></select><button class="login" id="addBtn" style="display:none;background:var(--green);color:#020907;" onclick="openGame()">+ AGREGAR APORTE</button></div>
     
-    <div class="section-head"><h2 id="sectionListTitle">🔥 ÚLTIMOS AGREGADOS</h2><a onclick="navAction('juegos')" style="cursor:pointer">Ver todos →</a></div>
+    <div class="section-head"><h2 id="sectionListTitle">🔥 CATÁLOGO</h2><a onclick="navAction('juegos')" style="cursor:pointer">Ver todos →</a></div>
     
-    <!-- CONTENEDOR DE ÚLTIMOS AGREGADOS / JUEGOS -->
+    <!-- CONTENEDOR DE JUEGOS / APORTES -->
     <div class="games" id="games"></div>
     </section>
 </div>
@@ -304,7 +304,7 @@ function navAction(target){
         activeFilter = "all";
         $("search").value = "";
         $("shopView").classList.add("active");
-        $("sectionListTitle").textContent = "🔥 ÚLTIMOS AGREGADOS";
+        $("sectionListTitle").textContent = "🔥 CATÁLOGO";
         window.scrollTo({top:0, behavior:'smooth'});
     } else if(target === 'juegos'){
         links[1].classList.add("active");
@@ -344,7 +344,9 @@ function navAction(target){
 }
 
 function checkAdminState(){
-    if(userRole === "admin"){
+    let isInicio = (activeFilter === "all" && $("search").value === "" && document.getElementById("shopView").classList.contains("active") && window.scrollY < 200);
+
+    if(userRole === "admin" && !isInicio){
         $("adminBanner").classList.add("active");
         $("adminBannerText").textContent = "⚙ MODO ADMINISTRADOR ACTIVO — Control total de la tienda.";
         $("addBtn").style.display = "inline-block";
@@ -353,7 +355,7 @@ function checkAdminState(){
         $("editSocialBtn").style.display = "block";
         $("editCommunityBtn").style.display = "inline-block";
         $("editChatBtn").style.display = "inline-block";
-    } else if(userRole === "colab"){
+    } else if(userRole === "colab" && !isInicio){
         $("adminBanner").classList.add("active");
         $("adminBannerText").textContent = "✍ MODO COLABORADOR ACTIVO — Puedes subir aportes al catálogo.";
         $("addBtn").style.display = "inline-block";
@@ -365,7 +367,7 @@ function checkAdminState(){
     } else {
         $("adminBanner").classList.remove("active");
         $("addBtn").style.display = "none";
-        $("loginBtn").style.display = "inline-block";
+        $("loginBtn").style.display = userRole === "guest" ? "inline-block" : "none";
         $("editSidebarBtn").style.display = "none";
         $("editSocialBtn").style.display = "none";
         $("editCommunityBtn").style.display = "none";

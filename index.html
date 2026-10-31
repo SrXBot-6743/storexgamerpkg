@@ -3,23 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0b0f19">
-<title>StoreXGamerPKG — Next-Gen Gaming Community</title>
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#050308">
+<title>StoreXGamerPKG — Dark Gothic Gaming Community</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
 :root {
-    --bg: #070913;
-    --panel: #0d1224;
-    --panel-border: rgba(0, 255, 204, 0.2);
-    --accent: #00ffcc;
-    --accent-glow: rgba(0, 255, 204, 0.35);
-    --purple: #9b35ff;
-    --purple-glow: rgba(155, 53, 255, 0.4);
-    --text: #f1f5f9;
-    --muted: #94a3b8;
-    --danger: #ff3366;
+    --bg-gothic: #050308;
+    --panel-gothic: #0f0a17;
+    --panel-border: rgba(155, 53, 255, 0.2);
+    --neon-purple: #9b35ff;
+    --neon-glow: rgba(155, 53, 255, 0.35);
+    --neon-pink: #ff2a85;
+    --text-light: #f3eef8;
+    --text-muted: #9e91b0;
 }
 
 * {
@@ -33,12 +31,13 @@ html {
     scroll-behavior: smooth;
 }
 
+/* FONDO LIMPIO, OSCURO Y TRANSPARENTE (Sin manchas difuminadas extrañas) */
 body {
-    background-color: var(--bg);
-    color: var(--text);
+    background-color: var(--bg-gothic);
+    color: var(--text-light);
     background-image: 
-        radial-gradient(circle at 15% 15%, rgba(155, 53, 255, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 85% 85%, rgba(0, 255, 204, 0.06) 0%, transparent 40%);
+        linear-gradient(rgba(5, 3, 8, 0.85), rgba(5, 3, 8, 0.85)),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
     min-height: 100vh;
 }
 
@@ -47,53 +46,76 @@ a {
     text-decoration: none;
 }
 
-/* TOP RGB LINE */
+/* LÍNEA SUPERIOR GÓTICA */
 .topline {
     height: 3px;
-    background: linear-gradient(90deg, var(--purple), var(--accent), var(--purple));
-    box-shadow: 0 0 10px var(--accent);
+    background: linear-gradient(90deg, #3d1066, var(--neon-purple), var(--neon-pink), #3d1066);
+    box-shadow: 0 0 12px var(--neon-purple);
 }
 
 /* HEADER */
 header {
     position: sticky;
     top: 0;
-    z-index: 100;
-    background: rgba(7, 9, 19, 0.85);
+    z-index: 1000;
+    background: rgba(5, 3, 8, 0.85);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(155, 53, 255, 0.15);
 }
 
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 1rem 1.5rem;
+    padding: 0.8rem 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
+/* LOGO GAMER GÓTICO */
 .brand {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.brand i {
-    font-size: 1.8rem;
-    color: var(--accent);
-    filter: drop-shadow(0 0 8px var(--accent-glow));
+.gothic-logo-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #1f0c33, #0f0a17);
+    border: 2px solid var(--neon-purple);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px var(--neon-glow);
 }
 
-.brand h1 {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
+.gothic-logo-icon i {
+    font-size: 1.3rem;
+    color: var(--neon-pink);
+    filter: drop-shadow(0 0 5px var(--neon-pink));
+}
+
+.brand-text h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.35rem;
+    font-weight: 900;
     letter-spacing: 1px;
+    color: #fff;
 }
 
-.brand span {
-    color: var(--accent);
+.brand-text h1 span {
+    color: var(--neon-purple);
+    text-shadow: 0 0 10px var(--neon-glow);
+}
+
+.brand-text small {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    font-family: 'Rajdhani', sans-serif;
 }
 
 .nav-links {
@@ -101,168 +123,150 @@ header {
     gap: 2rem;
     font-weight: 600;
     font-size: 0.95rem;
+    font-family: 'Rajdhani', sans-serif;
+    letter-spacing: 0.5px;
 }
 
 .nav-links a {
-    color: var(--muted);
+    color: var(--text-muted);
     transition: 0.2s;
 }
 
 .nav-links a:hover, .nav-links a.active {
-    color: var(--accent);
-    text-shadow: 0 0 10px var(--accent-glow);
+    color: var(--neon-purple);
+    text-shadow: 0 0 10px var(--neon-glow);
 }
 
-.nav-actions {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.btn-glow {
-    background: transparent;
-    border: 2px solid var(--accent);
-    color: var(--accent);
-    padding: 0.5rem 1.25rem;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 0.9rem;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
-    transition: 0.3s;
-}
-
-.btn-glow:hover {
-    background: var(--accent);
-    color: var(--bg);
-    box-shadow: 0 0 20px var(--accent-glow);
-}
-
-/* HERO BANNER */
-.hero {
+/* CARRUSEL / BANNER ROTATIVO */
+.hero-carousel {
     max-width: 1200px;
     margin: 2rem auto;
     padding: 0 1.5rem;
 }
 
-.hero-banner {
-    background: linear-gradient(135deg, #131c38 0%, #0d1224 100%);
+.carousel-container {
+    background: rgba(15, 10, 23, 0.75);
+    backdrop-filter: blur(10px);
     border: 1px solid var(--panel-border);
     border-radius: 20px;
-    padding: 3rem 2.5rem;
+    height: 380px;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
 }
 
-.hero-banner::after {
-    content: "🎮";
+.carousel-slide {
     position: absolute;
-    right: 5%;
-    bottom: -10%;
-    font-size: 14rem;
-    opacity: 0.1;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    padding: 3rem 4rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s ease-in-out, visibility 0.6s;
 }
 
-.hero-content {
+.carousel-slide.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.carousel-content {
     max-width: 600px;
-    position: relative;
     z-index: 2;
 }
 
-.badge-tag {
+.carousel-badge {
     display: inline-block;
-    background: rgba(0, 255, 204, 0.1);
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    padding: 4px 10px;
+    background: rgba(155, 53, 255, 0.15);
+    border: 1px solid var(--neon-purple);
+    color: #d4a5ff;
+    padding: 4px 12px;
     border-radius: 6px;
     font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
     margin-bottom: 1rem;
-}
-
-.hero-banner h2 {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 3rem;
-    line-height: 1.1;
+}
+
+.carousel-content h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1.15;
     margin-bottom: 1rem;
-    letter-spacing: 1px;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(155, 53, 255, 0.3);
 }
 
-.hero-banner p {
-    color: var(--muted);
+.carousel-content p {
+    color: var(--text-muted);
     font-size: 1.05rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.8rem;
+    line-height: 1.5;
 }
 
-.hero-buttons {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-}
-
-.btn-solid {
-    background: linear-gradient(135deg, var(--purple), #b45afc);
+.carousel-btn {
+    background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
     color: white;
     border: none;
     padding: 0.75rem 1.75rem;
     border-radius: 8px;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 8px 20px var(--purple-glow);
+    box-shadow: 0 0 20px var(--neon-glow);
     transition: 0.3s;
+    font-family: 'Rajdhani', sans-serif;
+    letter-spacing: 1px;
+    font-size: 1rem;
 }
 
-.btn-solid:hover {
+.carousel-btn:hover {
     filter: brightness(1.15);
     transform: translateY(-2px);
 }
 
-/* CATEGORÍAS RÁPIDAS */
-.categories {
-    max-width: 1200px;
-    margin: 0 auto 2.5rem auto;
-    padding: 0 1.5rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 12px;
+.carousel-bg-icon {
+    position: absolute;
+    right: 5%;
+    bottom: -10%;
+    font-size: 16rem;
+    opacity: 0.04;
+    z-index: 1;
 }
 
-.cat-card {
-    background: var(--panel);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    padding: 1rem;
-    text-align: center;
+/* CONTROLES DEL CARRUSEL */
+.carousel-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.dot {
+    width: 12px;
+    height: 4px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 4px;
     cursor: pointer;
     transition: 0.3s;
 }
 
-.cat-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px var(--accent-glow);
+.dot.active {
+    width: 30px;
+    background: var(--neon-purple);
+    box-shadow: 0 0 10px var(--neon-purple);
 }
 
-.cat-card i {
-    font-size: 1.5rem;
-    color: var(--accent);
-    margin-bottom: 8px;
-    display: block;
-}
-
-.cat-card span {
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-
-/* MAIN CONTENT / CATALOG */
+/* SECCIÓN PRINCIPAL / LISTAS DE CONSOLAS */
 .main-content {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1.5rem 4rem 1.5rem;
+    padding: 1.5rem 1.5rem 4rem 1.5rem;
 }
 
 .section-header {
@@ -270,14 +274,15 @@ header {
     justify-content: space-between;
     align-items: flex-end;
     margin-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(155, 53, 255, 0.15);
     padding-bottom: 0.75rem;
 }
 
 .section-header h3 {
-    font-family: 'Rajdhani', sans-serif;
+    font-family: 'Cinzel', serif;
     font-size: 2rem;
     letter-spacing: 0.5px;
+    color: #fff;
 }
 
 .filters-bar {
@@ -288,10 +293,10 @@ header {
 }
 
 .search-input, .select-input {
-    background: var(--panel);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: var(--text);
-    padding: 0.75rem 1rem;
+    background: rgba(15, 10, 23, 0.8);
+    border: 1px solid rgba(155, 53, 255, 0.2);
+    color: var(--text-light);
+    padding: 0.8rem 1rem;
     border-radius: 8px;
     outline: none;
     font-size: 0.95rem;
@@ -304,11 +309,11 @@ header {
 }
 
 .search-input:focus, .select-input:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 10px var(--accent-glow);
+    border-color: var(--neon-purple);
+    box-shadow: 0 0 12px var(--neon-glow);
 }
 
-/* GAME CARDS GRID */
+/* TARJETAS DE JUEGOS Y LISTAS */
 .game-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -316,8 +321,9 @@ header {
 }
 
 .game-card {
-    background: var(--panel);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(15, 10, 23, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(155, 53, 255, 0.15);
     border-radius: 14px;
     overflow: hidden;
     display: flex;
@@ -327,13 +333,13 @@ header {
 
 .game-card:hover {
     transform: translateY(-6px);
-    border-color: var(--accent);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    border-color: var(--neon-purple);
+    box-shadow: 0 15px 35px rgba(155, 53, 255, 0.2);
 }
 
 .game-img-container {
     height: 180px;
-    background: #04060b;
+    background: #07040c;
     position: relative;
     display: flex;
     align-items: center;
@@ -346,13 +352,14 @@ header {
     position: absolute;
     top: 10px;
     left: 10px;
-    background: rgba(7, 9, 19, 0.85);
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    padding: 3px 8px;
+    background: rgba(5, 3, 8, 0.9);
+    border: 1px solid var(--neon-purple);
+    color: #d4a5ff;
+    padding: 4px 10px;
     border-radius: 6px;
     font-size: 0.75rem;
     font-weight: 700;
+    font-family: 'Rajdhani', sans-serif;
 }
 
 .game-info {
@@ -366,10 +373,12 @@ header {
     font-size: 1.1rem;
     margin-bottom: 6px;
     font-weight: 700;
+    font-family: 'Rajdhani', sans-serif;
+    letter-spacing: 0.5px;
 }
 
 .game-info p {
-    color: var(--muted);
+    color: var(--text-muted);
     font-size: 0.85rem;
     margin-bottom: 1rem;
     flex: 1;
@@ -380,15 +389,15 @@ header {
     justify-content: space-between;
     align-items: center;
     font-size: 0.8rem;
-    color: var(--muted);
+    color: var(--text-muted);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     padding-top: 10px;
 }
 
 .btn-download {
-    background: rgba(0, 255, 204, 0.1);
-    color: var(--accent);
-    border: 1px solid var(--accent);
+    background: rgba(155, 53, 255, 0.1);
+    color: #d4a5ff;
+    border: 1px solid var(--neon-purple);
     padding: 6px 14px;
     border-radius: 6px;
     font-weight: 700;
@@ -398,78 +407,89 @@ header {
 }
 
 .btn-download:hover {
-    background: var(--accent);
-    color: var(--bg);
+    background: var(--neon-purple);
+    color: #fff;
+    box-shadow: 0 0 10px var(--neon-glow);
+}
+
+/* SECCIÓN COMUNIDAD (REDES SOCIALES) */
+.community-section {
+    max-width: 1200px;
+    margin: 40px auto 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.community-box {
+    background: rgba(15, 10, 23, 0.75);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--panel-border);
+    border-radius: 18px;
+    padding: 2.5rem;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+.community-box h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem;
+    margin-bottom: 0.75rem;
+    color: #fff;
+}
+
+.community-box p {
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+    font-size: 1rem;
+}
+
+.social-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.social-card {
+    background: rgba(15, 10, 23, 0.9);
+    border: 1px solid rgba(155, 53, 255, 0.2);
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.1rem;
+    transition: 0.3s;
+}
+
+.social-card:hover {
+    border-color: var(--neon-pink);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(255, 42, 133, 0.25);
+    color: var(--neon-pink);
+}
+
+.social-card i {
+    font-size: 1.4rem;
 }
 
 /* FOOTER */
 footer {
-    background: #04060c;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 3rem 1.5rem 1.5rem 1.5rem;
+    background: rgba(3, 2, 5, 0.9);
+    border-top: 1px solid rgba(155, 53, 255, 0.15);
+    padding: 2.5rem 1.5rem;
     margin-top: 4rem;
-}
-
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    margin-bottom: 2rem;
-}
-
-.footer-col h5 {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    color: var(--accent);
-}
-
-.footer-col p {
-    color: var(--muted);
-    font-size: 0.9rem;
-    line-height: 1.5;
-}
-
-.social-links {
-    display: flex;
-    gap: 12px;
-    margin-top: 1rem;
-}
-
-.social-links a {
-    background: var(--panel);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    width: 38px;
-    height: 38px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text);
-    transition: 0.2s;
-}
-
-.social-links a:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    box-shadow: 0 0 10px var(--accent-glow);
-}
-
-.footer-bottom {
-    max-width: 1200px;
-    margin: 0 auto;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding-top: 1.5rem;
     text-align: center;
-    color: var(--muted);
+    color: var(--text-muted);
     font-size: 0.85rem;
 }
 
 @media(max-width: 768px) {
     .nav-links { display: none; }
-    .hero-banner h2 { font-size: 2.2rem; }
+    .carousel-slide { padding: 2rem; }
+    .carousel-content h2 { font-size: 2rem; }
 }
 </style>
 </head>
@@ -480,110 +500,111 @@ footer {
 <header>
     <div class="nav-container">
         <a href="#" class="brand">
-            <i class="fa-solid fa-cube"></i>
-            <h1>STOREXGAMER<span>PKG</span></h1>
+            <div class="gothic-logo-icon">
+                <i class="fa-solid fa-skull"></i>
+            </div>
+            <div class="brand-text">
+                <h1>STOREXGAMER<span>PKG</span></h1>
+                <small>DARK GAMING COMMUNITY</small>
+            </div>
         </a>
         <nav class="nav-links">
             <a href="#" class="active">Inicio</a>
-            <a href="#catalogo">Catálogo</a>
+            <a href="#catalogo">Listas & Consolas</a>
             <a href="#comunidad">Comunidad</a>
-            <a href="https://t.me/" target="_blank">Telegram</a>
         </nav>
-        <div class="nav-actions">
-            <button class="btn-glow" onclick="window.open('https://paypal.me/', '_blank')"><i class="fa-solid fa-heart"></i> Donar</button>
-        </div>
     </div>
 </header>
 
 <main>
-    <!-- HERO BANNER -->
-    <section class="hero">
-        <div class="hero-banner">
-            <div class="hero-content">
-                <span class="badge-tag">PLATAFORMA MULTISISTEMA 2026</span>
-                <h2>JUEGA SIN LÍMITES, DESCARGA CON ESTILO</h2>
-                <p>Todo el contenido es gratuito. Descubre juegos, herramientas y ports optimizados para PS5, PS4, PS3, PC y Android en un solo lugar.</p>
-                <div class="hero-buttons">
-                    <button class="btn-solid" onclick="document.getElementById('catalogo').scrollIntoView({behavior: 'smooth'})">Explorar Biblioteca</button>
-                    <button class="btn-glow" onclick="window.open('https://t.me/', '_blank')"><i class="fa-brands fa-telegram"></i> Grupo Telegram</button>
+    <!-- CARRUSEL ROTATIVO (INICIO) -->
+    <section class="hero-carousel">
+        <div class="carousel-container" id="carouselContainer">
+            
+            <div class="carousel-slide active">
+                <div class="carousel-content">
+                    <span class="carousel-badge">LISTA OFICIAL 2026</span>
+                    <h2>NUEVA ERA GÓTICA PARA TUS DESCARGAS</h2>
+                    <p>Explora catálogos optimizados para todas tus consolas favoritas en un entorno oscuro, rápido y libre de restricciones.</p>
+                    <button class="carousel-btn" onclick="document.getElementById('catalogo').scrollIntoView({behavior: 'smooth'})">Ver Listas de Juegos</button>
                 </div>
+                <div class="carousel-bg-icon">🎮</div>
+            </div>
+
+            <div class="carousel-slide">
+                <div class="carousel-content">
+                    <span class="carousel-badge">SOPORTE MULTISISTEMA</span>
+                    <h2>PS5, PS4, PS3, PC Y ANDROID</h2>
+                    <p>Todo el contenido organizado en listas específicas por plataforma con información de firmware y tamaños exactos.</p>
+                    <button class="carousel-btn" onclick="document.getElementById('catalogo').scrollIntoView({behavior: 'smooth'})">Explorar Catálogo</button>
+                </div>
+                <div class="carousel-bg-icon">⚡</div>
+            </div>
+
+            <div class="carousel-slide">
+                <div class="carousel-content">
+                    <span class="carousel-badge">COMUNIDAD ACTIVA</span>
+                    <h2>ÚNETE A NUESTRO TELEGRAM Y TIKTOK</h2>
+                    <p>Comparte con otros jugadores, entérate de los últimos lanzamientos y pide tus juegos favoritos directamente.</p>
+                    <button class="carousel-btn" onclick="document.getElementById('comunidad').scrollIntoView({behavior: 'smooth'})">Ir a Redes</button>
+                </div>
+                <div class="carousel-bg-icon">💬</div>
+            </div>
+
+            <div class="carousel-dots">
+                <span class="dot active" onclick="currentSlide(0)"></span>
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
             </div>
         </div>
     </section>
 
-    <!-- CATEGORÍAS RÁPIDAS -->
-    <div class="categories">
-        <div class="cat-card" onclick="filterPlatform('PS5')">
-            <i class="fa-solid fa-gamepad"></i>
-            <span>PS5 Games</span>
-        </div>
-        <div class="cat-card" onclick="filterPlatform('PS4')">
-            <i class="fa-solid fa-compact-disc"></i>
-            <span>PS4 PKG</span>
-        </div>
-        <div class="cat-card" onclick="filterPlatform('PS3')">
-            <i class="fa-solid fa-vr-cardboard"></i>
-            <span>PS3 ISO & HEN</span>
-        </div>
-        <div class="cat-card" onclick="filterPlatform('PC')">
-            <i class="fa-solid fa-computer"></i>
-            <span>PC Ports</span>
-        </div>
-        <div class="cat-card" onclick="filterPlatform('Android')">
-            <i class="fa-solid fa-mobile-screen"></i>
-            <span>Android APK</span>
-        </div>
-    </div>
-
-    <!-- SECCIÓN DE CATÁLOGO -->
+    <!-- SECCIÓN DE LISTAS Y CATEGORÍAS -->
     <section class="main-content" id="catalogo">
         <div class="section-header">
-            <h3>Catálogo de Descargas</h3>
-            <span id="results-count" style="color: var(--muted); font-size: 0.9rem;">Mostrando juegos destacados</span>
+            <h3>Listas y Categorías por Consola</h3>
+            <span id="results-count" style="color: var(--text-muted); font-size: 0.9rem;">Mostrando todo el contenido</span>
         </div>
 
         <div class="filters-bar">
-            <input type="text" id="searchInput" class="search-input" placeholder="Buscar juego, herramienta o versión..." oninput="renderGames()">
+            <input type="text" id="searchInput" class="search-input" placeholder="Buscar juego, aplicación o versión..." oninput="renderGames()">
             <select id="platformSelect" class="select-input" onchange="renderGames()">
-                <option value="ALL">Todas las Plataformas</option>
-                <option value="PS5">PlayStation 5</option>
-                <option value="PS4">PlayStation 4</option>
-                <option value="PS3">PlayStation 3</option>
-                <option value="PC">PC Gaming</option>
-                <option value="Android">Android</option>
+                <option value="ALL">Todas las Listas (Consolas & Sistemas)</option>
+                <option value="PS5">Lista PS5</option>
+                <option value="PS4">Lista PS4</option>
+                <option value="PS3">Lista PS3</option>
+                <option value="PC">Lista PC</option>
+                <option value="Android">Lista Android</option>
             </select>
         </div>
 
         <div class="game-grid" id="gameGrid">
-            <!-- Se inyecta dinámicamente mediante JS -->
+            <!-- Contenido generado dinámicamente -->
+        </div>
+    </section>
+
+    <!-- SECCIÓN COMUNIDAD (REDES SOCIALES) -->
+    <section class="community-section" id="comunidad">
+        <div class="community-box">
+            <h3>Nuestra Comunidad</h3>
+            <p>Mantente al tanto de las últimas actualizaciones, novedades y soporte técnico uniéndote a nuestras redes sociales oficiales.</p>
+            <div class="social-grid">
+                <a href="https://t.me/" target="_blank" class="social-card">
+                    <i class="fa-brands fa-telegram" style="color: #229ed9;"></i> Telegram Oficial
+                </a>
+                <a href="https://tiktok.com/" target="_blank" class="social-card">
+                    <i class="fa-brands fa-tiktok" style="color: #ff0050;"></i> TikTok Gaming
+                </a>
+            </div>
         </div>
     </section>
 </main>
 
 <footer>
-    <div class="footer-content">
-        <div class="footer-col">
-            <h5>StoreXGamerPKG</h5>
-            <p>La comunidad gamer definitiva de distribución de software y respaldos de alta calidad. Verifica siempre el firmware requerido antes de instalar.</p>
-            <div class="social-links">
-                <a href="#" target="_blank"><i class="fa-brands fa-telegram"></i></a>
-                <a href="#" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
-                <a href="#" target="_blank"><i class="fa-brands fa-github"></i></a>
-            </div>
-        </div>
-        <div class="footer-col">
-            <h5>Apoya el Proyecto</h5>
-            <p>Mantener servidores rápidos y contenido constante requiere esfuerzo. Si te sirvió el sitio, apóyanos mediante PayPal.</p>
-            <button class="btn-solid" style="margin-top: 10px;" onclick="window.open('https://paypal.me/', '_blank')">Donar con PayPal</button>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <p>&copy; 2026 StoreXGamerPKG. Todos los derechos reservados. No afiliado con Sony Interactive Entertainment.</p>
-    </div>
+    <p>&copy; 2026 StoreXGamerPKG. Todos los derechos reservados. Estética gótica y oscura optimizada para GitHub Pages.</p>
 </footer>
 
 <script>
-    // Base de datos de juegos y herramientas
     const gamesData = [
         { title: "Dragon Ball Budokai Tenkaichi 4", platform: "PS4", fw: "FW 9.00+", size: "2.73 GB", icon: "🐉", desc: "Versión personalizada y adaptada con novedades de personajes." },
         { title: "EA Sports FC 27 Remaster", platform: "PS4", fw: "FW 5.05+", size: "63.3 GB", icon: "⚽", desc: "Plantillas actualizadas, gráficos de nueva generación y mods." },
@@ -609,14 +630,14 @@ footer {
         document.getElementById('results-count').innerText = `Mostrando ${filtered.length} resultados`;
 
         if (filtered.length === 0) {
-            grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--muted);">No se encontraron juegos con esos criterios.</div>`;
+            grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--text-muted);">No se encontraron elementos en esta lista.</div>`;
             return;
         }
 
         grid.innerHTML = filtered.map(game => `
             <div class="game-card">
-                <div class="game-img-container">
-                    <span class="game-badge">${game.platform}</span>
+                <div class="app-cover game-img-container">
+                    <span class="game-badge">Lista ${game.platform}</span>
                     <span>${game.icon}</span>
                 </div>
                 <div class="game-info">
@@ -624,21 +645,45 @@ footer {
                     <p>${game.desc}</p>
                     <div class="game-meta">
                         <span>${game.fw} • ${game.size}</span>
-                        <button class="btn-download" onclick="alert('Iniciando enlace de descarga para: ${game.title}')">Descargar</button>
+                        <button class="btn-download" onclick="alert('Iniciando descarga para: ${game.title}')">Descargar</button>
                     </div>
                 </div>
             </div>
         `).join('');
     }
 
-    function filterPlatform(plat) {
-        document.getElementById('platformSelect').value = plat;
-        renderGames();
-        document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' });
+    let currentSlideIndex = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.dot');
+    let slideInterval;
+
+    function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+
+        currentSlideIndex = (index + slides.length) % slides.length;
+        slides[currentSlideIndex].classList.add('active');
+        dots[currentSlideIndex].classList.add('active');
     }
 
-    // Inicializar catálogo al cargar
-    window.onload = renderGames;
+    function nextSlide() {
+        showSlide(currentSlideIndex + 1);
+    }
+
+    function currentSlide(index) {
+        showSlide(index);
+        resetTimer();
+    }
+
+    function resetTimer() {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(nextSlide, 5000);
+    }
+
+    window.onload = function() {
+        renderGames();
+        slideInterval = setInterval(nextSlide, 5000);
+    };
 </script>
 
 </body>

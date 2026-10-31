@@ -95,9 +95,9 @@ footer{border-top:1px solid #135748;padding:14px 22px;display:flex;justify-conte
 
 .modal-box{width:min(500px,100%);max-height:90vh;overflow:auto;background:#061711;border:1px solid var(--green);border-radius:12px;padding:20px;box-shadow:0 0 25px #00ff6a33}.modal-box h2{color:var(--green);margin-bottom:14px}.formrow{margin:10px 0}.formrow label{display:block;font-size:11px;color:#b5d7ca;margin-bottom:5px}.formrow input,.formrow textarea,.formrow select{width:100%;background:#020b08;border:1px solid #236653;color:white;padding:10px;border-radius:7px}.actions{display:flex;justify-content:flex-end;gap:8px;margin-top:15px}.secondary{border:1px solid #6a8980;background:transparent;color:white;border-radius:8px;padding:9px 13px;cursor:pointer}
 
-/* MENÚ HAMBURGUESA Y ADAPTABILIDAD MÓVIL */
+/* MENÚ HAMBURGUESA Y ADAPTABILIDAD MÓVIL OPTIMIZADA */
 .menu-toggle{display:none;background:transparent;border:1px solid var(--green);color:var(--green);padding:6px 10px;border-radius:6px;font-size:16px;cursor:pointer}
-@media(max-width:1050px){.layout{grid-template-columns:1fr}.sidebar{display:none}.games{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:1050px){.layout{grid-template-columns:1fr}.games{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:760px){.site{padding:0}.main{border-radius:0}header{height:auto;min-height:65px;padding:9px 12px;flex-wrap:wrap}.brand{min-width:0}.brand-name{font-size:15px}.brand-mark{width:39px;height:39px}
 .menu-toggle{display:block}
 nav{order:3;width:100%;display:none;flex-direction:column;align-items:flex-start;gap:8px;padding:10px 0;border-top:1px solid #087c6533}
@@ -563,7 +563,6 @@ function saveGame(){
         games=games.map(g=>g.id===id?obj:g);
     } else {
         games.unshift(obj);
-        // Dispara la alerta automática a Telegram al agregar un nuevo aporte
         sendTelegramAlert(obj);
     }
     

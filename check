@@ -344,6 +344,17 @@ function navAction(target){
 }
 
 function checkAdminState(){
+    if(userRole === "guest"){
+        $("adminBanner").classList.remove("active");
+        $("addBtn").style.display = "none";
+        $("loginBtn").style.display = "inline-block";
+        $("editSidebarBtn").style.display = "none";
+        $("editSocialBtn").style.display = "none";
+        $("editCommunityBtn").style.display = "none";
+        $("editChatBtn").style.display = "none";
+        return;
+    }
+
     let isInicio = (activeFilter === "all" && $("search").value === "" && document.getElementById("shopView").classList.contains("active") && window.scrollY < 200);
 
     if(userRole === "admin" && !isInicio){
@@ -353,8 +364,8 @@ function checkAdminState(){
         $("loginBtn").style.display = "none";
         $("editSidebarBtn").style.display = "block";
         $("editSocialBtn").style.display = "block";
-        $("editCommunityBtn").style.display = "inline-block";
-        $("editChatBtn").style.display = "inline-block";
+        $("editCommunityBtn").style.display = "block";
+        $("editChatBtn").style.display = "block";
     } else if(userRole === "colab" && !isInicio){
         $("adminBanner").classList.add("active");
         $("adminBannerText").textContent = "✍ MODO COLABORADOR ACTIVO — Puedes subir aportes al catálogo.";
@@ -367,7 +378,7 @@ function checkAdminState(){
     } else {
         $("adminBanner").classList.remove("active");
         $("addBtn").style.display = "none";
-        $("loginBtn").style.display = userRole === "guest" ? "inline-block" : "none";
+        $("loginBtn").style.display = "inline-block";
         $("editSidebarBtn").style.display = "none";
         $("editSocialBtn").style.display = "none";
         $("editCommunityBtn").style.display = "none";
@@ -507,8 +518,9 @@ function login(){
 function logout(){
     userRole = "guest";
     localStorage.removeItem("sxg_role");
+    navAction('inicio');
     render();
-    alert("Sesión cerrada.");
+    alert("Sesión cerrada correctamente.");
 }
 
 function openGame(id=null){$("gameModalTitle").textContent=id?"Editar ítem":"Agregar Aporte";let g=games.find(x=>x.id===id)||{};$("editId").value=g.id||"";$("gTitle").value=g.title||"";$("gType").value=g.type||"juego";$("gPlatform").value=g.platform||"PC";$("gGenre").value=g.genre||"";$("gDesc").value=g.desc||"";$("gSize").value=g.size||"";$("gImg").value=g.img||"";$("gLink").value=g.link||"";$("gameModal").classList.add("show")}

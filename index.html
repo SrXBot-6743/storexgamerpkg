@@ -227,8 +227,20 @@
         // ==========================================
         let vozActivada = true;
         let vocesDisponibles = [];
+        let usuarioInteractuo = false;
 
-        // Cargar las voces desde el navegador
+        // Desbloquear audio con la primera interacción del usuario
+        function desbloquearAudio() {
+            if (!usuarioInteractuo) {
+                usuarioInteractuo = true;
+                if ('speechSynthesis' in window) {
+                    window.speechSynthesis.getVoices();
+                }
+            }
+        }
+        window.addEventListener('click', desbloquearAudio, { once: true });
+        window.addEventListener('keydown', desbloquearAudio, { once: true });
+
         function cargarVocesHana() {
             if ('speechSynthesis' in window) {
                 vocesDisponibles = window.speechSynthesis.getVoices();
@@ -236,57 +248,43 @@
         }
 
         if ('speechSynthesis' in window) {
-            window.speechSynthesis.onvoiceschanged = cargarVocesHana;
             cargarVocesHana();
+            if (speechSynthesis.onvoiceschanged !== undefined) {
+                speechSynthesis.onvoiceschanged = cargarVocesHana;
+            }
         }
 
-        /**
-         * Función principal para hacer hablar a Hana
-         * @param {string} texto - El mensaje a sintetizar
-         */
         function hablarHana(texto) {
             if (!vozActivada || !('speechSynthesis' in window)) return;
-
-            // Cancelar audios en cola para evitar encavalgamientos
             window.speechSynthesis.cancel();
 
-            // Limpiar etiquetas HTML y formato Markdown antes de leer
+            // Limpiar etiquetas HTML y formato Markdown
             const textoLimpio = texto.replace(/<[^>]*>?/gm, '').replace(/[*_#`]/g, '');
 
             const utterance = new SpeechSynthesisUtterance(textoLimpio);
-            utterance.lang = 'es-ES'; // Idioma base español
-            utterance.rate = 1.0;     // Velocidad normal
-            utterance.pitch = 1.25;   // Tono agudo (estilo asistente anime)
+            utterance.lang = 'es-ES';
+            utterance.rate = 1.0;
+            utterance.pitch = 1.2;
 
             if (vocesDisponibles.length === 0) {
                 vocesDisponibles = window.speechSynthesis.getVoices();
             }
 
-            // Seleccionar voz femenina disponible en español
-            const vozFemenina = vocesDisponibles.find(voice => 
-                voice.lang.includes('es') && 
-                (voice.name.includes('Monica') || 
-                 voice.name.includes('Sabina') || 
-                 voice.name.includes('Lucia') || 
-                 voice.name.includes('Helena') || 
-                 voice.name.includes('Google español') ||
-                 voice.name.includes('Spanish'))
-            );
-
-            if (vozFemenina) {
-                utterance.voice = vozFemenina;
+            const vozEspanol = vocesDisponibles.find(v => v.lang.includes('es') || v.lang.includes('ES'));
+            if (vozEspanol) {
+                utterance.voice = vozEspanol;
             }
 
             window.speechSynthesis.speak(utterance);
         }
 
-        // Alternar el estado del audio con el botón superior
+        // Alternar voz con el botón superior
         function toggleAudio() {
             vozActivada = !vozActivada;
             const icon = document.getElementById('audioIcon');
             if (vozActivada) {
                 icon.className = 'fa-solid fa-volume-high';
-                hablarHana("Voz activada");
+                hablarHana("Voz de Hana activada");
             } else {
                 icon.className = 'fa-solid fa-volume-xmark';
                 window.speechSynthesis.cancel();
@@ -294,18 +292,18 @@
         }
 
         // ==========================================
-        // 2. LÓGICA DE INTERACCIÓN DEL CHAT
+        // 2. LÓGICA DEL CHAT Y RESPUESTAS
         // ==========================================
         function enviarMensaje() {
+            desbloquearAudio();
             const input = document.getElementById('userInput');
             const texto = input.value.trim();
             if (!texto) return;
 
-            // Mostrar mensaje del usuario
             agregarMensajeChat('user', texto);
             input.value = '';
 
-            // Respuesta por defecto al estar sin endpoint/modo local
+            // Respuesta por defecto (Modo local / Sin endpoint)
             setTimeout(() => {
                 const respuestaHana = "No pude conectar con el servicio de IA. Revisa el endpoint en la configuración. Mientras tanto, puedo ayudarte con el catálogo.";
                 
@@ -331,99 +329,6 @@
                 enviarMensaje();
             }
         }
-    </script>// ==========================================
-// 1. CONFIGURACIÓN DE SÍNTESIS DE VOZ (TTS)
-// ==========================================
-let vozActivada = true;
-let vocesDisponibles = [];
-let usuarioInteractuo = false;
-
-// Desbloquear audio con la primera interacción del usuario
-function desbloquearAudio() {
-    if (!usuarioInteractuo) {
-        usuarioInteractuo = true;
-        if ('speechSynthesis' in window) {
-            window.speechSynthesis.getVoices();
-        }
-    }
-}
-window.addEventListener('click', desbloquearAudio, { once: true });
-window.addEventListener('keydown', desbloquearAudio, { once: true });
-
-function cargarVocesHana() {
-    if ('speechSynthesis' in window) {
-        vocesDisponibles = window.speechSynthesis.getVoices();
-    }
-}
-
-if ('speechSynthesis' in window) {
-    cargarVocesHana();
-    if (speechSynthesis.onvoiceschanged !== undefined) {
-        speechSynthesis.onvoiceschanged = cargarVocesHana;
-    }
-}
-
-function hablarHana(texto) {
-    if (!vozActivada || !('speechSynthesis' in window)) return;
-    window.speechSynthesis.cancel();
-
-    // Limpiar etiquetas HTML y formato Markdown
-    const textoLimpio = texto.replace(/<[^>]*>?/gm, '').replace(/[*_#`]/g, '');
-
-    const utterance = new SpeechSynthesisUtterance(textoLimpio);
-    utterance.lang = 'es-ES';
-    utterance.rate = 1.0;
-    utterance.pitch = 1.2;
-
-    if (vocesDisponibles.length === 0) {
-        vocesDisponibles = window.speechSynthesis.getVoices();
-    }
-
-    const vozEspanol = vocesDisponibles.find(v => v.lang.includes('es') || v.lang.includes('ES'));
-    if (vozEspanol) {
-        utterance.voice = vozEspanol;
-    }
-
-    window.speechSynthesis.speak(utterance);
-}
-
-// ==========================================
-// 2. LÓGICA DEL CHAT Y RESPUESTAS
-// ==========================================
-function enviarMensaje() {
-    desbloquearAudio();
-    const input = document.getElementById('userInput');
-    const texto = input.value.trim();
-    if (!texto) return;
-
-    agregarMensajeChat('user', texto);
-    input.value = '';
-
-    // Respuesta por defecto (Modo local / Sin endpoint)
-    setTimeout(() => {
-        const respuestaHana = "No pude conectar con el servicio de IA. Revisa el endpoint en la configuración. Mientras tanto, puedo ayudarte con el catálogo.";
-        
-        // 1. Mostrar respuesta en pantalla
-        agregarMensajeChat('bot', respuestaHana);
-        
-        // 2. Pronunciar respuesta en voz alta
-        hablarHana(respuestaHana);
-    }, 600);
-}
-
-function agregarMensajeChat(tipo, texto) {
-    const chatBody = document.getElementById('chatBody');
-    const div = document.createElement('div');
-    div.className = `message ${tipo}`;
-    div.innerHTML = texto;
-    chatBody.appendChild(div);
-    chatBody.scrollTop = chatBody.scrollHeight;
-}
-
-function handleKeyPress(e) {
-    if (e.key === 'Enter') {
-        enviarMensaje();
-    }
-}
+    </script>
 </body>
 </html>

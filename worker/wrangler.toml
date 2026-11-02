@@ -2,15 +2,12 @@ name = "storexgamer-hana-api"
 main = "worker.js"
 compatibility_date = "2026-11-01"
 
-# Origen de la web publicada en GitHub Pages (solo el dominio, sin /storexgamerpkg/)
 [vars]
 ALLOWED_ORIGINS = "https://srxbot-6743.github.io"
 
-# Chat IA mediante Cloudflare Workers AI
 [ai]
 binding = "AI"
 
-# Memoria pequeña para guardar el ID de la voz de Hana y limitar solicitudes.
-# Wrangler puede crear automáticamente este espacio al desplegar sin ID.
 [[kv_namespaces]]
 binding = "HANA_KV"
+id = "7a4af852ca5a43ec86e5f2c82be51536"

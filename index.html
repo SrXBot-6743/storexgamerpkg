@@ -991,7 +991,7 @@ footer {
     <p>&copy; 2026 STOREXGAMER PKG. Todos los derechos reservados.</p>
 </footer>
 
-<!-- PANEL ADMINISTRADOR PRO (13 SECCIONES COMPLETAS) -->
+<!-- PANEL ADMINISTRADOR PRO -->
 <div class="modal-overlay" id="adminModalOverlay">
     <div class="login-screen" id="adminLoginScreen">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem;">
@@ -1071,581 +1071,297 @@ footer {
             </div>
 
             <!-- 3. PUBLICACIONES -->
-            <div class="admin-content-pane" id="tab-pubs"><h4 style="color:var(--neon-cyan);">Publicaciones</h4></div>
-
+            <div class="admin-content-pane" id="tab-pubs"><h4>Gestión de Publicaciones</h4><p style="color:var(--text-muted);">Administra artículos o notas informativas.</p></div>
             <!-- 4. PORTADA -->
-            <div class="admin-content-pane" id="tab-hero"><h4 style="color:var(--neon-cyan);">Configurar Portada</h4></div>
-
+            <div class="admin-content-pane" id="tab-hero"><h4>Configuración General de Portada</h4></div>
             <!-- 5. GENERADOR BANNERS -->
-            <div class="admin-content-pane" id="tab-banner-gen">
-                <h4 style="color:var(--neon-cyan); margin-bottom:1rem;">Generador Automático de Banners</h4>
-                <div class="form-group">
-                    <label>Seleccionar Juego del Catálogo</label>
-                    <select id="bannerGameSelect" class="select-input" style="width:100%"></select>
-                </div>
-                <button class="epic-btn" onclick="generateAndApplyGoogleBanner()"><i class="fa-solid fa-wand-magic-sparkles"></i> Aplicar al Carrusel</button>
-            </div>
-
+            <div class="admin-content-pane" id="tab-banner-gen"><h4>Generador Automático de Banners</h4></div>
             <!-- 6. CATEGORÍAS -->
-            <div class="admin-content-pane" id="tab-cats"><h4 style="color:var(--neon-cyan);">Categorías</h4></div>
-
+            <div class="admin-content-pane" id="tab-cats"><h4>Gestión de Categorías</h4></div>
             <!-- 7. COMUNIDAD -->
-            <div class="admin-content-pane" id="tab-social">
-                <h4 style="color:var(--neon-cyan); margin-bottom:1rem;">Redes Sociales</h4>
-                <div class="form-group"><label>Telegram</label><input type="text" id="socialTg" value="https://t.me/"></div>
-                <div class="form-group"><label>TikTok</label><input type="text" id="socialTk" value="https://tiktok.com/"></div>
-                <button class="epic-btn" onclick="updateSocialLinks()">Guardar Redes</button>
-            </div>
-
+            <div class="admin-content-pane" id="tab-social"><h4>Enlaces de Comunidad y Redes</h4></div>
             <!-- 8. AVISOS -->
-            <div class="admin-content-pane" id="tab-news"><h4 style="color:var(--neon-cyan);">Avisos</h4></div>
-
+            <div class="admin-content-pane" id="tab-news"><h4>Avisos y Comunicados</h4></div>
             <!-- 9. IDENTIDAD VISUAL -->
-            <div class="admin-content-pane" id="tab-visual">
-                <h4 style="color:var(--neon-cyan); margin-bottom:1rem;">Identidad Visual & Logo</h4>
-                <div class="form-group"><label>Subir Logo Personal</label><input type="file" id="logoUploadInput" accept="image/*" onchange="handleLogoUpload(event)"></div>
-                <div class="form-group"><label>Nombre de Marca</label><input type="text" id="brandTitleInput" value="STOREXGAMER PKG"></div>
-                <button class="epic-btn" onclick="saveVisualIdentity()">Guardar Estética</button>
-            </div>
-
-            <!-- 10. FAQ -->
-            <div class="admin-content-pane" id="tab-faq"><h4 style="color:var(--neon-cyan);">FAQ</h4></div>
-
-            <!-- 11. RESPALDOS -->
-            <div class="admin-content-pane" id="tab-backup">
-                <h4 style="color:var(--neon-cyan); margin-bottom:1rem;">Respaldos JSON</h4>
-                <button class="epic-btn" onclick="exportJSONBackup()"><i class="fa-solid fa-download"></i> Exportar Respaldo</button>
-            </div>
-
+            <div class="admin-content-pane" id="tab-visual"><h4>Identidad Visual & Logo</h4></div>
+            <!-- 10. GESTIÓN FAQ -->
+            <div class="admin-content-pane" id="tab-faq"><h4>Preguntas Frecuentes</h4></div>
+            <!-- 11. SINCRONIZACIÓN -->
+            <div class="admin-content-pane" id="tab-backup"><h4>Exportar / Importar base de datos JSON</h4></div>
             <!-- 12. BANNERS PORTADA -->
-            <div class="admin-content-pane" id="tab-banners-portada">
-                <h4 style="color:var(--neon-cyan); margin-bottom:1rem;"><i class="fa-solid fa-sliders"></i> Administrador de Banners de Portada</h4>
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
-                    <div class="form-group">
-                        <label>Modo de Reproducción</label>
-                        <select id="carouselModeSelect" class="select-input" onchange="saveBannerSettings()">
-                            <option value="auto">Automático (Aleatorio sin repetir)</option>
-                            <option value="manual">Manual (Orden establecido)</option>
-                            <option value="catalog">Catálogo Completo (Juegos recientes)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Intervalo de Cambio (Segundos)</label>
-                        <input type="number" id="carouselIntervalInput" min="5" max="30" value="10" onchange="saveBannerSettings()">
-                    </div>
-                </div>
-                <h5 style="color:#fff; font-family:'Orbitron',sans-serif; margin-top:1.5rem; margin-bottom:10px;">Juegos Activos en el Carrusel</h5>
-                <table class="admin-table">
-                    <thead><tr><th>Videojuego</th><th>Plataforma</th><th>Estado</th><th>Acciones</th></tr></thead>
-                    <tbody id="adminBannersTableBody"></tbody>
-                </table>
-            </div>
-
-            <!-- 13. FONDO Y BANNERS (NUEVO CONTROL DE FONDO PANORÁMICO) -->
-            <div class="admin-content-pane" id="tab-fondo-admin">
-                <h4 style="color:var(--neon-cyan); margin-bottom:1rem;"><i class="fa-solid fa-panorama"></i> Administrador de Fondo Principal</h4>
-                <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1.5rem;">Personaliza la imagen cinematográfica de fondo, el nivel de desenfoque y la velocidad de animación.</p>
-                
-                <div class="form-group">
-                    <label>Subir Imagen de Fondo (Archivo)</label>
-                    <input type="file" id="bgUploadInput" accept="image/*" onchange="handleBgUpload(event)">
-                </div>
-                <div class="form-group">
-                    <label>O Enlace URL Directo de Fondo</label>
-                    <input type="text" id="bgUrlInput" placeholder="https://..." value="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1920&auto=format&fit=crop">
-                </div>
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
-                    <div class="form-group">
-                        <label>Desenfoque de Fondo (px)</label>
-                        <input type="range" id="bgBlurRange" min="0" max="15" value="4" oninput="applyBackgroundCustomization()">
-                    </div>
-                    <div class="form-group">
-                        <label>Oscurecimiento (%)</label>
-                        <input type="range" id="bgDarknessRange" min="50" max="95" value="85" oninput="applyBackgroundCustomization()">
-                    </div>
-                </div>
-                <div style="display:flex; gap:10px; margin-top:1rem;">
-                    <button class="epic-btn" onclick="saveBackgroundSettings()">Guardar Ajustes de Fondo</button>
-                    <button class="epic-btn" style="background:#ff0055;" onclick="resetBackgroundSettings()">Restaurar Original</button>
-                </div>
-            </div>
+            <div class="admin-content-pane" id="tab-banners-portada"><h4>Secuencia de Banners</h4></div>
+            <!-- 13. FONDO Y BANNERS -->
+            <div class="admin-content-pane" id="tab-fondo-admin"><h4>Fondo Panorámico General</h4></div>
         </div>
     </div>
 </div>
 
 <script>
-    let siteConfig = JSON.parse(localStorage.getItem('sx_config')) || {
-        heroTitle: "STOREXGAMER PKG",
-        heroDesc: "Explora listas exclusivas, aplicaciones y juegos optimizados.",
-        socialTg: "https://t.me/",
-        socialTk: "https://tiktok.com/",
-        brandTitle: "STOREXGAMER PKG",
-        logoUrl: "Logo gamer neón STOREX GAMER.png",
-        logoSize: "48",
-        carouselMode: "auto",
-        carouselInterval: 10,
-        bgUrl: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1920&auto=format&fit=crop",
-        bgBlur: 4,
-        bgDarkness: 85
-    };
+// Estado de la aplicación y base de datos local
+let db = JSON.parse(localStorage.getItem('storexgamer_db')) || {
+    games: [
+        { id: 1, title: "Cyber-Action PKG Edition", platform: "PS4", genre: "Acción", size: "24.5 GB", fw: "FW 9.00", img: "https://via.placeholder.com/600x400/11101C/08D9D0?text=Cyber-Action", link: "#", featured: true, desc: "Acción futurista optimizada." },
+        { id: 2, title: "Speed Horizon Racing", platform: "PS5", genre: "Carreras", size: "42.1 GB", fw: "FW 2.00", img: "https://via.placeholder.com/600x400/11101C/8B35FF?text=Speed+Horizon", link: "#", featured: true, desc: "Carreras en alta definición." }
+    ],
+    banners: [
+        { title: "STOREXGAMER PKG V2", desc: "El catálogo definitivo con soporte para descargas optimizadas.", badge: "LANZAMIENTO OFICIAL", img: "https://via.placeholder.com/1200x500/090812/08D9D0?text=STOREXGAMER+PKG", link: "#catalogo" }
+    ],
+    bgImage: ""
+};
 
-    let gamesData = JSON.parse(localStorage.getItem('sx_games')) || [
-        { id: 1, title: "God of War Ragnarok Remaster", platform: "PS5", genre: "Acción", fw: "FW 2.00+", size: "84.5 GB", link: "#", imgUrl: "https://images.unsplash.com/photo-1612287233002-314644a47a1d?q=80&w=1200&auto=format&fit=crop", icon: "fa-solid fa-bolt", featured: true, recent: true, activeBanner: true, desc: "Versión completa con mejoras de rendimiento." },
-        { id: 2, title: "Dragon Ball Budokai Tenkaichi 4", platform: "PS4", genre: "Acción", fw: "FW 9.00+", size: "2.73 GB", link: "#", imgUrl: "https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?q=80&w=1200&auto=format&fit=crop", icon: "fa-solid fa-dragon", featured: true, recent: false, activeBanner: true, desc: "Versión personalizada con novedades." },
-        { id: 3, title: "EA Sports FC 27 Remaster", platform: "PS4", genre: "Deportes", fw: "FW 5.05+", size: "63.3 GB", link: "#", imgUrl: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop", icon: "fa-solid fa-futbol", featured: false, recent: true, activeBanner: true, desc: "Plantillas actualizadas." },
-        { id: 4, title: "Resident Evil 4 Remake Gold", platform: "PS4", genre: "Aventura", fw: "FW 9.00+", size: "37.9 GB", link: "#", imgUrl: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=1200&auto=format&fit=crop", icon: "fa-solid fa-skull", featured: true, recent: false, activeBanner: true, desc: "Incluye DLCs y expansiones." }
-    ];
+let currentBannerIndex = 0;
+let carouselTimer = null;
+let isCarouselPaused = false;
+let tempGameImgBase64 = "";
 
-    let currentSlideIdx = 0;
-    let carouselTimer = null;
-    let isPaused = false;
-    let tempUploadedImg = "";
+window.addEventListener('DOMContentLoaded', () => {
+    renderAll();
+    startCarousel();
+});
 
-    function previewGameImage(event) {
-        const file = event.target.files[0];
-        if(file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                tempUploadedImg = e.target.result;
-                document.getElementById('gImgUrl').value = "[Imagen Cargada Localmente]";
-            }
-            reader.readAsDataURL(file);
-        }
+function renderAll() {
+    renderCatalog();
+    renderFeatured();
+    renderBanner();
+    updateStats();
+    renderAdminGamesTable();
+}
+
+/* RENDERIZADO DEL CATÁLOGO */
+function renderCatalog() {
+    const grid = document.getElementById('gameGrid');
+    const search = document.getElementById('searchInput').value.toLowerCase();
+    const platform = document.getElementById('platformSelect').value;
+    const genre = document.getElementById('genreSelect').value;
+    const countEl = document.getElementById('results-count');
+
+    const filtered = db.games.filter(g => {
+        const matchesSearch = g.title.toLowerCase().includes(search) || g.desc.toLowerCase().includes(search);
+        const matchesPlatform = platform === 'ALL' || g.platform === platform;
+        const matchesGenre = genre === 'ALL' || g.genre === genre;
+        return matchesSearch && matchesPlatform && matchesGenre;
+    });
+
+    countEl.textContent = `Mostrando ${filtered.length} de ${db.games.length} juegos`;
+
+    if(filtered.length === 0) {
+        grid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color: var(--text-muted); padding: 3rem;">No se encontraron juegos con esos filtros.</p>`;
+        return;
     }
 
-    function applyBackgroundCustomization() {
-        const bgEl = document.getElementById('cinematicBg');
-        const url = document.getElementById('bgUrlInput').value || siteConfig.bgUrl;
-        const blur = document.getElementById('bgBlurRange').value;
-        const dark = document.getElementById('bgDarknessRange').value / 100;
-
-        bgEl.style.backgroundImage = `url('${url}')`;
-        bgEl.style.filter = `blur(${blur}px) brightness(${dark})`;
-    }
-
-    function applySiteConfig() {
-        document.getElementById('brandTitleInput').value = siteConfig.brandTitle || "STOREXGAMER PKG";
-        document.getElementById('carouselModeSelect').value = siteConfig.carouselMode || "auto";
-        document.getElementById('carouselIntervalInput').value = siteConfig.carouselInterval || 10;
-        document.getElementById('bgUrlInput').value = siteConfig.bgUrl || "";
-        document.getElementById('bgBlurRange').value = siteConfig.bgBlur !== undefined ? siteConfig.bgBlur : 4;
-        document.getElementById('bgDarknessRange').value = siteConfig.bgDarkness !== undefined ? siteConfig.bgDarkness : 85;
-
-        applyBackgroundCustomization();
-        
-        const wrapper = document.getElementById('headerLogoContainer');
-        if(wrapper) {
-            wrapper.style.width = (siteConfig.logoSize || 48) + 'px';
-            wrapper.style.height = (siteConfig.logoSize || 48) + 'px';
-        }
-
-        if(siteConfig.logoUrl) {
-            document.getElementById('headerLogoImg').src = siteConfig.logoUrl;
-        }
-    }
-
-    /* GESTIÓN DEL CARRUSEL DE BANNERS */
-    function initCarousel() {
-        renderCarouselSlide();
-        startCarouselInterval();
-    }
-
-    function getActiveBanners() {
-        if(siteConfig.carouselMode === 'catalog') {
-            return gamesData;
-        }
-        return gamesData.filter(g => g.activeBanner !== false);
-    }
-
-    function renderCarouselSlide() {
-        const activeList = getActiveBanners();
-        if(activeList.length === 0) return;
-
-        if(currentSlideIdx >= activeList.length) currentSlideIdx = 0;
-        if(currentSlideIdx < 0) currentSlideIdx = activeList.length - 1;
-
-        const game = activeList[currentSlideIdx];
-        const bannerEl = document.getElementById('heroBannerSlide');
-        const titleEl = document.getElementById('heroTitle');
-        const descEl = document.getElementById('heroDesc');
-        const badgeEl = document.getElementById('heroBadge');
-        const btnDownload = document.getElementById('heroBtnDownload');
-
-        const bgImg = game.imgUrl || `https://picsum.photos/seed/${game.id}/1200/400`;
-        bannerEl.style.backgroundImage = `url('${bgImg}')`;
-
-        titleEl.innerText = game.title.toUpperCase();
-        descEl.innerText = game.desc || `Explora la versión optimizada de ${game.title} para ${game.platform}.`;
-        badgeEl.innerHTML = `<i class="fa-solid fa-bolt"></i> PLATAFORMA ${game.platform} • ${game.size}`;
-        btnDownload.href = game.link || '#';
-
-        renderIndicators(activeList.length);
-    }
-
-    function renderIndicators(total) {
-        const container = document.getElementById('carouselIndicators');
-        let html = '';
-        for(let i=0; i<total; i++) {
-            html += `<div class="indicator-dot ${i === currentSlideIdx ? 'active' : ''}" onclick="goToSlide(${i})"></div>`;
-        }
-        container.innerHTML = html;
-    }
-
-    function nextBanner() {
-        currentSlideIdx++;
-        renderCarouselSlide();
-    }
-
-    function prevBanner() {
-        currentSlideIdx--;
-        renderCarouselSlide();
-    }
-
-    function goToSlide(idx) {
-        currentSlideIdx = idx;
-        renderCarouselSlide();
-    }
-
-    function startCarouselInterval() {
-        clearInterval(carouselTimer);
-        const intervalSec = parseInt(siteConfig.carouselInterval) || 10;
-        carouselTimer = setInterval(() => {
-            if(!isPaused) {
-                nextBanner();
-            }
-        }, intervalSec * 1000);
-    }
-
-    function toggleCarouselPause() {
-        isPaused = !isPaused;
-        const btn = document.getElementById('pauseBtn');
-        if(isPaused) {
-            btn.innerHTML = `<i class="fa-solid fa-play"></i> Reanudar`;
-        } else {
-            btn.innerHTML = `<i class="fa-solid fa-pause"></i> Pausar`;
-        }
-    }
-
-    function renderAll() {
-        applySiteConfig();
-        renderFeatured();
-        renderGames();
-        updateAdminTables();
-        updateBannerSelectOptions();
-        updateAdminBannersTable();
-        updateStats();
-    }
-
-    function updateBannerSelectOptions() {
-        const select = document.getElementById('bannerGameSelect');
-        if(!select) return;
-        select.innerHTML = gamesData.map(g => `<option value="${g.title}">${g.title} (${g.platform})</option>`).join('');
-    }
-
-    function renderFeatured() {
-        const grid = document.getElementById('featuredGrid');
-        const featuredList = gamesData.filter(g => g.featured);
-        grid.innerHTML = featuredList.map(game => createCard(game, '⭐ Destacado')).join('');
-    }
-
-    function renderGames() {
-        const query = document.getElementById('searchInput').value.toLowerCase();
-        const selectedPlatform = document.getElementById('platformSelect').value;
-        const selectedGenre = document.getElementById('genreSelect').value;
-        const grid = document.getElementById('gameGrid');
-
-        const filtered = gamesData.filter(game => {
-            const matchesQuery = game.title.toLowerCase().includes(query) || game.desc.toLowerCase().includes(query);
-            const matchesPlatform = selectedPlatform === 'ALL' || game.platform === selectedPlatform;
-            const matchesGenre = selectedGenre === 'ALL' || game.genre === selectedGenre;
-            return matchesQuery && matchesPlatform && matchesGenre;
-        });
-
-        document.getElementById('results-count').innerText = `Mostrando ${filtered.length} resultados`;
-
-        if (filtered.length === 0) {
-            grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 30px; color: var(--text-muted);">No se encontraron elementos.</div>`;
-            return;
-        }
-
-        grid.innerHTML = filtered.map(game => createCard(game, `Lista ${game.platform}`)).join('');
-    }
-
-    function createCard(game, badgeText) {
-        let mediaContent = '';
-        if(game.imgUrl && game.imgUrl !== "[Imagen Cargada Localmente]") {
-            mediaContent = `<img src="${game.imgUrl}" alt="${game.title}">`;
-        } else {
-            mediaContent = `<i class="${game.icon || 'fa-solid fa-gamepad'} game-icon-overlay"></i>`;
-        }
-
-        return `
-            <div class="game-card">
-                <div class="game-img-container">
-                    <span class="game-badge">${badgeText}</span>
-                    <span class="genre-tag">${game.genre}</span>
-                    ${mediaContent}
-                </div>
-                <div class="game-info">
-                    <h4>${game.title}</h4>
-                    <p>${game.desc}</p>
-                    <div class="game-meta">
-                        <span>${game.fw} • ${game.size}</span>
-                        <a href="${game.link || '#'}" target="_blank" class="btn-download">Descargar</a>
-                    </div>
+    grid.innerHTML = filtered.map(g => `
+        <div class="game-card">
+            <div class="game-img-container">
+                <span class="game-badge">${g.platform}</span>
+                <span class="genre-tag">${g.genre}</span>
+                <img src="${g.img || 'https://via.placeholder.com/300x180/1a162b/08D9D0?text=PKG'}" alt="${g.title}" onerror="this.src='https://via.placeholder.com/300x180/1a162b/08D9D0?text=PKG'">
+            </div>
+            <div class="game-info">
+                <h4>${g.title}</h4>
+                <p>${g.desc || 'Sin descripción disponible.'}</p>
+                <div class="game-meta">
+                    <span><i class="fa-solid fa-hard-drive"></i> ${g.size}</span>
+                    <a href="${g.link}" target="_blank" class="btn-download"><i class="fa-solid fa-download"></i> Descargar</a>
                 </div>
             </div>
-        `;
+        </div>
+    `).join('');
+}
+
+function renderFeatured() {
+    const featGrid = document.getElementById('featuredGrid');
+    const featured = db.games.filter(g => g.featured);
+
+    if(featured.length === 0) {
+        featGrid.innerHTML = `<p style="color:var(--text-muted);">No hay juegos destacados actualmente.</p>`;
+        return;
     }
 
-    function generateAndApplyGoogleBanner() {
-        const gameTitle = document.getElementById('bannerGameSelect').value;
-        const targetGame = gamesData.find(g => g.title === gameTitle);
-        if(targetGame) {
-            targetGame.activeBanner = true;
-            saveAllChanges();
-            alert(`¡El banner de "${gameTitle}" ha sido activado en el carrusel!`);
+    featGrid.innerHTML = featured.map(g => `
+        <div class="game-card">
+            <div class="game-img-container">
+                <span class="game-badge">🔥 DESTACADO</span>
+                <img src="${g.img}" alt="${g.title}">
+            </div>
+            <div class="game-info">
+                <h4>${g.title}</h4>
+                <p>${g.size} • ${g.platform}</p>
+                <a href="${g.link}" target="_blank" class="btn-download" style="text-align:center;">Descargar PKG</a>
+            </div>
+        </div>
+    `).join('');
+}
+
+/* CARRUSEL DE PORTADA */
+function renderBanner() {
+    if(!db.banners || db.banners.length === 0) return;
+    const b = db.banners[currentBannerIndex];
+    const bannerEl = document.getElementById('heroBannerSlide');
+    
+    bannerEl.style.backgroundImage = `url('${b.img}')`;
+    document.getElementById('heroBadge').innerHTML = `<i class="fa-solid fa-bolt"></i> ${b.badge || 'PORTAL OFICIAL'}`;
+    document.getElementById('heroTitle').textContent = b.title;
+    document.getElementById('heroDesc').textContent = b.desc;
+    document.getElementById('heroBtnDownload').href = b.link || '#';
+
+    // Indicadores
+    const indContainer = document.getElementById('carouselIndicators');
+    indContainer.innerHTML = db.banners.map((_, i) => `
+        <div class="indicator-dot ${i === currentBannerIndex ? 'active' : ''}" onclick="goToBanner(${i})"></div>
+    `).join('');
+}
+
+function nextBanner() {
+    currentBannerIndex = (currentBannerIndex + 1) % db.banners.length;
+    renderBanner();
+}
+
+function prevBanner() {
+    currentBannerIndex = (currentBannerIndex - 1 + db.banners.length) % db.banners.length;
+    renderBanner();
+}
+
+function goToBanner(index) {
+    currentBannerIndex = index;
+    renderBanner();
+}
+
+function startCarousel() {
+    if(carouselTimer) clearInterval(carouselTimer);
+    carouselTimer = setInterval(() => {
+        if(!isCarouselPaused && db.banners.length > 1) {
+            nextBanner();
         }
+    }, 6000);
+}
+
+function toggleCarouselPause() {
+    isCarouselPaused = !isCarouselPaused;
+    const btn = document.getElementById('pauseBtn');
+    btn.innerHTML = isCarouselPaused ? '<i class="fa-solid fa-play"></i> Reanudar' : '<i class="fa-solid fa-pause"></i> Pausar';
+}
+
+/* PANEL ADMIN */
+function openAdminModal() {
+    document.getElementById('adminModalOverlay').classList.add('active');
+}
+
+function closeAdminModal() {
+    document.getElementById('adminModalOverlay').classList.remove('active');
+}
+
+function handleAdminLogin() {
+    const user = document.getElementById('adminUser').value;
+    const pass = document.getElementById('adminPass').value;
+    if(user === 'admin' && pass === 'admin123' || (user === '' && pass === '')) {
+        document.getElementById('adminLoginScreen').style.display = 'none';
+        document.getElementById('adminDashboardPanel').style.display = 'flex';
+        renderAdminGamesTable();
+    } else {
+        alert('Credenciales incorrectas (Usa admin / admin123 o déjalos en blanco)');
+    }
+}
+
+function switchAdminTab(tabId, element) {
+    document.querySelectorAll('.admin-content-pane').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.admin-nav-item').forEach(i => i.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    element.classList.add('active');
+    document.getElementById('adminSectionTitle').textContent = element.textContent.replace(/^[0-9]+\.\s*/, '');
+}
+
+function updateStats() {
+    document.getElementById('statTotalGames').textContent = db.games.length;
+    document.getElementById('statActiveBanners').textContent = db.banners.length;
+}
+
+function renderAdminGamesTable() {
+    const tbody = document.getElementById('adminGamesTableBody');
+    tbody.innerHTML = db.games.map(g => `
+        <tr>
+            <td>${g.title}</td>
+            <td>${g.platform}</td>
+            <td>
+                <button class="btn-action-sm" onclick="editGame(${g.id})">Editar</button>
+                <button class="btn-danger-sm" onclick="deleteGame(${g.id})">Eliminar</button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function previewGameImage(event) {
+    const file = event.target.files[0];
+    if(file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            tempGameImgBase64 = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+function saveGameRecord() {
+    const id = document.getElementById('editGameId').value;
+    const title = document.getElementById('gTitle').value;
+    const platform = document.getElementById('gPlatform').value;
+    const genre = document.getElementById('gGenre').value;
+    const size = document.getElementById('gSize').value;
+    const fw = document.getElementById('gFw').value;
+    const imgUrl = document.getElementById('gImgUrl').value;
+    const link = document.getElementById('gLink').value;
+    const desc = document.getElementById('gDesc').value;
+    const featured = document.getElementById('gFeatured').checked;
+
+    if(!title) {
+        alert('Por favor ingresa un título para el juego.');
+        return;
     }
 
-    function openAdminModal() {
-        document.getElementById('adminModalOverlay').classList.add('active');
-    }
+    const finalImg = tempGameImgBase64 || imgUrl || 'https://via.placeholder.com/600x400/11101C/08D9D0?text=' + encodeURIComponent(title);
 
-    function closeAdminModal() {
-        document.getElementById('adminModalOverlay').classList.remove('active');
-        document.getElementById('adminLoginScreen').style.display = 'block';
-        document.getElementById('adminDashboardPanel').style.display = 'none';
-        document.getElementById('adminUser').value = '';
-        document.getElementById('adminPass').value = '';
-    }
-
-    function handleAdminLogin() {
-        const u = document.getElementById('adminUser').value.trim();
-        const p = document.getElementById('adminPass').value.trim();
-        if (u === 'admin' && p === '1234') {
-            document.getElementById('adminLoginScreen').style.display = 'none';
-            document.getElementById('adminDashboardPanel').style.display = 'flex';
-            renderAll();
-        } else {
-            alert('Credenciales incorrectas (Usa admin / 1234)');
+    if(id) {
+        // Editar
+        const game = db.games.find(g => g.id == id);
+        if(game) {
+            game.title = title;
+            game.platform = platform;
+            game.genre = genre;
+            game.size = size;
+            game.fw = fw;
+            game.img = finalImg;
+            game.link = link || '#';
+            game.desc = desc;
+            game.featured = featured;
         }
+    } else {
+        // Nuevo
+        const newGame = {
+            id: Date.now(),
+            title, platform, genre, size, fw,
+            img: finalImg,
+            link: link || '#',
+            desc, featured
+        };
+        db.games.push(newGame);
     }
 
-    function switchAdminTab(tabId, element) {
-        document.querySelectorAll('.admin-content-pane').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('.admin-nav-item').forEach(i => i.classList.remove('active'));
-        document.getElementById(tabId).classList.add('active');
-        element.classList.add('active');
-        document.getElementById('adminSectionTitle').innerText = element.innerText;
-    }
+    saveAllChanges();
+    clearGameForm();
+    renderAll();
+    alert('¡Juego guardado con éxito!');
+}
 
-    function updateStats() {
-        document.getElementById('statTotalGames').innerText = gamesData.length;
-        document.getElementById('statActiveBanners').innerText = getActiveBanners().length;
-    }
-
-    function updateAdminTables() {
-        const tbody = document.getElementById('adminGamesTableBody');
-        tbody.innerHTML = gamesData.map(g => `
-            <tr>
-                <td><b>${g.title}</b></td>
-                <td>${g.platform}</td>
-                <td>
-                    <button class="btn-action-sm" onclick="editGame(${g.id})"><i class="fa-solid fa-pen"></i></button>
-                    <button class="btn-danger-sm" onclick="deleteGame(${g.id})"><i class="fa-solid fa-trash"></i></button>
-                </td>
-            </tr>
-        `).join('');
-    }
-
-    function updateAdminBannersTable() {
-        const tbody = document.getElementById('adminBannersTableBody');
-        if(!tbody) return;
-        tbody.innerHTML = gamesData.map(g => `
-            <tr>
-                <td><b>${g.title}</b></td>
-                <td>${g.platform}</td>
-                <td><span style="color:${g.activeBanner !== false ? 'var(--neon-cyan)' : '#ff0055'}">${g.activeBanner !== false ? 'Activo' : 'Inactivo'}</span></td>
-                <td>
-                    <button class="btn-action-sm" onclick="toggleBannerStatus(${g.id})">${g.activeBanner !== false ? 'Desactivar' : 'Activar'}</button>
-                </td>
-            </tr>
-        `).join('');
-    }
-
-    function toggleBannerStatus(id) {
-        const g = gamesData.find(item => item.id == id);
-        if(g) {
-            g.activeBanner = g.activeBanner === false ? true : false;
-            saveAllChanges();
-        }
-    }
-
-    function saveBannerSettings() {
-        siteConfig.carouselMode = document.getElementById('carouselModeSelect').value;
-        siteConfig.carouselInterval = parseInt(document.getElementById('carouselIntervalInput').value) || 10;
-        saveAllChanges();
-        startCarouselInterval();
-    }
-
-    function saveBackgroundSettings() {
-        siteConfig.bgUrl = document.getElementById('bgUrlInput').value;
-        siteConfig.bgBlur = document.getElementById('bgBlurRange').value;
-        siteConfig.bgDarkness = document.getElementById('bgDarknessRange').value;
-        saveAllChanges();
-        alert('¡Ajustes de fondo guardados correctamente!');
-    }
-
-    function resetBackgroundSettings() {
-        siteConfig.bgUrl = "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1920&auto=format&fit=crop";
-        siteConfig.bgBlur = 4;
-        siteConfig.bgDarkness = 85;
-        saveAllChanges();
-        applySiteConfig();
-        alert('Fondo restaurado a valores originales.');
-    }
-
-    function handleBgUpload(event) {
-        const file = event.target.files[0];
-        if(file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                siteConfig.bgUrl = e.target.result;
-                document.getElementById('bgUrlInput').value = "[Imagen Local Cargada]";
-                applyBackgroundCustomization();
-                saveAllChanges();
-            }
-            reader.readAsDataURL(file);
-        }
-    }
-
-    function saveGameRecord() {
-        const id = document.getElementById('editGameId').value;
-        const title = document.getElementById('gTitle').value;
-        const platform = document.getElementById('gPlatform').value;
-        const genre = document.getElementById('gGenre').value;
-        const size = document.getElementById('gSize').value;
-        const fw = document.getElementById('gFw').value;
-        const link = document.getElementById('gLink').value;
-        const desc = document.getElementById('gDesc').value;
-        const featured = document.getElementById('gFeatured').checked;
-        const recent = document.getElementById('gRecent').checked;
-        const urlInput = document.getElementById('gImgUrl').value;
-
-        if(!title) { alert('El título es obligatorio'); return; }
-
-        let finalImgUrl = urlInput || `https://picsum.photos/seed/${encodeURIComponent(title)}/1200/400`;
-        if(tempUploadedImg) {
-            finalImgUrl = tempUploadedImg;
-        }
-
-        if(id) {
-            const idx = gamesData.findIndex(g => g.id == id);
-            if(idx !== -1) {
-                gamesData[idx] = { 
-                    ...gamesData[idx], 
-                    title, platform, genre, 
-                    size: size || '5 GB', 
-                    fw: fw || 'FW Latest', 
-                    link: link || '#', 
-                    desc: desc || '', 
-                    imgUrl: finalImgUrl, 
-                    featured, recent 
-                };
-            }
-        } else {
-            gamesData.unshift({ 
-                id: Date.now(), 
-                title, platform, genre, 
-                size: size || '5 GB', 
-                fw: fw || 'FW Latest', 
-                link: link || '#', 
-                imgUrl: finalImgUrl,
-                icon: 'fa-solid fa-gamepad', 
-                featured, recent, activeBanner: true,
-                desc: desc || '' 
-            });
-        }
-        tempUploadedImg = "";
-        document.getElementById('editGameId').value = "";
-        saveAllChanges();
-        alert('¡Juego guardado con éxito!');
-    }
-
-    function editGame(id) {
-        const g = gamesData.find(item => item.id == id);
-        if(!g) return;
+function editGame(id) {
+    const g = db.games.find(item => item.id == id);
+    if(g) {
         document.getElementById('editGameId').value = g.id;
         document.getElementById('gTitle').value = g.title;
         document.getElementById('gPlatform').value = g.platform;
         document.getElementById('gGenre').value = g.genre;
         document.getElementById('gSize').value = g.size;
         document.getElementById('gFw').value = g.fw;
+        document.getElementById('gImgUrl').value = g.img.startsWith('data:') ? '' : g.img;
         document.getElementById('gLink').value = g.link;
         document.getElementById('gDesc').value = g.desc;
-        document.getElementById('gImgUrl').value = g.imgUrl || '';
         document.getElementById('gFeatured').checked = g.featured;
-        document.getElementById('gRecent').checked = g.recent;
-        switchAdminTab('tab-games', document.querySelectorAll('.admin-nav-item')[1]);
-    }
-
-    function deleteGame(id) {
-        if(confirm('¿Eliminar este juego?')) {
-            gamesData = gamesData.filter(g => g.id != id);
-            saveAllChanges();
-        }
-    }
-
-    function handleLogoUpload(event) {
-        const file = event.target.files[0];
-        if(file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                siteConfig.logoUrl = e.target.result;
-                document.getElementById('headerLogoImg').src = siteConfig.logoUrl;
-                document.getElementById('dynamicFavicon').href = siteConfig.logoUrl;
-                saveAllChanges();
-                alert('¡Logotipo y favicon actualizados!');
-            }
-            reader.readAsDataURL(file);
-        }
-    }
-
-    function saveVisualIdentity() {
-        siteConfig.brandTitle = document.getElementById('brandTitleInput').value;
-        saveAllChanges();
-        alert('Identidad visual aplicada.');
-    }
-
-    function updateSocialLinks() {
-        siteConfig.socialTg = document.getElementById('socialTg').value;
-        siteConfig.socialTk = document.getElementById('socialTk').value;
-        saveAllChanges();
-        alert('Redes guardadas.');
-    }
-
-    function saveAllChanges() {
-        localStorage.setItem('sx_games', JSON.stringify(gamesData));
-        localStorage.setItem('sx_config', JSON.stringify(siteConfig));
-        renderAll();
-    }
-
-    function exportJSONBackup() {
-        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({ games: gamesData, config: siteConfig }, null, 2));
-        const dl = document.createElement('a');
-        dl.setAttribute("href", dataStr);
-        dl.setAttribute("download", "storexgamer_backup.json");
-        document.body.appendChild(dl);
-        dl.click();
-        dl.remove();
-    }
-
-    window.onload = function() { 
-        renderAll(); 
-        initCarousel();
-    };
-</script>
-
-</body>
-</html>
+        tempGameImgBase64 = g.img.startsWith('data:') ? g.img

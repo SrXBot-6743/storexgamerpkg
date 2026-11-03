@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>STOREXGAMER PKG</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     :root {
       --bg: #090c15;
@@ -49,23 +48,6 @@
       text-transform: uppercase;
     }
 
-    .admin-btn {
-      background: linear-gradient(135deg, var(--accent-pink), #b30054);
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(255, 0, 119, 0.4);
-      transition: all 0.2s ease;
-    }
-
-    .admin-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 15px rgba(255, 0, 119, 0.7);
-    }
-
     .search-box {
       width: 100%;
       margin-bottom: 30px;
@@ -81,7 +63,6 @@
       font-size: 16px;
       outline: none;
       box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
-      transition: border 0.3s ease;
     }
 
     .search-bar:focus {
@@ -124,11 +105,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover img {
-      transform: scale(1.05);
     }
 
     .badge-platform {
@@ -142,7 +118,6 @@
       border-radius: 20px;
       font-size: 11px;
       font-weight: 800;
-      backdrop-filter: blur(4px);
     }
 
     .card-body {
@@ -157,15 +132,12 @@
       font-weight: 700;
       margin-bottom: 8px;
       color: var(--text-main);
-      line-height: 1.3;
     }
 
     .card-meta {
       font-size: 13px;
       color: var(--text-muted);
       margin-bottom: 15px;
-      display: flex;
-      justify-content: space-between;
     }
 
     .download-btn {
@@ -178,74 +150,6 @@
       text-decoration: none;
       font-weight: 700;
       font-size: 14px;
-      box-shadow: 0 4px 10px rgba(0, 112, 243, 0.3);
-      transition: background 0.2s;
-    }
-
-    .download-btn:hover {
-      background: linear-gradient(135deg, #0080ff, #0055cc);
-    }
-
-    /* MODAL ADMIN */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(5px);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .modal-overlay.active { display: flex; }
-
-    .modal-content {
-      background: var(--card-bg);
-      padding: 30px;
-      border-radius: 14px;
-      width: 100%;
-      max-width: 480px;
-      border: 1px solid var(--accent-cyan);
-      box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
-    }
-
-    .modal-content h2 { 
-      margin-bottom: 20px; 
-      color: var(--accent-cyan); 
-      font-size: 22px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .form-group { margin-bottom: 15px; }
-    .form-group label { display: block; margin-bottom: 6px; font-size: 12px; color: var(--text-muted); font-weight: 600; }
-    .form-group input, .form-group textarea {
-      width: 100%;
-      padding: 10px 14px;
-      background: #090c15;
-      border: 1px solid var(--border-color);
-      color: #fff;
-      border-radius: 6px;
-      outline: none;
-    }
-
-    .form-group input:focus, .form-group textarea:focus {
-      border-color: var(--accent-cyan);
-    }
-
-    .btn-submit {
-      width: 100%;
-      padding: 12px;
-      background: var(--accent-pink);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-weight: 700;
-      cursor: pointer;
-      font-size: 15px;
-      box-shadow: 0 4px 12px rgba(255, 0, 119, 0.4);
     }
   </style>
 </head>
@@ -253,7 +157,6 @@
 
   <header>
     <div class="logo">STOREXGAMER PKG</div>
-    <button class="admin-btn" onclick="toggleModal(true)">+ AGREGAR JUEGO</button>
   </header>
 
   <div class="search-box">
@@ -261,132 +164,24 @@
   </div>
 
   <div class="grid" id="juegosContainer">
-    <p style="color: var(--text-muted); grid-column: 1/-1;">Cargando catálogo...</p>
-  </div>
-
-  <!-- Modal Admin -->
-  <div class="modal-overlay" id="adminModal">
-    <div class="modal-content">
-      <h2>Publicar Juego</h2>
-      <form id="gameForm" onsubmit="guardarJuego(event)">
-        <div class="form-group">
-          <label>ID Numérico:</label>
-          <input type="number" id="gameId" required placeholder="Ej: 1">
-        </div>
-        <div class="form-group">
-          <label>Título del Juego:</label>
-          <input type="text" id="gameTitle" required placeholder="Ej: God of War">
-        </div>
-        <div class="form-group">
-          <label>Plataforma:</label>
-          <input type="text" id="gamePlatform" placeholder="Ej: PS4 / PS5">
-        </div>
-        <div class="form-group">
-          <label>Tamaño:</label>
-          <input type="text" id="gameSize" placeholder="Ej: 45 GB">
-        </div>
-        <div class="form-group">
-          <label>URL de Carátula (Imagen):</label>
-          <input type="url" id="gameImg" placeholder="https://link-de-la-imagen.jpg">
-        </div>
-        <div class="form-group">
-          <label>URL de Descarga (PKG):</label>
-          <input type="url" id="gameLink" placeholder="https://link-de-descarga.pkg">
-        </div>
-        <div class="form-group">
-          <label>Descripción:</label>
-          <textarea id="gameDesc" rows="3" placeholder="Detalles del juego..."></textarea>
-        </div>
-        <button type="submit" class="btn-submit">GUARDAR EN LA NUBE</button>
-        <button type="button" class="btn-submit" style="background:#334155; margin-top:10px; box-shadow:none;" onclick="toggleModal(false)">CANCELAR</button>
-      </form>
+    <!-- Aquí puedes agregar tus juegos directamente en el código o mantenerlos -->
+    <div class="card">
+      <div class="card-img-wrapper">
+        <img src="https://via.placeholder.com/240x300" alt="Juego de Ejemplo">
+        <span class="badge-platform">PS4</span>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Ejemplo de Juego</h3>
+        <div class="card-meta">💾 20 GB</div>
+        <a href="#" class="download-btn">DESCARGAR PKG</a>
+      </div>
     </div>
   </div>
 
   <script>
-    const SUPABASE_URL = 'https://boahzezjaxtgbvmttxho.supabase.co';
-    const SUPABASE_KEY = 'sb_publishable_0STgJcecj4JryhtoseK8Iw_Ktb8fd9q';
-    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-    let juegosData = [];
-
-    document.addEventListener('DOMContentLoaded', cargarJuegos);
-
-    async function cargarJuegos() {
-      const { data, error } = await supabaseClient
-        .from('games')
-        .select('*')
-        .order('id', { ascending: false });
-
-      if (error) {
-        console.error('Error al obtener juegos:', error);
-        document.getElementById('juegosContainer').innerHTML = '<p style="color:red;">Error al cargar el catálogo desde Supabase.</p>';
-        return;
-      }
-
-      juegosData = data || [];
-      renderizar(juegosData);
-    }
-
-    function renderizar(juegos) {
-      const container = document.getElementById('juegosContainer');
-      if (juegos.length === 0) {
-        container.innerHTML = '<p style="color: var(--text-muted); grid-column: 1/-1;">No hay juegos en la base de datos.</p>';
-        return;
-      }
-
-      container.innerHTML = juegos.map(juego => `
-        <div class="card">
-          <div class="card-img-wrapper">
-            <img src="${juego.imgUrl || 'https://via.placeholder.com/240x300'}" alt="${juego.title}">
-            <span class="badge-platform">${juego.platform || 'PKG'}</span>
-          </div>
-          <div class="card-body">
-            <h3 class="card-title">${juego.title}</h3>
-            <div class="card-meta">
-              <span>💾 ${juego.size || 'N/A'}</span>
-            </div>
-            ${juego.link ? `<a href="${juego.link}" target="_blank" class="download-btn">DESCARGAR PKG</a>` : ''}
-          </div>
-        </div>
-      `).join('');
-    }
-
+    // Aquí puedes pegar la lista de tus juegos estáticos si los tenías por código directo.
     function filtrarJuegos() {
-      const query = document.getElementById('searchInput').value.toLowerCase();
-      const filtrados = juegosData.filter(j => 
-        (j.title && j.title.toLowerCase().includes(query)) ||
-        (j.platform && j.platform.toLowerCase().includes(query))
-      );
-      renderizar(filtrados);
-    }
-
-    async function guardarJuego(e) {
-      e.preventDefault();
-      const nuevoJuego = {
-        id: parseInt(document.getElementById('gameId').value),
-        title: document.getElementById('gameTitle').value,
-        platform: document.getElementById('gamePlatform').value,
-        size: document.getElementById('gameSize').value,
-        imgUrl: document.getElementById('gameImg').value,
-        link: document.getElementById('gameLink').value,
-        desc: document.getElementById('gameDesc').value
-      };
-
-      const { error } = await supabaseClient.from('games').insert([nuevoJuego]);
-
-      if (error) {
-        alert('Error al guardar en Supabase: ' + error.message);
-      } else {
-        alert('¡Juego publicado exitosamente!');
-        document.getElementById('gameForm').reset();
-        toggleModal(false);
-        cargarJuegos();
-      }
-    }
-
-    function toggleModal(show) {
-      document.getElementById('adminModal').classList.toggle('active', show);
+      // Función de búsqueda local
     }
   </script>
 </body>

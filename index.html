@@ -3,480 +3,296 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#050611">
-  <title>STOREXGAMER PKG — Neon Gaming Hub</title>
-  
-  <!-- Fuentes -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@500;600;700;800&display=swap" rel="stylesheet">
-
+  <title>STOREXGAMER PKG</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     :root {
-      --bg: #050611;
-      --panel: #0b1020;
-      --panel2: #10152c;
-      --ink: #f7f5ff;
-      --muted: #9ea4c7;
-      --line: rgba(112, 190, 255, 0.24);
-      --lime: #b84dff;
-      --orange: #00d9ff;
-      --accent: #a64dff;
-      --purple: #a64dff;
-      --cyan: #00d9ff;
-      --radius: 18px;
+      --bg: #0a0e17;
+      --card-bg: #161b26;
+      --accent: #ff0055;
+      --text: #ffffff;
+      --text-dim: #9ea4c7;
     }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: Inter, Arial, sans-serif;
-      overflow-x: hidden;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 20px;
     }
 
-    body:before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -2;
-      background: radial-gradient(ellipse at 14% 0%, rgba(125, 38, 255, .22), transparent 35%),
-                  radial-gradient(ellipse at 85% 14%, rgba(0, 206, 255, .17), transparent 28%),
-                  linear-gradient(rgba(66, 88, 190, .06) 1px, transparent 1px),
-                  linear-gradient(90deg, rgba(66, 88, 190, .06) 1px, transparent 1px);
-      background-size: auto, auto, 38px 38px, 38px 38px;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    button, input, select, textarea { font: inherit; }
-    button { cursor: pointer; }
-    .wrap { width: min(1540px, calc(100% - 42px)); margin: auto; }
-
-    /* TOPLINE & HEADER */
-    .topline { height: 4px; background: linear-gradient(90deg, #8b2dff, #00d9ff, #b900ff, #00d9ff); }
-    header.sx-main-header {
-      position: sticky;
-      top: 0;
-      z-index: 60;
-      background: linear-gradient(95deg, rgba(5, 6, 20, .97), rgba(10, 8, 29, .96));
-      border-bottom: 1px solid rgba(0, 217, 255, .34);
-      box-shadow: 0 7px 28px rgba(0, 0, 0, .48);
-    }
-
-    .nav {
-      height: 90px;
+    header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+      padding: 10px 0 30px;
+      border-bottom: 2px solid var(--accent);
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--accent);
+      letter-spacing: 2px;
+    }
+
+    .admin-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .admin-btn:hover { opacity: 0.9; }
+
+    .search-bar {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--card-bg);
+      border: 1px solid #2a3245;
+      border-radius: 8px;
+      color: #fff;
+      margin-bottom: 30px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .search-bar:focus { border-color: var(--accent); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 20px;
     }
 
-    .brand { display: flex; align-items: center; gap: 14px; min-width: 280px; }
-    .brandmark {
-      width: 58px;
-      height: 58px;
-      clip-path: polygon(8% 0, 92% 0, 100% 72%, 74% 100%, 0 82%);
-      background: linear-gradient(145deg, #1ce4ff, #7134ff 55%, #ba3cff);
-      color: #fff;
-      font: 900 24px Orbitron, sans-serif;
-      display: grid;
-      place-items: center;
-      position: relative;
-    }
-    .brandname { font: 900 22px Orbitron, sans-serif; letter-spacing: .025em; }
-    .brandname span { color: #bc47ff; }
-    .brandtag { font: 700 10px Rajdhani, sans-serif; letter-spacing: .25em; color: #c7c4ee; margin-top: 4px; }
-
-    .navlinks { display: flex; align-items: center; gap: 24px; }
-    .navlinks a { font: 700 13px Rajdhani, sans-serif; letter-spacing: .08em; color: #ebeaff; transition: .2s; }
-    .navlinks a:hover { color: #00d9ff; }
-
-    .admin-trigger {
-      border: 1px solid #6935cf;
-      border-radius: 13px;
-      background: linear-gradient(120deg, rgba(115, 44, 214, .22), rgba(0, 196, 255, .12));
-      color: white;
-      padding: 11px 18px;
-      font: 800 12px Rajdhani, sans-serif;
-      letter-spacing: .07em;
-      transition: .2s;
-    }
-    .admin-trigger:hover { border-color: #00d9ff; color: #fff; box-shadow: 0 0 15px rgba(0, 217, 255, .4); }
-
-    /* MAIN STAGE & HERO */
-    main { width: calc(100% - clamp(360px, 29vw, 450px)); margin: 0 auto 0 0; }
-    .hero { padding: 24px 0 13px; }
-    .hero-grid {
-      position: relative;
-      min-height: 320px;
-      border: 2px solid #5325a7;
-      border-radius: 19px;
-      overflow: hidden;
-      background: #090b21;
-      padding: 40px;
-      box-shadow: 0 0 25px rgba(112, 40, 255, .28);
-    }
-    .hero h1 { font: 900 clamp(40px, 5vw, 70px)/.95 Orbitron, sans-serif; margin: 0 0 15px; }
-    .hero h1 em { color: #c13dff; font-style: normal; }
-
-    /* CATALOG */
-    .catalog-section { padding: 40px 0; }
-    .searchbox { position: relative; margin-bottom: 20px; }
-    .searchbox input {
-      width: 100%;
-      height: 48px;
-      border: 1px solid var(--line);
-      background: #0c1020;
-      color: var(--ink);
-      padding: 0 16px;
+    .card {
+      background: var(--card-bg);
       border-radius: 10px;
-      outline: none;
-    }
-    .searchbox input:focus { border-color: #00d9ff; }
-
-    .game-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 16px;
-    }
-    .game-card {
-      border: 1px solid var(--line);
-      background: #10152c;
-      border-radius: 12px;
       overflow: hidden;
-      transition: .25s;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #2a3245;
     }
-    .game-card:hover { transform: translateY(-5px); border-color: #00d9ff; }
-    .game-cover { height: 180px; background: #1a203e; position: relative; }
-    .game-cover img { width: 100%; height: 100%; object-fit: cover; }
-    .game-info { padding: 15px; }
-    .game-title { font: 700 18px Orbitron, sans-serif; margin: 0 0 8px; }
-    .game-desc { font-size: 11px; color: var(--muted); margin-bottom: 12px; line-height: 1.5; }
+
+    .card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-title {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .card-meta {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+
+    .download-btn {
+      margin-top: auto;
+      background: #0070f3;
+      color: white;
+      text-align: center;
+      padding: 8px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+    }
 
     /* MODAL ADMIN */
-    .overlay {
+    .modal-overlay {
       display: none;
       position: fixed;
       inset: 0;
-      z-index: 100;
-      background: rgba(0, 0, 0, .85);
-      backdrop-filter: blur(10px);
-      padding: 20px;
-      overflow: auto;
+      background: rgba(0,0,0,0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
     }
-    .overlay.show { display: flex; align-items: center; justify-content: center; }
-    .modal {
-      width: min(520px, 100%);
-      background: #10152c;
-      border: 1px solid #00d9ff;
-      border-radius: 16px;
+
+    .modal-overlay.active { display: flex; }
+
+    .modal-content {
+      background: var(--card-bg);
       padding: 30px;
-      position: relative;
-      box-shadow: 0 0 35px rgba(0, 217, 255, .25);
-    }
-    .modal h2 { font: 800 28px Orbitron, sans-serif; text-transform: uppercase; margin: 0 0 15px; color: #00d9ff; }
-    .close-btn { position: absolute; right: 20px; top: 20px; background: transparent; border: 0; color: #fff; font-size: 20px; }
-    
-    .field { display: grid; gap: 6px; margin-bottom: 14px; }
-    .field label { font: 700 11px Rajdhani, sans-serif; letter-spacing: .1em; color: var(--muted); text-transform: uppercase; }
-    .field input, .field textarea {
+      border-radius: 10px;
       width: 100%;
-      background: #060914;
-      border: 1px solid var(--line);
-      color: var(--ink);
-      padding: 10px 12px;
-      border-radius: 8px;
+      max-width: 450px;
+      border: 1px solid var(--accent);
+    }
+
+    .modal-content h2 { margin-bottom: 20px; color: var(--accent); }
+
+    .form-group { margin-bottom: 15px; }
+    .form-group label { display: block; margin-bottom: 5px; font-size: 12px; color: var(--text-dim); }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 8px 12px;
+      background: var(--bg);
+      border: 1px solid #2a3245;
+      color: #fff;
+      border-radius: 4px;
       outline: none;
     }
-    .field input:focus, .field textarea:focus { border-color: #00d9ff; }
-    
+
     .btn-submit {
       width: 100%;
-      padding: 12px;
-      background: linear-gradient(120deg, #8b2dff, #00d9ff);
-      border: 0;
-      border-radius: 8px;
-      color: #fff;
-      font: 800 14px Rajdhani, sans-serif;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      margin-top: 10px;
-    }
-    .btn-submit:hover { opacity: .9; }
-
-    .btn-backup {
-      width: 100%;
       padding: 10px;
-      background: rgba(0, 217, 255, 0.1);
-      border: 1px solid #00d9ff;
-      border-radius: 8px;
-      color: #00d9ff;
-      font: 700 12px Rajdhani, sans-serif;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      margin-top: 12px;
-    }
-    .btn-backup:hover { background: rgba(0, 217, 255, 0.25); }
-
-    /* HANA ASSISTANT */
-    #sxAssistant { position: fixed; right: 24px; bottom: 22px; z-index: 90; }
-    #sxAssistant .sx-launcher {
-      width: 70px;
-      height: 70px;
-      border: 2px solid #a855f7;
-      border-radius: 50%;
-      background: #100c1d;
-      box-shadow: 0 0 25px rgba(112, 66, 255, .42);
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <div class="topline"></div>
-
-  <!-- HEADER -->
-  <header class="sx-main-header">
-    <div class="wrap nav">
-      <div class="brand">
-        <div class="brandmark">SX</div>
-        <div>
-          <div class="brandname">STOREXGAMER <span>PKG</span></div>
-          <div class="brandtag">NEON GAMING HUB</div>
-        </div>
-      </div>
-
-      <nav class="navlinks">
-        <a href="#cat-all">CATÁLOGO</a>
-        <a href="#novedades">NOVEDADES</a>
-        <a href="#destacados">DESTACADOS</a>
-      </nav>
-
-      <div>
-        <button class="admin-trigger" onclick="abrirModalAdmin()">⚙️ PANEL ADMIN</button>
-      </div>
-    </div>
+  <header>
+    <div class="logo">STOREXGAMER PKG</div>
+    <button class="admin-btn" onclick="toggleModal(true)">+ Agregar Juego</button>
   </header>
 
-  <main class="wrap">
-    <!-- HERO SECTION -->
-    <section class="hero">
-      <div class="hero-grid">
-        <span class="eyebrow">PLATAFORMA DE JUEGOS CLOUD</span>
-        <h1>STOREXGAMER <em>PKG</em></h1>
-        <p style="color: var(--muted); max-width: 500px; line-height: 1.6;">
-          Descarga y administra tu colección de juegos PKG en tiempo real gracias a nuestra infraestructura conectada a la nube.
-        </p>
-      </div>
-    </section>
+  <input type="text" id="searchInput" class="search-bar" placeholder="Buscar juego..." oninput="filtrarJuegos()">
 
-    <!-- CATALOG SECTION -->
-    <section class="catalog-section" id="cat-all">
-      <div class="searchbox">
-        <input type="text" id="input-buscar" placeholder="Buscar por título o plataforma..." oninput="filtrarJuegos()">
-      </div>
+  <div class="grid" id="juegosContainer">
+    <p style="color: var(--text-dim);">Cargando juegos...</p>
+  </div>
 
-      <div class="game-grid" id="juegos-container">
-        <!-- Los juegos se cargarán dinámicamente desde Supabase aquí -->
-        <p style="color: var(--muted); grid-column: 1/-1;">Cargando catálogo desde la nube...</p>
-      </div>
-    </section>
-  </main>
-
-  <!-- MODAL ADMIN -->
-  <div class="overlay" id="modal-admin-overlay">
-    <div class="modal">
-      <button class="close-btn" onclick="cerrarModalAdmin()">✕</button>
-      <h2>Panel Admin</h2>
-      
-      <form id="form-juego" onsubmit="publicarJuegoEnNube(event)">
-        <div class="field">
-          <label>ID del Juego (Número):</label>
-          <input type="number" id="game-id" required placeholder="Ej: 101">
+  <!-- Modal Admin -->
+  <div class="modal-overlay" id="adminModal">
+    <div class="modal-content">
+      <h2>Agregar Nuevo Juego</h2>
+      <form id="gameForm" onsubmit="guardarJuego(event)">
+        <div class="form-group">
+          <label>ID Numérico:</label>
+          <input type="number" id="gameId" required>
         </div>
-
-        <div class="field">
-          <label>Título del Juego:</label>
-          <input type="text" id="game-title" required placeholder="Ej: God of War Ragnarok">
+        <div class="form-group">
+          <label>Título:</label>
+          <input type="text" id="gameTitle" required>
         </div>
-
-        <div class="field">
-          <label>Plataforma:</label>
-          <input type="text" id="game-platform" placeholder="Ej: PS4 / PS5">
+        <div class="form-group">
+          <label>Plataforma (PS4/PS5):</label>
+          <input type="text" id="gamePlatform">
         </div>
-
-        <div class="field">
-          <label>Género:</label>
-          <input type="text" id="game-genre" placeholder="Ej: Acción / Aventura">
+        <div class="form-group">
+          <label>Tamaño (GB):</label>
+          <input type="text" id="gameSize">
         </div>
-
-        <div class="field">
-          <label>Firmware (FW):</label>
-          <input type="text" id="game-fw" placeholder="Ej: 9.00">
+        <div class="form-group">
+          <label>URL Carátula (Imagen):</label>
+          <input type="url" id="gameImg">
         </div>
-
-        <div class="field">
-          <label>Tamaño:</label>
-          <input type="text" id="game-size" placeholder="Ej: 45 GB">
+        <div class="form-group">
+          <label>URL Descarga (PKG):</label>
+          <input type="url" id="gameLink">
         </div>
-
-        <div class="field">
-          <label>URL de Descarga:</label>
-          <input type="url" id="game-link" placeholder="https://...">
-        </div>
-
-        <div class="field">
-          <label>URL de la Carátula (Imagen):</label>
-          <input type="url" id="game-img" placeholder="https://...">
-        </div>
-
-        <div class="field">
+        <div class="form-group">
           <label>Descripción:</label>
-          <textarea id="game-desc" rows="3" placeholder="Resumen del juego..."></textarea>
+          <textarea id="gameDesc" rows="3"></textarea>
         </div>
-
-        <button type="submit" class="btn-submit">Guardar en Supabase</button>
+        <button type="submit" class="btn-submit">Publicar Juego</button>
+        <button type="button" class="btn-submit" style="background:#555; margin-top:10px;" onclick="toggleModal(false)">Cancelar</button>
       </form>
-
-      <button type="button" class="btn-backup" onclick="exportarBackupJSON()">📥 Descargar Backup (JSON)</button>
     </div>
   </div>
 
-  <!-- HANA VOICE ASSISTANT (WIDGET) -->
-  <div id="sxAssistant">
-    <button class="sx-launcher" title="Asistente Hana">
-      <span style="color:#fff; font-weight:bold; font-size: 12px;">HANA</span>
-    </button>
-  </div>
-
-  <!-- SUPABASE SDK & CLIENT LOGIC -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    // 1. Conexión a Supabase
-    // 1. Conexión a Supabase
     const SUPABASE_URL = 'https://boahzezjaxtgbvmttxho.supabase.co';
-    const SUPABASE_KEY = 'sb_publishable_0STgJcecj4JryhtoseK8Iw_Ktb8fd9q'; 
-    
-    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    
+    const SUPABASE_KEY = 'sb_publishable_0STgJcecj4JryhtoseK8Iw_Ktb8fd9q';
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    let listaJuegosGlobal = [];
+    let juegosData = [];
 
-    // 2. Cargar datos al iniciar
-    document.addEventListener('DOMContentLoaded', () => {
-      obtenerJuegosDesdeSupabase();
-    });
+    document.addEventListener('DOMContentLoaded', cargarJuegos);
 
-    async function obtenerJuegosDesdeSupabase() {
-      const { data: juegos, error } = await supabaseClient
+    async function cargarJuegos() {
+      const { data, error } = await supabaseClient
         .from('games')
         .select('*')
         .order('id', { ascending: false });
 
       if (error) {
-        console.error('Error al cargar juegos:', error.message);
-        document.getElementById('juegos-container').innerHTML = `<p style="color:red; grid-column:1/-1;">Error al conectar con la base de datos.</p>`;
+        console.error('Error:', error);
+        document.getElementById('juegosContainer').innerHTML = '<p>Error al cargar catálogo.</p>';
         return;
       }
 
-      listaJuegosGlobal = juegos || [];
-      renderizarJuegos(listaJuegosGlobal);
+      juegosData = data || [];
+      renderizar(juegosData);
     }
 
-    // 3. Renderizar en UI
-    function renderizarJuegos(juegos) {
-      const container = document.getElementById('juegos-container');
-      
-      if (!juegos || juegos.length === 0) {
-        container.innerHTML = `<p style="color: var(--muted); grid-column: 1/-1;">No hay juegos publicados aún en la base de datos.</p>`;
+    function renderizar(juegos) {
+      const container = document.getElementById('juegosContainer');
+      if (juegos.length === 0) {
+        container.innerHTML = '<p>No hay juegos registrados.</p>';
         return;
       }
 
       container.innerHTML = juegos.map(juego => `
-        <div class="game-card">
-          <div class="game-cover">
-            <img src="${juego.imgUrl || 'https://via.placeholder.com/300x180?text=No+Image'}" alt="${juego.title}">
-          </div>
-          <div class="game-info">
-            <h3 class="game-title">${juego.title}</h3>
-            <p class="game-desc">${juego.desc || 'Sin descripción disponible.'}</p>
-            <div style="font-size: 10px; color: var(--orange); font-family: 'DM Mono', monospace; margin-bottom: 8px;">
-              ${juego.platform || 'PKG'} | ${juego.size || 'N/A'}
-            </div>
-            ${juego.link ? `<a href="${juego.link}" target="_blank" style="display:inline-block; padding: 6px 12px; background: #00d9ff; color: #000; font-weight: bold; border-radius: 4px; font-size: 11px;">DESCARGAR</a>` : ''}
+        <div class="card">
+          <img src="${juego.imgUrl || 'https://via.placeholder.com/220x250'}" alt="${juego.title}">
+          <div class="card-body">
+            <h3 class="card-title">${juego.title}</h3>
+            <div class="card-meta">${juego.platform || 'PKG'} • ${juego.size || 'N/A'}</div>
+            ${juego.link ? `<a href="${juego.link}" target="_blank" class="download-btn">DESCARGAR</a>` : ''}
           </div>
         </div>
       `).join('');
     }
 
-    // 4. Filtrar en tiempo real
     function filtrarJuegos() {
-      const termino = document.getElementById('input-buscar').value.toLowerCase();
-      const filtrados = listaJuegosGlobal.filter(juego => 
-        (juego.title && juego.title.toLowerCase().includes(termino)) ||
-        (juego.platform && juego.platform.toLowerCase().includes(termino))
-      );
-      renderizarJuegos(filtrados);
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const filtrados = juegosData.filter(j => j.title && j.title.toLowerCase().includes(query));
+      renderizar(filtrados);
     }
 
-    // 5. Publicar desde Panel Admin
-    async function publicarJuegoEnNube(event) {
-      event.preventDefault();
-
+    async function guardarJuego(e) {
+      e.preventDefault();
       const nuevoJuego = {
-        id: parseInt(document.getElementById('game-id').value),
-        title: document.getElementById('game-title').value,
-        platform: document.getElementById('game-platform').value,
-        genre: document.getElementById('game-genre').value,
-        fw: document.getElementById('game-fw').value,
-        size: document.getElementById('game-size').value,
-        link: document.getElementById('game-link').value,
-        imgUrl: document.getElementById('game-img').value,
-        desc: document.getElementById('game-desc').value,
-        activeBanner: true,
-        featured: false,
-        recent: true
+        id: parseInt(document.getElementById('gameId').value),
+        title: document.getElementById('gameTitle').value,
+        platform: document.getElementById('gamePlatform').value,
+        size: document.getElementById('gameSize').value,
+        imgUrl: document.getElementById('gameImg').value,
+        link: document.getElementById('gameLink').value,
+        desc: document.getElementById('gameDesc').value
       };
 
-      const { data, error } = await supabaseClient
-        .from('games')
-        .insert([nuevoJuego]);
+      const { error } = await supabaseClient.from('games').insert([nuevoJuego]);
 
       if (error) {
-        alert('❌ Error al guardar el juego: ' + error.message);
+        alert('Error al guardar: ' + error.message);
       } else {
-        alert('✅ ¡Juego guardado y publicado exitosamente!');
-        document.getElementById('form-juego').reset();
-        cerrarModalAdmin();
-        obtenerJuegosDesdeSupabase();
+        alert('¡Juego publicado correctamente!');
+        document.getElementById('gameForm').reset();
+        toggleModal(false);
+        cargarJuegos();
       }
     }
 
-    // 6. Función de Respaldo / Exportación
-    function exportarBackupJSON() {
-      if (!listaJuegosGlobal || listaJuegosGlobal.length === 0) {
-        alert('No hay juegos cargados para respaldar.');
-        return;
-      }
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(listaJuegosGlobal, null, 2));
-      const downloadAnchor = document.createElement('a');
-      downloadAnchor.setAttribute("href", dataStr);
-      downloadAnchor.setAttribute("download", `storexgamer_backup_${new Date().toISOString().slice(0,10)}.json`);
-      document.body.appendChild(downloadAnchor);
-      downloadAnchor.click();
-      downloadAnchor.remove();
-    }
-
-    // Modal Admin Helpers
-    function abrirModalAdmin() {
-      document.getElementById('modal-admin-overlay').classList.add('show');
-    }
-    function cerrarModalAdmin() {
-      document.getElementById('modal-admin-overlay').classList.remove('show');
+    function toggleModal(show) {
+      document.getElementById('adminModal').classList.toggle('active', show);
     }
   </script>
 </body>
